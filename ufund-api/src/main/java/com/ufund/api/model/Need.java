@@ -13,6 +13,17 @@ public class Need {
         this.type = type;
     }
 
-    
+    public String getName(){
+        return this.name;
+    }
+    public double getCost(){
+        return this.cost;
+    }
+    public int getQuantity(){
+        return this.quantity;
+    }
+    public String getType(){
+        return this.type;
+    }
 
 }
