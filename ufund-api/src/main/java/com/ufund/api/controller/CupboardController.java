@@ -31,8 +31,8 @@ import com.ufund.api.model.Need;
 @RestController
 @RequestMapping("needs")
 public class CupboardController {
-    private static final Logger LOG = Logger.getLogger(HeroController.class.getName());
-    private HeroDAO heroDao;
+    private static final Logger LOG = Logger.getLogger(CupboardController.class.getName());
+    private NeedDAO needDao;
 
     /**
      * Creates a REST API controller to reponds to requests
@@ -41,8 +41,8 @@ public class CupboardController {
      * <br>
      * This dependency is injected by the Spring Framework
      */
-    public HeroController(HeroDAO heroDao) {
-        this.heroDao = heroDao;
+    public NeedController(NeedDAO needDao) {
+        this.needDao = needDao;
     }
 
     /**
