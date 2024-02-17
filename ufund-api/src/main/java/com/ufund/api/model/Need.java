@@ -7,7 +7,7 @@ public class Need {
     private String type;  
     private int id;
 
-    public Need(String name, double cost, int quantity, String type){
+    public Need(String name, double cost, int quantity, String type, int id){
         this.name = name;
         this.cost = cost;
         this.quantity = quantity;
