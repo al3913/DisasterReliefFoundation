@@ -1,79 +1,79 @@
-package com.ufund.api.model;
+package com.ufund.api.persistence;
 import java.io.IOException;
 import com.ufund.api.model.Need;
 
 /**
- * Defines the interface for Hero object persistence
+ * Defines the interface for Need object persistence
  * 
  * @author SWEN Faculty
  */
 public interface CupboardDAO {
     /**
-     * Retrieves all {@linkplain Hero heroes}
+     * Retrieves all {@linkplain Need needs}
      * 
-     * @return An array of {@link Hero hero} objects, may be empty
+     * @return An array of {@link Need need} objects, may be empty
      * 
      * @throws IOException if an issue with underlying storage
      */
     Need[] getNeeds() throws IOException;
 
     /**
-     * Finds all {@linkplain Hero heroes} whose name contains the given text
+     * Finds all {@linkplain Need needs} whose name contains the given text
      * 
      * @param containsText The text to match against
      * 
-     * @return An array of {@link Hero heroes} whose nemes contains the given text, may be empty
+     * @return An array of {@link Need needs} whose names contain the given text, may be empty
      * 
      * @throws IOException if an issue with underlying storage
      */
     Need[] findNeeds(String containsText) throws IOException;
 
     /**
-     * Retrieves a {@linkplain Hero hero} with the given id
+     * Retrieves a {@linkplain Need need} with the given id
      * 
-     * @param id The id of the {@link Hero hero} to get
+     * @param id The id of the {@link Need need} to get
      * 
-     * @return a {@link Hero hero} object with the matching id
+     * @return a {@link Need need} object with the matching id
      * <br>
-     * null if no {@link Hero hero} with a matching id is found
+     * null if no {@link Need need} with a matching id is found
      * 
      * @throws IOException if an issue with underlying storage
      */
     Need getNeed(int id) throws IOException;
 
     /**
-     * Creates and saves a {@linkplain Hero hero}
+     * Creates and saves a {@linkplain Need need}
      * 
-     * @param hero {@linkplain Hero hero} object to be created and saved
+     * @param need {@linkplain Need need} object to be created and saved
      * <br>
-     * The id of the hero object is ignored and a new uniqe id is assigned
+     * The id of the need object is ignored, and a new unique id is assigned
      *
-     * @return new {@link Hero hero} if successful, false otherwise 
+     * @return new {@link Need need} if successful, false otherwise 
      * 
      * @throws IOException if an issue with underlying storage
      */
     Need createNeed(Need need) throws IOException;
 
     /**
-     * Updates and saves a {@linkplain Hero hero}
+     * Updates and saves a {@linkplain Need need}
      * 
-     * @param {@link Hero hero} object to be updated and saved
+     * @param need {@link Need need} object to be updated and saved
      * 
-     * @return updated {@link Hero hero} if successful, null if
-     * {@link Hero hero} could not be found
+     * @return updated {@link Need need} if successful, null if
+     * {@link Need need} could not be found
      * 
      * @throws IOException if underlying storage cannot be accessed
      */
     Need updateNeed(Need need) throws IOException;
 
     /**
-     * Deletes a {@linkplain Hero hero} with the given id
+     * Deletes a {@linkplain Need need} with the given id
      * 
-     * @param id The id of the {@link Hero hero}
+     * @param id The id of the {@link Need need}
      * 
-     * @return true if the {@link Hero hero} was deleted
+     * @return true if the {@link Need need} was deleted
      * <br>
-     * false if hero with the given id does not exist
+     * false if the need with the given id does not exist
      * 
      * @throws IOException if underlying storage cannot be accessed
      */

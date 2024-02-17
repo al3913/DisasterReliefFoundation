@@ -5,12 +5,14 @@ public class Need {
     private double cost;
     private int quantity; 
     private String type;  
+    private int id;
 
     public Need(String name, double cost, int quantity, String type){
         this.name = name;
         this.cost = cost;
         this.quantity = quantity;
         this.type = type;
+        this.id = id;
     }
 
     public String getName(){
@@ -24,6 +26,10 @@ public class Need {
     }
     public String getType(){
         return this.type;
+    }
+
+    public int getId(){
+        return this.id;
     }
 
 }
