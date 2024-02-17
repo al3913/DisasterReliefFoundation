@@ -1,4 +1,4 @@
-package com;
+package com.ufund.api.model;
 
 public class Need {
     private String name;
