@@ -32,17 +32,17 @@ import com.ufund.api.model.Need;
 @RequestMapping("needs")
 public class CupboardController {
     private static final Logger LOG = Logger.getLogger(CupboardController.class.getName());
-    private NeedDAO needDao;
+    private CupboardDAO cupboardDao;
 
     /**
      * Creates a REST API controller to reponds to requests
      * 
-     * @param heroDao The {@link HeroDAO Hero Data Access Object} to perform CRUD operations
+     * @param needDAO The {@link HeroDAO Hero Data Access Object} to perform CRUD operations
      * <br>
      * This dependency is injected by the Spring Framework
      */
-    public NeedController(NeedDAO needDao) {
-        this.needDao = needDao;
+    public CupboardController(CupboardDAO cupboardDAO) {
+        this.cupboardDao = cupboardDAO;
     }
 
     /**
@@ -55,12 +55,12 @@ public class CupboardController {
      * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
      */
     @GetMapping("/{id}")
-    public ResponseEntity<Hero> getHero(@PathVariable int id) {
-        LOG.info("GET /heroes/" + id);
+    public ResponseEntity<Need> getHero(@PathVariable int id) {
+        LOG.info("GET /needs/" + id);
         try {
-            Hero hero = heroDao.getHero(id);
+            Need hero = needDao.getHero(id);
             if (hero != null)
-                return new ResponseEntity<Hero>(hero,HttpStatus.OK);
+                return new ResponseEntity<Need>(need,HttpStatus.OK);
             else
                 return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
