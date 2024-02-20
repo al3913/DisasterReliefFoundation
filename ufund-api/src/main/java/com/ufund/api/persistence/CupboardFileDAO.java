@@ -159,7 +159,7 @@ public class CupboardFileDAO implements CupboardDAO {
         synchronized(needs) {
             // We create a new hero object because the id field is immutable
             // and we need to assign the next unique id
-            Need newNeed = new Need(nextId(),need.getName()); // Need to add the rest of the inputs needed for a new Need
+            Need newNeed = new Need(need.getName(), 0.0, 0, null, nextId()); // Need to add the rest of the inputs needed for a new Need
             needs.put(newNeed.getId(),newNeed);
             save(); // may throw an IOException
             return newNeed;

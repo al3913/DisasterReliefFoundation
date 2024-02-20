@@ -37,7 +37,7 @@ public class CupboardController {
     /**
      * Creates a REST API controller to reponds to requests
      * 
-     * @param needDAO The {@link HeroDAO Hero Data Access Object} to perform CRUD operations
+     * @param cupboardDAO The {@link cupboardDAO Hero Data Access Object} to perform CRUD operations
      * <br>
      * This dependency is injected by the Spring Framework
      */
@@ -55,11 +55,11 @@ public class CupboardController {
      * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
      */
     @GetMapping("/{id}")
-    public ResponseEntity<Need> getHero(@PathVariable int id) {
-        LOG.info("GET /needs/" + id);
+    public ResponseEntity<Need> getNeed(@PathVariable int id) {
+        LOG.info("GET /need/" + id);
         try {
-            Need hero = needDao.getHero(id);
-            if (hero != null)
+            Need need = cupboardDao.getNeed(id);
+            if (need != null)
                 return new ResponseEntity<Need>(need,HttpStatus.OK);
             else
                 return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -78,12 +78,12 @@ public class CupboardController {
      * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
      */
     @GetMapping("")
-    public ResponseEntity<Hero[]> getHeroes() {
-        LOG.info("GET /heroes");
+    public ResponseEntity<Need[]> getCupboard() {
+        LOG.info("GET /cupboard");
         try{
-            Hero[] heroes = heroDao.getHeroes();
-            if (heroes != null)
-                return new ResponseEntity<Hero[]>(heroes, HttpStatus.OK);
+            Need[] cupboard = cupboardDao.getNeeds();
+            if (cupboard != null)
+                return new ResponseEntity<Need[]>(cupboard, HttpStatus.OK);
             else
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
@@ -109,12 +109,12 @@ public class CupboardController {
      * GET http://localhost:8080/heroes/?name=ma
      */
     @GetMapping("/")
-    public ResponseEntity<Hero[]> searchHeroes(@RequestParam String name) {
-        LOG.info("GET /heroes/?name="+name);
+    public ResponseEntity<Need[]> searchCupboard(@RequestParam String name) {
+        LOG.info("GET /cupboard/?name="+name);
         try{
-            Hero[] heroes = heroDao.findHeroes(name);
-            if (heroes != null)
-                return new ResponseEntity<Hero[]>(heroes, HttpStatus.OK);
+            Need[] needs = cupboardDao.findNeeds(name);
+            if (needs != null)
+                return new ResponseEntity<Need[]>(needs, HttpStatus.OK);
             else
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
@@ -134,12 +134,12 @@ public class CupboardController {
      * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
      */
     @PostMapping("")
-    public ResponseEntity<Hero> createHero(@RequestBody Hero hero) {
-        LOG.info("POST /heroes " + hero);
+    public ResponseEntity<Need> createNeed(@RequestBody Need need) {
+        LOG.info("POST /cupboard " + need);
         try{
-            Hero newhero = heroDao.createHero(hero);
-            if (newhero != null)
-                return new ResponseEntity<Hero>(hero,HttpStatus.CREATED);
+            Need newneed = cupboardDao.createNeed(need);
+            if (newneed != null)
+                return new ResponseEntity<Need>(need,HttpStatus.CREATED);
             return new ResponseEntity<>(HttpStatus.CONFLICT);
         }
         catch(IOException e) {
@@ -158,12 +158,12 @@ public class CupboardController {
      * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
      */
     @PutMapping("")
-    public ResponseEntity<Hero> updateHero(@RequestBody Hero hero) {
-        LOG.info("PUT /heroes " + hero);
+    public ResponseEntity<Need> updateNeed(@RequestBody Need need) {
+        LOG.info("PUT /cupboard " + need);
         try{
-            Hero newhero = heroDao.updateHero(hero);
-            if (newhero != null)
-                return new ResponseEntity<Hero>(newhero,HttpStatus.OK);
+            Need newneed = cupboardDao.updateNeed(need);
+            if (newneed != null)
+                return new ResponseEntity<Need>(newneed,HttpStatus.OK);
             else
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
@@ -183,12 +183,12 @@ public class CupboardController {
      * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
      */
     @DeleteMapping("/{id}")
-    public ResponseEntity<Hero> deleteHero(@PathVariable int id) {
-        LOG.info("DELETE /heroes/" + id);
+    public ResponseEntity<Need> deleteNeed(@PathVariable int id) {
+        LOG.info("DELETE /cupboard/" + id);
         try{
-            boolean deleted = heroDao.deleteHero(id);
+            boolean deleted = cupboardDao.deleteNeed(id);
             if (deleted)
-                return new ResponseEntity<Hero>(HttpStatus.OK);
+                return new ResponseEntity<Need>(HttpStatus.OK);
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
         catch(IOException e) {
