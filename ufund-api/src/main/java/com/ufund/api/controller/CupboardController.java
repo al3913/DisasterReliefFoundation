@@ -29,7 +29,7 @@ import com.ufund.api.model.Need;
  */
 
 @RestController
-@RequestMapping("needs")
+@RequestMapping("cupboard")
 public class CupboardController {
     private static final Logger LOG = Logger.getLogger(CupboardController.class.getName());
     private CupboardDAO cupboardDao;
