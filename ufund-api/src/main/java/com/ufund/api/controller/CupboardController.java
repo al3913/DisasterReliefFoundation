@@ -85,7 +85,7 @@ public class CupboardController {
             if (cupboard != null)
                 return new ResponseEntity<Need[]>(cupboard, HttpStatus.OK);
             else
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
         catch(IOException e) {
             LOG.log(Level.SEVERE,e.getLocalizedMessage());

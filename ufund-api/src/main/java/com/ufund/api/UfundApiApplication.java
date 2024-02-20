@@ -1,4 +1,4 @@
-package com.ufund.api.ufundapi;
+package com.ufund.api;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
