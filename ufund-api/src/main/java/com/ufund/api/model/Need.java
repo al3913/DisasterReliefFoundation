@@ -12,10 +12,14 @@ public class Need {
     private static final Logger LOG = Logger.getLogger(Need.class.getName());
 
     // Package private for tests
-    static final String STRING_FORMAT = "Need [id=%d, name=%s]";
+    static final String STRING_FORMAT = "Need [id=%d, name=%s, cost=%f, quantity=%d, type=%s]";
 
     @JsonProperty("id") private int id;
     @JsonProperty("name") private String name;
+    @JsonProperty("cost") private Double cost;
+    @JsonProperty("quantity") private int quantity;
+    @JsonProperty("type") private String type;
+
 
     /**
      * Create a hero with the given id and name
@@ -27,9 +31,12 @@ public class Need {
      * is not provided in the JSON object, the Java field gets the default Java
      * value, i.e. 0 for int
      */
-    public Need(@JsonProperty("id") int id, @JsonProperty("name") String name) {
+    public Need(@JsonProperty("id") int id,@JsonProperty("name") String name,@JsonProperty("cost") Double cost,@JsonProperty("quantity") int quantity,@JsonProperty("type") String type) {
         this.id = id;
         this.name = name;
+        this.cost = cost;
+        this.quantity = quantity;
+        this.type = type;
     }
 
     /**
@@ -48,13 +55,22 @@ public class Need {
      * Retrieves the name of the hero
      * @return The name of the hero
      */
+
+
     public String getName() {return name;}
 
     /**
      * {@inheritDoc}
      */
+    public Double getCost() {return cost;}
+
+    public int getQuantity() {return quantity;}
+
+    public String getType() {return type;}
+
     @Override
     public String toString() {
         return String.format(STRING_FORMAT,id,name);
     }
+    
 }
