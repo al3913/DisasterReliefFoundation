@@ -20,7 +20,7 @@ import com.ufund.api.model.Need;
  */
 @Component
 public class CupboardFileDAO implements CupboardDAO {
-    private static final Logger LOG = Logger.getLogger(CupboardDAO.class.getName());
+    private static final Logger LOG = Logger.getLogger(CupboardFileDAO.class.getName());
     Map<Integer,Need> needs;   // Provides a local cache of the hero objects
                                 // so that we don't need to read from the file
                                 // each time

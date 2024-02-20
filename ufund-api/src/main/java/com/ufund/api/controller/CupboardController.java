@@ -56,7 +56,7 @@ public class CupboardController {
      */
     @GetMapping("/{id}")
     public ResponseEntity<Need> getNeed(@PathVariable int id) {
-        LOG.info("GET /need/" + id);
+        LOG.info("GET /cupboard/" + id);
         try {
             Need need = cupboardDao.getNeed(id);
             if (need != null)
