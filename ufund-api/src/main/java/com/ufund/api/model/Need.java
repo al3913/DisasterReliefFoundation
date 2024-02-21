@@ -12,11 +12,11 @@ public class Need {
     private static final Logger LOG = Logger.getLogger(Need.class.getName());
 
     // Package private for tests
-    static final String STRING_FORMAT = "Need [id=%d, name=%s, cost=%f, quantity=%d, type=%s]";
+    static final String STRING_FORMAT = "Need [id=%d, name=%s]";
 
     @JsonProperty("id") private int id;
     @JsonProperty("name") private String name;
-    @JsonProperty("cost") private Double cost;
+    @JsonProperty("cost") private int cost;
     @JsonProperty("quantity") private int quantity;
     @JsonProperty("type") private String type;
 
@@ -31,7 +31,7 @@ public class Need {
      * is not provided in the JSON object, the Java field gets the default Java
      * value, i.e. 0 for int
      */
-    public Need(@JsonProperty("id") int id,@JsonProperty("name") String name,@JsonProperty("cost") Double cost,@JsonProperty("quantity") int quantity,@JsonProperty("type") String type) {
+    public Need(@JsonProperty("id") int id,@JsonProperty("name") String name,@JsonProperty("cost") int cost,@JsonProperty("quantity") int quantity,@JsonProperty("type") String type) {
         this.id = id;
         this.name = name;
         this.cost = cost;
@@ -44,6 +44,8 @@ public class Need {
      * @return The id of the hero
      */
     public int getId() {return id;}
+
+    public void setId(int id){this.id =id;}
 
     /**
      * Sets the name of the hero - necessary for JSON object to Java object deserialization
@@ -62,15 +64,21 @@ public class Need {
     /**
      * {@inheritDoc}
      */
-    public Double getCost() {return cost;}
+    public int getCost() {return cost;}
+
+    public void setCost(int cost){this.cost = cost;}
 
     public int getQuantity() {return quantity;}
+
+    public void setQuantity(int quantity) {this.quantity = quantity;}
+
+    public void setType(String type) {this.type = type;}
 
     public String getType() {return type;}
 
     @Override
     public String toString() {
-        return String.format(STRING_FORMAT,id,name);
+        return String.format(STRING_FORMAT,id,name,cost,quantity,type);
     }
     
 }

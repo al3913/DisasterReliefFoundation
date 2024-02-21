@@ -1,1 +1,1 @@
-[{"id":1,"name":"Food"},{"id":2,"name":"Water"}]
+[{"id":1,"name":"crackers","cost":1,"quantity":10,"type":"food"},{"id":2,"name":"tarp","cost":10,"quantity":5,"type":"shelter"}]
