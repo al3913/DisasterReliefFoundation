@@ -9,16 +9,18 @@ geometry: margin=1in
 > and appear in the generated PDF in italics but do so only **after** all team members agree that the requirements for that section and current Sprint have been met. **Do not** delete future Sprint expectations._
 
 ## Team Information
-* Team name: TEAMNAME
+* Team name: Albatross
 * Team members
-  * MEMBER1
+  * Joseph Pilon
   * MEMBER2
   * MEMBER3
   * MEMBER4
 
 ## Executive Summary
 
-This is a summary of the project.
+This project is considered to be a website that allows users to sign in and donate needs.
+It allows for a manager to sign in as well in order to update the cupboard of needs that the
+customers will be able to see.
 
 ### Purpose
 >  _**[Sprint 2 & 4]** Provide a very brief statement about the project and the most
@@ -109,6 +111,10 @@ This section describes the web interface flow; this is how the user views and in
 
 ### ViewModel Tier
 > _**[Sprint 1]** List the classes supporting this tier and provide a description of there purpose._
+    Need.java is used to keep the atributes of the needs that will be shown in the cupboard.
+    CupboardController.java is used to read in the commands and calls the commands to make adjusments to the cupboard or specific instructions from the user.
+    CupboardDAO.java defines different functions that the cupboard is able to use and perform while manipulating different needs.
+    CupboardFileDAO.java is used to define each of the functions that cupboardDAO uses and actually writes the functions actions that they will be performing.
 
 > _**[Sprint 4]** Provide a summary of this tier of your architecture. This
 > section will follow the same instructions that are given for the View
@@ -121,7 +127,10 @@ This section describes the web interface flow; this is how the user views and in
 
 ### Model Tier
 > _**[Sprint 1]** List the classes supporting this tier and provide a description of there purpose._
-
+    Need.java is used to keep the atributes of the needs that will be shown in the cupboard.
+    CupboardController.java is used to read in the commands and calls the commands to make adjusments to the cupboard or specific instructions from the user.
+    CupboardDAO.java defines different functions that the cupboard is able to use and perform while manipulating different needs.
+    CupboardFileDAO.java is used to define each of the functions that cupboardDAO uses and actually writes the functions actions that they will be performing.
 > _**[Sprint 2, 3 & 4]** Provide a summary of this tier of your architecture. This
 > section will follow the same instructions that are given for the View
 > Tier above._
@@ -134,6 +143,7 @@ This section describes the web interface flow; this is how the user views and in
 ## OO Design Principles
 
 > _**[Sprint 1]** Name and describe the initial OO Principles that your team has considered in support of your design (and implementation) for this first Sprint._
+    While getting started with this project and during the first sprint, we need to make sure that we are focusing on the idea of single responsibility in the hopes that it will disperse the 'weight' of the functionality across multiple classes and functions.
 
 > _**[Sprint 2, 3 & 4]** Will eventually address upto **4 key OO Principles** in your final design. Follow guidance in augmenting those completed in previous Sprints as indicated to you by instructor. Be sure to include any diagrams (or clearly refer to ones elsewhere in your Tier sections above) to support your claims._
 
