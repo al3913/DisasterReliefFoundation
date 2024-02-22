@@ -1,1 +1,1 @@
-[{"id":1,"name":"crackers","cost":1,"quantity":10,"type":"food"},{"id":2,"name":"tarp","cost":10,"quantity":5,"type":"shelter"}]
+[{"id":1,"name":"crackers","cost":1,"quantity":10,"type":"food"},{"id":2,"name":"tarp","cost":10,"quantity":5,"type":"shelter"},{"id":4,"name":"beans","cost":2,"quantity":10,"type":"food"},{"id":5,"name":"chips","cost":2,"quantity":10,"type":"food"},{"id":6,"name":"granola","cost":2,"quantity":10,"type":"food"}]
