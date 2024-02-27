@@ -17,8 +17,8 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import com.ufund.api.persistence.CupboardDAO;
-import com.ufund.api.model.Need;
+import com.ufund.api.persistence.MailboxDAO;
+import com.ufund.api.model.Request;
 
 /**
  * Handles the REST API requests for the Ngeed resource
@@ -129,7 +129,7 @@ public class MailboxController {
      * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
      */
     @PostMapping("")
-    public ResponseEntity<Need> createRequest(@RequestBody Request request) {
+    public ResponseEntity<Request> createRequest(@RequestBody Request request) {
         LOG.info("POST /mailbox " + request);
         try {
             Request newRequest = mailboxDao.createRequest(request);
@@ -154,7 +154,7 @@ public class MailboxController {
      * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
      */
     @PutMapping("")
-    public ResponseEntity<Need> updateRequest(@RequestBody Request request) {
+    public ResponseEntity<Request> updateRequest(@RequestBody Request request) {
         LOG.info("PUT /mailbox " + request);
         try {
             Request newRequest = mailboxDao.updateRequest(request);
@@ -178,7 +178,7 @@ public class MailboxController {
      * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
      */
     @DeleteMapping("/{id}")
-    public ResponseEntity<Need> deleteNeed(@PathVariable int id) {
+    public ResponseEntity<Request> deleteNeed(@PathVariable int id) {
         LOG.info("DELETE /mailbox/" + id);
         try {
             boolean deleted = mailboxDao.deleteRequest(id);
