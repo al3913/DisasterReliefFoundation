@@ -6,70 +6,80 @@ import java.util.ArrayList;
 import java.util.Map;
 import java.util.TreeMap;
 import java.util.logging.Logger;
+
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import com.ufund.api.model.Need;
+
 /**
- * Implements the functionality for JSON file-based peristance for Heroes
+ * Implements the functionality for JSON file-based persistence for Need objects.
+ * The class provides methods to interact with a local cache of Need objects stored in a JSON file.
  *
  * {@literal @}Component Spring annotation instantiates a single instance of this
- * class and injects the instance into other classes as needed
+ * class and injects the instance into other classes as needed.
  *
  * @author SWEN Faculty
  */
 @Component
 public class CupboardFileDAO implements CupboardDAO {
+
     private static final Logger LOG = Logger.getLogger(CupboardFileDAO.class.getName());
-    Map<Integer,Need> needs;   // Provides a local cache of the hero objects
+    
+    Map<Integer, Need> needs;   // Provides a local cache of the Need objects
                                 // so that we don't need to read from the file
                                 // each time
-    private ObjectMapper objectMapper;  // Provides conversion between Hero
+    private ObjectMapper objectMapper;  // Provides conversion between Need
                                         // objects and JSON text format written
                                         // to the file
-    private static int nextId;  // The next Id to assign to a new hero
+    private static int nextId;  // The next Id to assign to a new Need
     private String filename;    // Filename to read from and write to
+
     /**
-     * Creates a Need File Data Access Object
+     * Creates a Need File Data Access Object.
      *
-     * @param filename Filename to read from and write to
-     * @param objectMapper Provides JSON Object to/from Java Object serialization and deserialization
+     * @param filename      Filename to read from and write to.
+     * @param objectMapper  Provides JSON Object to/from Java Object serialization and deserialization.
      *
-     * @throws IOException when file cannot be accessed or read from
+     * @throws IOException when the file cannot be accessed or read from.
      */
-    public CupboardFileDAO(@Value("${cupboard.file}") String filename,ObjectMapper objectMapper) throws IOException {
+    public CupboardFileDAO(@Value("${cupboard.file}") String filename, ObjectMapper objectMapper) throws IOException {
         this.filename = filename;
         this.objectMapper = objectMapper;
-        load();  // load the heroes from the file
+        load();  // load the needs from the file
     }
+
     /**
-     * Generates the next id for a new {@linkplain Hero hero}
+     * Generates the next id for a new {@linkplain Need need}.
      *
-     * @return The next id
+     * @return The next id.
      */
     private synchronized static int nextId() {
         int id = nextId;
         ++nextId;
         return id;
     }
+
     /**
-     * Generates an array of {@linkplain Hero heroes} from the tree map
+     * Generates an array of {@linkplain Need needs} from the tree map.
      *
-     * @return  The array of {@link Hero heroes}, may be empty
+     * @return The array of {@link Need needs}, may be empty.
      */
     private Need[] getNeedsArray() {
         return getNeedsArray(null);
     }
+
     /**
-     * Generates an array of {@linkplain Hero heroes} from the tree map for any
-     * {@linkplain Hero heroes} that contains the text specified by containsText
+     * Generates an array of {@linkplain Need needs} from the tree map for any
+     * {@linkplain Need needs} that contain the text specified by containsText.
      * <br>
-     * If containsText is null, the array contains all of the {@linkplain Hero heroes}
-     * in the tree map
+     * If containsText is null, the array contains all of the {@linkplain Need needs}
+     * in the tree map.
      *
-     * @return  The array of {@link Hero heroes}, may be empty
+     * @param containsText The text to filter the needs by (if null, no filter).
+     * @return The array of {@link Need needs}, may be empty.
      */
-    private Need[] getNeedsArray(String containsText) { // if containsText == null, no filter
+    private Need[] getNeedsArray(String containsText) {
         ArrayList<Need> needArrayList = new ArrayList<>();
         for (Need need : needs.values()) {
             if (containsText == null || need.getName().contains(containsText)) {
@@ -80,40 +90,42 @@ public class CupboardFileDAO implements CupboardDAO {
         needArrayList.toArray(needArray);
         return needArray;
     }
+
     /**
-     * Saves the {@linkplain Hero heroes} from the map into the file as an array of JSON objects
+     * Saves the {@linkplain Need needs} from the map into the file as an array of JSON objects.
      *
-     * @return true if the {@link Hero heroes} were written successfully
+     * @return true if the {@link Need needs} were written successfully.
      *
-     * @throws IOException when file cannot be accessed or written to
+     * @throws IOException when the file cannot be accessed or written to.
      */
     private boolean save() throws IOException {
         Need[] needArray = getNeedsArray();
         // Serializes the Java Objects to JSON objects into the file
-        // writeValue will thrown an IOException if there is an issue
+        // writeValue will throw an IOException if there is an issue
         // with the file or reading from the file
         objectMapper.writeValue(new File(filename), needArray);
         return true;
     }
+
     /**
-     * Loads {@linkplain Hero heroes} from the JSON file into the map
+     * Loads {@linkplain Need needs} from the JSON file into the map.
      * <br>
-     * Also sets next id to one more than the greatest id found in the file
+     * Also sets the next id to one more than the greatest id found in the file.
      *
-     * @return true if the file was read successfully
+     * @return true if the file was read successfully.
      *
-     * @throws IOException when file cannot be accessed or read from
+     * @throws IOException when the file cannot be accessed or read from.
      */
     private boolean load() throws IOException {
         needs = new TreeMap<>();
         nextId = 0;
-        // Deserializes the JSON objects from the file into an array of heroes
+        // Deserializes the JSON objects from the file into an array of needs
         // readValue will throw an IOException if there's an issue with the file
         // or reading from the file
-        Need[] needArray = objectMapper.readValue(new File(filename),Need[].class);
-        // Add each hero to the tree map and keep track of the greatest id
+        Need[] needArray = objectMapper.readValue(new File(filename), Need[].class);
+        // Add each need to the tree map and keep track of the greatest id
         for (Need need : needArray) {
-            needs.put(need.getId(),need);
+            needs.put(need.getId(), need);
             if (need.getId() > nextId)
                 nextId = need.getId();
         }
@@ -121,74 +133,79 @@ public class CupboardFileDAO implements CupboardDAO {
         ++nextId;
         return true;
     }
+
     /**
-    ** {@inheritDoc}
+     * {@inheritDoc}
      */
     @Override
     public Need[] getNeeds() {
-        synchronized(needs) {
+        synchronized (needs) {
             return getNeedsArray();
         }
     }
+
     /**
-    ** {@inheritDoc}
+     * {@inheritDoc}
      */
     @Override
     public Need[] findNeeds(String containsText) {
-        synchronized(needs) {
+        synchronized (needs) {
             return getNeedsArray(containsText);
         }
     }
+
     /**
-    ** {@inheritDoc}
+     * {@inheritDoc}
      */
     @Override
     public Need getNeed(int id) {
-        synchronized(needs) {
+        synchronized (needs) {
             if (needs.containsKey(id))
                 return needs.get(id);
             else
                 return null;
         }
     }
+
     /**
-    ** {@inheritDoc}
+     * {@inheritDoc}
      */
     @Override
     public Need createNeed(Need need) throws IOException {
-        synchronized(needs) {
-            // We create a new hero object because the id field is immutable
+        synchronized (needs) {
+            // We create a new need object because the id field is immutable
             // and we need to assign the next unique id
-            Need newNeed = new Need(need.getId(),need.getName(),need.getCost(),need.getQuantity(),need.getType()); // Need to add the rest of the inputs needed for a new Need
-            needs.put(newNeed.getId(),newNeed);
+            Need newNeed = new Need(need.getId(), need.getName(), need.getCost(), need.getQuantity(), need.getType());
+            needs.put(newNeed.getId(), newNeed);
             save(); // may throw an IOException
             return newNeed;
         }
     }
+
     /**
-    ** {@inheritDoc}
+     * {@inheritDoc}
      */
     @Override
     public Need updateNeed(Need need) throws IOException {
-        synchronized(needs) {
-            if (needs.containsKey(need.getId()) == false)
-                return null;  // hero does not exist
-            needs.put(need.getId(),need);
+        synchronized (needs) {
+            if (!needs.containsKey(need.getId()))
+                return null;  // need does not exist
+            needs.put(need.getId(), need);
             save(); // may throw an IOException
             return need;
         }
     }
+
     /**
-    ** {@inheritDoc}
+     * {@inheritDoc}
      */
     @Override
     public boolean deleteNeed(int id) throws IOException {
-        synchronized(needs) {
+        synchronized (needs) {
             if (needs.containsKey(id)) {
                 needs.remove(id);
                 return save();
-            }
-            else
+            } else
                 return false;
         }
     }

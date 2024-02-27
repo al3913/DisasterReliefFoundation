@@ -3,16 +3,19 @@ package com.ufund.api.model;
 import java.util.logging.Logger;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+
 /**
- * Represents a Hero entity
+ * Represents a "Need" entity that encapsulates information about a specific need.
+ * This class is part of the application's model.
  * 
  * @author SWEN Faculty
  */
 public class Need {
+
     private static final Logger LOG = Logger.getLogger(Need.class.getName());
 
     // Package private for tests
-    static final String STRING_FORMAT = "Need [id=%d, name=%s]";
+    static final String STRING_FORMAT = "Need [id=%d, name=%s, cost=%d, quantity=%d, type=%s]";
 
     @JsonProperty("id") private int id;
     @JsonProperty("name") private String name;
@@ -20,18 +23,23 @@ public class Need {
     @JsonProperty("quantity") private int quantity;
     @JsonProperty("type") private String type;
 
-
     /**
-     * Create a hero with the given id and name
-     * @param id The id of the hero
-     * @param name The name of the hero
+     * Constructs a "Need" object with the given parameters.
      * 
-     * {@literal @}JsonProperty is used in serialization and deserialization
-     * of the JSON object to the Java object in mapping the fields.  If a field
-     * is not provided in the JSON object, the Java field gets the default Java
-     * value, i.e. 0 for int
+     * @param id       The unique identifier for the need.
+     * @param name     The name or description of the need.
+     * @param cost     The cost associated with the need.
+     * @param quantity The quantity or amount required for the need.
+     * @param type     The type or category of the need.
+     * 
+     * @JsonProperty is used in serialization and deserialization of the JSON object 
+     * to the Java object, facilitating the mapping of fields.
+     * If a field is not provided in the JSON object, the Java field gets the default Java value,
+     * i.e., 0 for int.
      */
-    public Need(@JsonProperty("id") int id,@JsonProperty("name") String name,@JsonProperty("cost") int cost,@JsonProperty("quantity") int quantity,@JsonProperty("type") String type) {
+    public Need(@JsonProperty("id") int id, @JsonProperty("name") String name,
+                @JsonProperty("cost") int cost, @JsonProperty("quantity") int quantity,
+                @JsonProperty("type") String type) {
         this.id = id;
         this.name = name;
         this.cost = cost;
@@ -40,45 +48,101 @@ public class Need {
     }
 
     /**
-     * Retrieves the id of the hero
-     * @return The id of the hero
+     * Retrieves the unique identifier of the need.
+     * 
+     * @return The unique identifier of the need.
      */
-    public int getId() {return id;}
-
-    public void setId(int id){this.id =id;}
+    public int getId() {
+        return id;
+    }
 
     /**
-     * Sets the name of the hero - necessary for JSON object to Java object deserialization
-     * @param name The name of the hero
+     * Sets the unique identifier of the need.
+     * 
+     * @param id The unique identifier for the need.
      */
-    public void setName(String name) {this.name = name;}
+    public void setId(int id) {
+        this.id = id;
+    }
 
     /**
-     * Retrieves the name of the hero
-     * @return The name of the hero
+     * Sets the name or description of the need.
+     * Necessary for JSON object to Java object deserialization.
+     * 
+     * @param name The name or description of the need.
      */
+    public void setName(String name) {
+        this.name = name;
+    }
 
+    /**
+     * Retrieves the name or description of the need.
+     * 
+     * @return The name or description of the need.
+     */
+    public String getName() {
+        return name;
+    }
 
-    public String getName() {return name;}
+    /**
+     * Retrieves the cost associated with the need.
+     * 
+     * @return The cost associated with the need.
+     */
+    public int getCost() {
+        return cost;
+    }
+
+    /**
+     * Sets the cost associated with the need.
+     * 
+     * @param cost The cost associated with the need.
+     */
+    public void setCost(int cost) {
+        this.cost = cost;
+    }
+
+    /**
+     * Retrieves the quantity or amount required for the need.
+     * 
+     * @return The quantity or amount required for the need.
+     */
+    public int getQuantity() {
+        return quantity;
+    }
+
+    /**
+     * Sets the quantity or amount required for the need.
+     * 
+     * @param quantity The quantity or amount required for the need.
+     */
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
+
+    /**
+     * Sets the type or category of the need.
+     * 
+     * @param type The type or category of the need.
+     */
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    /**
+     * Retrieves the type or category of the need.
+     * 
+     * @return The type or category of the need.
+     */
+    public String getType() {
+        return type;
+    }
 
     /**
      * {@inheritDoc}
      */
-    public int getCost() {return cost;}
-
-    public void setCost(int cost){this.cost = cost;}
-
-    public int getQuantity() {return quantity;}
-
-    public void setQuantity(int quantity) {this.quantity = quantity;}
-
-    public void setType(String type) {this.type = type;}
-
-    public String getType() {return type;}
-
     @Override
     public String toString() {
-        return String.format(STRING_FORMAT,id,name,cost,quantity,type);
+        return String.format(STRING_FORMAT, id, name, cost, quantity, type);
     }
-    
 }
