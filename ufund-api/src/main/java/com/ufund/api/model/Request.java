@@ -38,14 +38,12 @@ public class Request {
      * If a field is not provided in the JSON object, the Java field gets the default Java value,
      * i.e., 0 for int.
      */
-    public Need(@JsonProperty("id") int id, @JsonProperty("name") String name,
-                @JsonProperty("cost") int cost, @JsonProperty("quantity") int quantity,
-                @JsonProperty("type") String type) {
+    public Request(@JsonProperty("id") int id, @JsonProperty("title") String title, @JsonProperty("body") String body, @JsonProperty("response") String response, @JsonProperty("completed") boolean completed) {
         this.id = id;
-        this.name = name;
-        this.cost = cost;
-        this.quantity = quantity;
-        this.type = type;
+        this.title = title;
+        this.body = body;
+        this.response = response;
+        this.completed = completed;
     }
 
     /**
