@@ -1,9 +1,6 @@
 package com.ufund.api.persistence;
 import java.io.IOException;
-
-import org.apache.catalina.connector.Request;
-
-import com.ufund.api.model.Need;
+import com.ufund.api.model.HelpRequest;
 
 /**
  * Defines the interface for Need object persistence
@@ -18,7 +15,7 @@ public interface MailboxDAO {
      * 
      * @throws IOException if an issue with underlying storage
      */
-    Request[] getRequests() throws IOException;
+    HelpRequest[] getRequests() throws IOException;
 
     /**
      * Finds all {@linkplain Need needs} whose name contains the given text
@@ -29,7 +26,7 @@ public interface MailboxDAO {
      * 
      * @throws IOException if an issue with underlying storage
      */
-    Request[] findRequests(String containsText) throws IOException;
+    HelpRequest[] findRequests(String containsText) throws IOException;
 
     /**
      * Retrieves a {@linkplain Need need} with the given id
@@ -42,7 +39,34 @@ public interface MailboxDAO {
      * 
      * @throws IOException if an issue with underlying storage
      */
-    Request getRequest(int id) throws IOException;
+    boolean findMyRequests() throws IOException;
+
+    /**
+     * Retrieves a {@linkplain Need need} with the given id
+     * 
+     * @param id The id of the {@link Need need} to get
+     * 
+     * @return a {@link Need need} object with the matching id
+     * <br>
+     * null if no {@link Need need} with a matching id is found
+     * 
+     * @throws IOException if an issue with underlying storage
+     */
+
+    boolean findCompleted(boolean completedStatus) throws IOException;
+
+    /**
+     * Retrieves a {@linkplain Need need} with the given id
+     * 
+     * @param id The id of the {@link Need need} to get
+     * 
+     * @return a {@link Need need} object with the matching id
+     * <br>
+     * null if no {@link Need need} with a matching id is found
+     * 
+     * @throws IOException if an issue with underlying storage
+     */
+    HelpRequest getRequest(int id) throws IOException;
 
     /**
      * Creates and saves a {@linkplain Need need}
@@ -55,7 +79,7 @@ public interface MailboxDAO {
      * 
      * @throws IOException if an issue with underlying storage
      */
-    Request createRequest(Request request) throws IOException;
+    HelpRequest createRequest(HelpRequest request) throws IOException;
 
     /**
      * Updates and saves a {@linkplain Need need}
@@ -67,7 +91,7 @@ public interface MailboxDAO {
      * 
      * @throws IOException if underlying storage cannot be accessed
      */
-    Request updateRequest(Request request) throws IOException;
+    HelpRequest updateRequest(HelpRequest request) throws IOException;
 
     /**
      * Deletes a {@linkplain Need need} with the given id

@@ -1,6 +1,5 @@
 package com.ufund.api.controller;
 
-import org.apache.catalina.connector.Request;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -18,7 +17,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import com.ufund.api.persistence.MailboxDAO;
-import com.ufund.api.model.Request;
+import com.ufund.api.model.HelpRequest;
 
 /**
  * Handles the REST API requests for the Ngeed resource
@@ -55,12 +54,12 @@ public class MailboxController {
      * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
      */
     @GetMapping("/{id}")
-    public ResponseEntity<Request> getRequest(@PathVariable int id) {
+    public ResponseEntity<HelpRequest> getRequest(@PathVariable int id) {
         LOG.info("GET /mailbox/" + id);
         try {
-            Request request = mailboxDao.getRequest(id);
+            HelpRequest request = mailboxDao.getRequest(id);
             if (request != null)
-                return new ResponseEntity<Request>(request, HttpStatus.OK);
+                return new ResponseEntity<HelpRequest>(request, HttpStatus.OK);
             else
                 return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         } catch (IOException e) {
@@ -77,12 +76,12 @@ public class MailboxController {
      * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
      */
     @GetMapping("")
-    public ResponseEntity<Request[]> getMailbox() {
+    public ResponseEntity<HelpRequest[]> getMailbox() {
         LOG.info("GET /mailbox");
         try {
-            Request[] mailbox = mailboxDao.getRequests();
+            HelpRequest[] mailbox = mailboxDao.getRequests();
             if (mailbox != null)
-                return new ResponseEntity<Request[]>(mailbox, HttpStatus.OK);
+                return new ResponseEntity<HelpRequest[]>(mailbox, HttpStatus.OK);
             else
                 return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         } catch (IOException e) {
@@ -105,12 +104,12 @@ public class MailboxController {
      * GET http://localhost:8080/needs/?name=ma
      */
     @GetMapping("/")
-    public ResponseEntity<Request[]> searchMailbox(@RequestParam String name) {
+    public ResponseEntity<HelpRequest[]> searchMailbox(@RequestParam String name) {
         LOG.info("GET /mailbox/?name=" + name);
         try {
-            Request[] requests = mailboxDao.findRequests(name);
+            HelpRequest[] requests = mailboxDao.findRequests(name);
             if (requests != null)
-                return new ResponseEntity<Request[]>(requests, HttpStatus.OK);
+                return new ResponseEntity<HelpRequest[]>(requests, HttpStatus.OK);
             else
                 return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         } catch (IOException e) {
@@ -129,12 +128,12 @@ public class MailboxController {
      * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
      */
     @PostMapping("")
-    public ResponseEntity<Request> createRequest(@RequestBody Request request) {
+    public ResponseEntity<HelpRequest> createRequest(@RequestBody HelpRequest request) {
         LOG.info("POST /mailbox " + request);
         try {
-            Request newRequest = mailboxDao.createRequest(request);
-            if (mailboxDao.findRequests(request.getName()).length != 0)
-                return new ResponseEntity<Request>(newRequest, HttpStatus.CREATED);
+            HelpRequest newRequest = mailboxDao.createRequest(request);
+            if (mailboxDao.findRequests(request.getTitle()).length != 0)
+                return new ResponseEntity<HelpRequest>(newRequest, HttpStatus.CREATED);
             else {
                 return new ResponseEntity<>(HttpStatus.CONFLICT);
             }
@@ -154,12 +153,12 @@ public class MailboxController {
      * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
      */
     @PutMapping("")
-    public ResponseEntity<Request> updateRequest(@RequestBody Request request) {
+    public ResponseEntity<HelpRequest> updateRequest(@RequestBody HelpRequest request) {
         LOG.info("PUT /mailbox " + request);
         try {
-            Request newRequest = mailboxDao.updateRequest(request);
+            HelpRequest newRequest = mailboxDao.updateRequest(request);
             if (newRequest != null)
-                return new ResponseEntity<Request>(newRequest, HttpStatus.OK);
+                return new ResponseEntity<HelpRequest>(newRequest, HttpStatus.OK);
             else
                 return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         } catch (IOException e) {
@@ -178,14 +177,14 @@ public class MailboxController {
      * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
      */
     @DeleteMapping("/{id}")
-    public ResponseEntity<Request> deleteNeed(@PathVariable int id) {
+    public ResponseEntity<HelpRequest> deleteNeed(@PathVariable int id) {
         LOG.info("DELETE /mailbox/" + id);
         try {
             boolean deleted = mailboxDao.deleteRequest(id);
             if (deleted)
                 return new ResponseEntity<>(HttpStatus.OK);
             else
-                return new ResponseEntity<Request>(HttpStatus.NOT_FOUND);
+                return new ResponseEntity<HelpRequest>(HttpStatus.NOT_FOUND);
         } catch (IOException e) {
             LOG.log(Level.SEVERE, e.getLocalizedMessage());
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);

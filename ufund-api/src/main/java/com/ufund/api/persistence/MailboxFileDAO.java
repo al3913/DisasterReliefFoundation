@@ -9,10 +9,9 @@ import java.util.logging.Logger;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import org.apache.catalina.connector.Request;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
-import com.ufund.api.model.Request;
+import com.ufund.api.model.HelpRequest;
 
 /**
  * Implements the functionality for JSON file-based persistence for Need objects.
@@ -28,7 +27,7 @@ public class MailboxFileDAO implements MailboxDAO {
 
     private static final Logger LOG = Logger.getLogger(MailboxFileDAO.class.getName());
     
-    Map<Integer, Request> requests;   // Provides a local cache of the Need objects
+    Map<Integer, HelpRequest> requests;   // Provides a local cache of the Need objects
                                 // so that we don't need to read from the file
                                 // each time
     private ObjectMapper objectMapper;  // Provides conversion between Need
@@ -67,7 +66,7 @@ public class MailboxFileDAO implements MailboxDAO {
      *
      * @return The array of {@link Need needs}, may be empty.
      */
-    private Request[] getRequestsArray() {
+    private HelpRequest[] getRequestsArray() {
         return getRequestsArray(null);
     }
 
@@ -81,14 +80,14 @@ public class MailboxFileDAO implements MailboxDAO {
      * @param containsText The text to filter the needs by (if null, no filter).
      * @return The array of {@link Need needs}, may be empty.
      */
-    private Request[] getRequestsArray(String containsText) {
-        ArrayList<Request> requestArrayList = new ArrayList<>();
-        for (Request request : requests.values()) {
-            if (containsText == null || request.getName().contains(containsText)) {
+    private HelpRequest[] getRequestsArray(String containsText) {
+        ArrayList<HelpRequest> requestArrayList = new ArrayList<>();
+        for (HelpRequest request : requests.values()) {
+            if (containsText == null || request.getTitle().contains(containsText) || request.getBody().contains(containsText)) {
                 requestArrayList.add(request);
             }
         }
-        Request[] requestArray = new Request[requestArrayList.size()];
+        HelpRequest[] requestArray = new HelpRequest[requestArrayList.size()];
         requestArrayList.toArray(requestArray);
         return requestArray;
     }
@@ -101,7 +100,7 @@ public class MailboxFileDAO implements MailboxDAO {
      * @throws IOException when the file cannot be accessed or written to.
      */
     private boolean save() throws IOException {
-        Request[] requestArray = getRequestsArray();
+        HelpRequest[] requestArray = getRequestsArray();
         // Serializes the Java Objects to JSON objects into the file
         // writeValue will throw an IOException if there is an issue
         // with the file or reading from the file
@@ -124,9 +123,9 @@ public class MailboxFileDAO implements MailboxDAO {
         // Deserializes the JSON objects from the file into an array of needs
         // readValue will throw an IOException if there's an issue with the file
         // or reading from the file
-        Request[] requestArray = objectMapper.readValue(new File(filename), Request[].class);
+        HelpRequest[] requestArray = objectMapper.readValue(new File(filename), HelpRequest[].class);
         // Add each need to the tree map and keep track of the greatest id
-        for (Request request : requestArray) {
+        for (HelpRequest request : requestArray) {
             requests.put(request.getId(), request);
             if (request.getId() > nextId)
                 nextId = request.getId();
@@ -140,7 +139,7 @@ public class MailboxFileDAO implements MailboxDAO {
      * {@inheritDoc}
      */
     @Override
-    public Request[] getRequests() {
+    public HelpRequest[] getRequests() {
         synchronized (requests) {
             return getRequestsArray();
         }
@@ -150,7 +149,7 @@ public class MailboxFileDAO implements MailboxDAO {
      * {@inheritDoc}
      */
     @Override
-    public Request[] findRequests(String containsText) {
+    public HelpRequest[] findRequests(String containsText) {
         synchronized (requests) {
             return getRequestsArray(containsText);
         }
@@ -160,7 +159,7 @@ public class MailboxFileDAO implements MailboxDAO {
      * {@inheritDoc}
      */
     @Override
-    public Request getRequest(int id) {
+    public HelpRequest getRequest(int id) {
         synchronized (requests) {
             if (requests.containsKey(id))
                 return requests.get(id);
@@ -173,11 +172,11 @@ public class MailboxFileDAO implements MailboxDAO {
      * {@inheritDoc}
      */
     @Override
-    public Request createRequest(Request request) throws IOException {
+    public HelpRequest createRequest(HelpRequest request) throws IOException {
         synchronized (requests) {
             // We create a new need object because the id field is immutable
             // and we need to assign the next unique id
-            Request newRequest = new Request(request.getId(), request.getName(), request.getCost(), request.getQuantity(), request.getType());
+            HelpRequest newRequest = new HelpRequest(request.getId(), request.getCreator(), request.getTitle(), request.getBody(), request.getReponse(), request.getCompleted());
             requests.put(newRequest.getId(), newRequest);
             save(); // may throw an IOException
             return newRequest;
@@ -188,7 +187,7 @@ public class MailboxFileDAO implements MailboxDAO {
      * {@inheritDoc}
      */
     @Override
-    public Request updateRequest(Request request) throws IOException {
+    public HelpRequest updateRequest(HelpRequest request) throws IOException {
         synchronized (requests) {
             if (!requests.containsKey(request.getId()))
                 return null;  // need does not exist
@@ -209,6 +208,35 @@ public class MailboxFileDAO implements MailboxDAO {
                 return save();
             } else
                 return false;
+        }
+    }
+
+    @Override
+    public boolean findMyRequests() throws IOException {
+        synchronized (requests) {
+            boolean requestExists = false;
+            int userID = 0; // THIS IS A TESTING VALUE, replace with actual user's id
+            for(HelpRequest request : requests.values()) {
+                if ((request.getCreator() == userID))
+                    requests.put(request.getId(), request);
+                    requestExists = true;
+            }
+            if(!requestExists) 
+                return false;
+            save(); // may throw an IOException
+            return true;
+        }
+    }
+
+    @Override
+    public boolean findCompleted(boolean completedStatus) throws IOException {
+        synchronized (requests) {
+            for(HelpRequest request : requests.values()) {
+                if ((request.getCompleted() == completedStatus))
+                    requests.put(request.getId(), request);
+            }
+            save(); // may throw an IOException
+            return completedStatus;
         }
     }
 }

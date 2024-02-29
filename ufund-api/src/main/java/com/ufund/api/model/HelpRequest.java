@@ -6,19 +6,20 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 /**
- * Represents a "Need" entity that encapsulates information about a specific need.
+ * Represents a "Request" entity that encapsulates information about a specific need.
  * This class is part of the application's model.
  * 
  * @author SWEN Faculty
  */
-public class Request {
+public class HelpRequest {
 
-    private static final Logger LOG = Logger.getLogger(Request.class.getName());
+    private static final Logger LOG = Logger.getLogger(HelpRequest.class.getName());
 
     // Package private for tests
     static final String STRING_FORMAT = "Request [id=%d, title=%s, body=%s, response=%s, completed=%b]"; 
 
     @JsonProperty("id") private int id;
+    @JsonProperty("creator") private int creator;
     @JsonProperty("title") private String title;
     @JsonProperty("body") private String body;
     @JsonProperty("response") private String response;
@@ -38,8 +39,9 @@ public class Request {
      * If a field is not provided in the JSON object, the Java field gets the default Java value,
      * i.e., 0 for int.
      */
-    public Request(@JsonProperty("id") int id, @JsonProperty("title") String title, @JsonProperty("body") String body, @JsonProperty("response") String response, @JsonProperty("completed") boolean completed) {
+    public HelpRequest(@JsonProperty("id") int id, @JsonProperty("creator") int creator, @JsonProperty("title") String title, @JsonProperty("body") String body, @JsonProperty("response") String response, @JsonProperty("completed") boolean completed) {
         this.id = id;
+        this.creator = creator;
         this.title = title;
         this.body = body;
         this.response = response;
@@ -70,8 +72,8 @@ public class Request {
      * 
      * @param name The name or description of the need.
      */
-    public void setName(String name) {
-        this.name = name;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     /**
@@ -79,8 +81,8 @@ public class Request {
      * 
      * @return The name or description of the need.
      */
-    public String getName() {
-        return name;
+    public String getTitle() {
+        return title;
     }
 
     /**
@@ -88,8 +90,8 @@ public class Request {
      * 
      * @return The cost associated with the need.
      */
-    public int getCost() {
-        return cost;
+    public String getBody() {
+        return body;
     }
 
     /**
@@ -97,8 +99,8 @@ public class Request {
      * 
      * @param cost The cost associated with the need.
      */
-    public void setCost(int cost) {
-        this.cost = cost;
+    public void setBody(String body) {
+        this.body = body;
     }
 
     /**
@@ -106,8 +108,8 @@ public class Request {
      * 
      * @return The quantity or amount required for the need.
      */
-    public int getQuantity() {
-        return quantity;
+    public String getReponse() {
+        return response;
     }
 
     /**
@@ -115,8 +117,8 @@ public class Request {
      * 
      * @param quantity The quantity or amount required for the need.
      */
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
+    public void setResponse(String response) {
+        this.response = response;
     }
 
     /**
@@ -124,8 +126,8 @@ public class Request {
      * 
      * @param type The type or category of the need.
      */
-    public void setType(String type) {
-        this.type = type;
+    public void setCompleted(boolean completed) {
+        this.completed = completed;
     }
 
     /**
@@ -133,8 +135,8 @@ public class Request {
      * 
      * @return The type or category of the need.
      */
-    public String getType() {
-        return type;
+    public boolean getCompleted() {
+        return completed;
     }
 
     /**
@@ -142,6 +144,19 @@ public class Request {
      */
     @Override
     public String toString() {
-        return String.format(STRING_FORMAT, id, name, cost, quantity, type);
+        return String.format(STRING_FORMAT, id, title, body, response, completed);
     }
+    
+    public int getCreator() {
+        return creator;
+    }
+
+    public void setCreator(int creator) {
+        this.creator = creator;
+    }
+
+    public String getResponse() {
+        return response;
+    }
+    
 }
