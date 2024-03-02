@@ -3,7 +3,6 @@ package com.ufund.api.model;
 import java.util.logging.Logger;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 /**
  * Represents a "Request" entity that encapsulates information about a specific need.
@@ -16,7 +15,7 @@ public class HelpRequest {
     private static final Logger LOG = Logger.getLogger(HelpRequest.class.getName());
 
     // Package private for tests
-    static final String STRING_FORMAT = "Request [id=%d, title=%s, body=%s, response=%s, completed=%b]"; 
+    static final String STRING_FORMAT = "Request [id=%d, creator=%d, title=%s, body=%s, response=%s, completed=%b]"; 
 
     @JsonProperty("id") private int id;
     @JsonProperty("creator") private int creator;
@@ -72,6 +71,15 @@ public class HelpRequest {
      * 
      * @param name The name or description of the need.
      */
+
+    public int getCreator() {
+        return creator;
+    }
+
+    public void setCreator(int creator) {
+        this.creator = creator;
+    }
+
     public void setTitle(String title) {
         this.title = title;
     }
@@ -108,7 +116,7 @@ public class HelpRequest {
      * 
      * @return The quantity or amount required for the need.
      */
-    public String getReponse() {
+    public String getResponse() {
         return response;
     }
 
@@ -144,19 +152,6 @@ public class HelpRequest {
      */
     @Override
     public String toString() {
-        return String.format(STRING_FORMAT, id, title, body, response, completed);
+        return String.format(STRING_FORMAT, id, creator, title, body, response, completed);
     }
-    
-    public int getCreator() {
-        return creator;
-    }
-
-    public void setCreator(int creator) {
-        this.creator = creator;
-    }
-
-    public String getResponse() {
-        return response;
-    }
-    
 }

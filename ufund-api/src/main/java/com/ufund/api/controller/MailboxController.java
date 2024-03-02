@@ -54,12 +54,13 @@ public class MailboxController {
      * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
      */
     @GetMapping("/{id}")
-    public ResponseEntity<HelpRequest> getRequest(@PathVariable int id) {
-        LOG.info("GET /mailbox/" + id);
+    public ResponseEntity<HelpRequest[]> getMyRequests() {
+        LOG.info("GET /mailbox/myRequests");
+        int userID = 0; //THIS WILL NEED TO BE REPLACED WITH ACTUAL USER ID LATER!!
         try {
-            HelpRequest request = mailboxDao.getRequest(id);
-            if (request != null)
-                return new ResponseEntity<HelpRequest>(request, HttpStatus.OK);
+            HelpRequest[] myRequests = mailboxDao.findMyRequests(userID);
+            if (myRequests != null)
+                return new ResponseEntity<HelpRequest[]>(myRequests, HttpStatus.OK);
             else
                 return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         } catch (IOException e) {
@@ -104,10 +105,10 @@ public class MailboxController {
      * GET http://localhost:8080/needs/?name=ma
      */
     @GetMapping("/")
-    public ResponseEntity<HelpRequest[]> searchMailbox(@RequestParam String name) {
-        LOG.info("GET /mailbox/?name=" + name);
+    public ResponseEntity<HelpRequest[]> searchMailbox(@RequestParam String contains) {
+        LOG.info("GET /mailbox/?contains=" + contains);
         try {
-            HelpRequest[] requests = mailboxDao.findRequests(name);
+            HelpRequest[] requests = mailboxDao.findRequests(contains);
             if (requests != null)
                 return new ResponseEntity<HelpRequest[]>(requests, HttpStatus.OK);
             else
@@ -177,7 +178,7 @@ public class MailboxController {
      * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
      */
     @DeleteMapping("/{id}")
-    public ResponseEntity<HelpRequest> deleteNeed(@PathVariable int id) {
+    public ResponseEntity<HelpRequest> deleteRequest(@PathVariable int id) {
         LOG.info("DELETE /mailbox/" + id);
         try {
             boolean deleted = mailboxDao.deleteRequest(id);

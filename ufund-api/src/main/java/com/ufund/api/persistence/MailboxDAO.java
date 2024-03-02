@@ -39,7 +39,7 @@ public interface MailboxDAO {
      * 
      * @throws IOException if an issue with underlying storage
      */
-    boolean findMyRequests() throws IOException;
+    HelpRequest[] findMyRequests(int userID) throws IOException;
 
     /**
      * Retrieves a {@linkplain Need need} with the given id

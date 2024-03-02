@@ -85,6 +85,7 @@ public class MailboxFileDAO implements MailboxDAO {
         for (HelpRequest request : requests.values()) {
             if (containsText == null || request.getTitle().contains(containsText) || request.getBody().contains(containsText)) {
                 requestArrayList.add(request);
+                System.out.print(request);
             }
         }
         HelpRequest[] requestArray = new HelpRequest[requestArrayList.size()];
@@ -159,7 +160,7 @@ public class MailboxFileDAO implements MailboxDAO {
      * {@inheritDoc}
      */
     @Override
-    public HelpRequest getRequest(int id) {
+    public HelpRequest getRequest(int id) { //May not be necessary
         synchronized (requests) {
             if (requests.containsKey(id))
                 return requests.get(id);
@@ -176,7 +177,7 @@ public class MailboxFileDAO implements MailboxDAO {
         synchronized (requests) {
             // We create a new need object because the id field is immutable
             // and we need to assign the next unique id
-            HelpRequest newRequest = new HelpRequest(request.getId(), request.getCreator(), request.getTitle(), request.getBody(), request.getReponse(), request.getCompleted());
+            HelpRequest newRequest = new HelpRequest(request.getId(), request.getCreator(), request.getTitle(), request.getBody(), request.getResponse(), request.getCompleted());
             requests.put(newRequest.getId(), newRequest);
             save(); // may throw an IOException
             return newRequest;
@@ -212,19 +213,18 @@ public class MailboxFileDAO implements MailboxDAO {
     }
 
     @Override
-    public boolean findMyRequests() throws IOException {
+    public HelpRequest[] findMyRequests(int userID) throws IOException {
         synchronized (requests) {
-            boolean requestExists = false;
-            int userID = 0; // THIS IS A TESTING VALUE, replace with actual user's id
+            ArrayList<HelpRequest> requestArrayList = new ArrayList<>();
             for(HelpRequest request : requests.values()) {
                 if ((request.getCreator() == userID))
                     requests.put(request.getId(), request);
-                    requestExists = true;
+                    requestArrayList.add(request);
             }
-            if(!requestExists) 
-                return false;
+            HelpRequest[] requestArray = new HelpRequest[requestArrayList.size()];
+            requestArrayList.toArray(requestArray);
             save(); // may throw an IOException
-            return true;
+            return requestArray;
         }
     }
 
