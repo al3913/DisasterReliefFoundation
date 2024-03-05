@@ -6,6 +6,12 @@ import org.junit.jupiter.api.Test;
 
 import com.ufund.api.model.HelpRequest;
 
+/**
+ * Test the HelpRequest Class
+ * 
+ * @author Andy Lin
+ * 
+ */
 @Tag("Model-tier")
 public class HelpRequestTest {
     @Test

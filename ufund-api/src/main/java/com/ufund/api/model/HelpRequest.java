@@ -15,7 +15,7 @@ public class HelpRequest {
     private static final Logger LOG = Logger.getLogger(HelpRequest.class.getName());
 
     // Package private for tests
-    static final String STRING_FORMAT = "Request [id=%d, creator=%d, title=%s, body=%s, response=%s, completed=%b]"; 
+    public static final String STRING_FORMAT = "Request [id=%d, creator=%d, title=%s, body=%s, response=%s, completed=%b]"; 
 
     @JsonProperty("id") private int id;
     @JsonProperty("creator") private int creator;

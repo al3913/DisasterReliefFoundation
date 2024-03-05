@@ -132,7 +132,7 @@ public class CupboardController {
         LOG.info("POST /cupboard " + need);
         try {
             Need newNeed = cupboardDao.createNeed(need);
-            if (cupboardDao.findNeeds(need.getName()).length != 0)
+            if (newNeed != null)
                 return new ResponseEntity<Need>(newNeed, HttpStatus.CREATED);
             else {
                 return new ResponseEntity<>(HttpStatus.CONFLICT);
