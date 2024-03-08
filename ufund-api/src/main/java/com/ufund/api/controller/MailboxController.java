@@ -133,7 +133,7 @@ public class MailboxController {
         LOG.info("POST /mailbox " + request);
         try {
             HelpRequest newRequest = mailboxDao.createRequest(request);
-            if (mailboxDao.findRequests(request.getTitle()).length != 0)
+            if (newRequest != null)
                 return new ResponseEntity<HelpRequest>(newRequest, HttpStatus.CREATED);
             else {
                 return new ResponseEntity<>(HttpStatus.CONFLICT);
