@@ -20,12 +20,15 @@ import com.ufund.api.persistence.CupboardDAO;
 import com.ufund.api.model.Need;
 
 /**
- * Handles the REST API requests for the Ngeed resource
+ * Handles the REST API requests for the Need resource
+ * 
  * <p>
  * {@literal @}RestController Spring annotation identifies this class as a REST API
  * method handler to the Spring framework
+ * </p>
  * 
- * @author SWEN Faculty
+ * @author Team
+ * 
  */
 @RestController
 @RequestMapping("cupboard")
@@ -34,10 +37,10 @@ public class CupboardController {
     private CupboardDAO cupboardDao;
 
     /**
-     * Creates a REST API controller to respond to requests
      * 
-     * @param cupboardDAO The {@link CupboardDAO Need Data Access Object} to perform CRUD operations
-     * <br>
+     * Creates a REST API controller to respond to requests
+‌     *
+     * @param cupboardDAO The {@link CupboardDAO Need Data Access Object} to perform CRUD operations.
      * This dependency is injected by the Spring Framework
      */
     public CupboardController(CupboardDAO cupboardDAO) {
@@ -75,6 +78,8 @@ public class CupboardController {
      * HTTP status of OK<br>
      * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
      */
+
+    //We need to edit this so that it lines up with JavaDoc above, or update JavaDoc
     @GetMapping("")
     public ResponseEntity<Need[]> getCupboard() {
         LOG.info("GET /cupboard");
@@ -103,6 +108,7 @@ public class CupboardController {
      * Example: Find all needs that contain the text "ma"
      * GET http://localhost:8080/needs/?name=ma
      */
+    //We need to edit this so that it lines up with JavaDoc above, or update JavaDoc
     @GetMapping("/")
     public ResponseEntity<Need[]> searchCupboard(@RequestParam String name) {
         LOG.info("GET /cupboard/?name=" + name);

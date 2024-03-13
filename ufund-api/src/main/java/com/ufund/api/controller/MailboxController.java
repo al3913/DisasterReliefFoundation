@@ -20,12 +20,12 @@ import com.ufund.api.persistence.MailboxDAO;
 import com.ufund.api.model.HelpRequest;
 
 /**
- * Handles the REST API requests for the Ngeed resource
+ * Handles the REST API requests for the HelpRequest resource
  * <p>
  * {@literal @}RestController Spring annotation identifies this class as a REST API
  * method handler to the Spring framework
  * 
- * @author SWEN Faculty
+ * @author Team
  */
 @RestController
 @RequestMapping("mailbox")
@@ -36,7 +36,7 @@ public class MailboxController {
     /**
      * Creates a REST API controller to respond to requests
      * 
-     * @param cupboardDAO The {@link CupboardDAO Need Data Access Object} to perform CRUD operations
+     * @param mailboxDAO The {@link MailboxDAO HelpRequest Data Access Object} to perform CRUD operations
      * <br>
      * This dependency is injected by the Spring Framework
      */
@@ -45,14 +45,14 @@ public class MailboxController {
     }
 
     /**
-     * Responds to the GET request for a {@linkplain Need need} for the given id
+     * Responds to the GET request for all {@linkplain HelpRequest request} for the given user
      * 
-     * @param id The id used to locate the {@link Need need}
-     * 
-     * @return ResponseEntity with {@link Need need} object and HTTP status of OK if found<br>
-     * ResponseEntity with HTTP status of NOT_FOUND if not found<br>
+     * @return ResponseEntity with array of {@link HelpRequest request} objects (may be empty) and
+     * HTTP status of OK<br>
      * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
      */
+
+    //We need to edit this so that it lines up with JavaDoc above, or update JavaDoc
     @GetMapping("/{id}")
     public ResponseEntity<HelpRequest[]> getMyRequests() {
         LOG.info("GET /mailbox/myRequests");
@@ -70,12 +70,14 @@ public class MailboxController {
     }
 
     /**
-     * Responds to the GET request for all {@linkplain Need needs}
+     * Responds to the GET request for all {@linkplain HelpRequest request}
      * 
-     * @return ResponseEntity with array of {@link Need need} objects (may be empty) and
+     * @return ResponseEntity with array of {@link HelpRequest request} objects (may be empty) and
      * HTTP status of OK<br>
      * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
      */
+
+    //We need to edit this so that it lines up with JavaDoc above, or update JavaDoc
     @GetMapping("")
     public ResponseEntity<HelpRequest[]> getMailbox() {
         LOG.info("GET /mailbox");
@@ -92,18 +94,20 @@ public class MailboxController {
     }
 
     /**
-     * Responds to the GET request for all {@linkplain Need needs} whose name contains
-     * the text in name
+     * Responds to the GET request for all {@linkplain HelpRequest request} whose title or body contains
+     * the text in contains
      * 
-     * @param name The name parameter which contains the text used to find the {@link Need needs}
+     * @param contains The  parameter which contains the text used to find the {@link HelpRequest request}
      * 
-     * @return ResponseEntity with array of {@link Need need} objects (may be empty) and
+     * @return ResponseEntity with array of {@link HelpRequest request} objects (may be empty) and
      * HTTP status of OK<br>
      * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
      * <p>
-     * Example: Find all needs that contain the text "ma"
-     * GET http://localhost:8080/needs/?name=ma
+     * Example: Find all requests that contain the text "ma"
+     * GET http://localhost:8080/mailbox/?contains=ma
      */
+
+    //We need to edit this so that it lines up with JavaDoc above, or update JavaDoc
     @GetMapping("/")
     public ResponseEntity<HelpRequest[]> searchMailbox(@RequestParam String contains) {
         LOG.info("GET /mailbox/?contains=" + contains);
@@ -120,12 +124,12 @@ public class MailboxController {
     }
 
     /**
-     * Creates a {@linkplain Need need} with the provided need object
+     * Creates a {@linkplain HelpRequest request} with the provided request object
      * 
-     * @param need - The {@link Need need} to create
+     * @param request - The {@link HelpRequest request} to create
      * 
-     * @return ResponseEntity with created {@link Need need} object and HTTP status of CREATED<br>
-     * ResponseEntity with HTTP status of CONFLICT if {@link Need need} object already exists<br>
+     * @return ResponseEntity with created {@link HelpRequest request} object and HTTP status of CREATED<br>
+     * ResponseEntity with HTTP status of CONFLICT if {@link HelpRequest request} object already exists<br>
      * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
      */
     @PostMapping("")
@@ -145,11 +149,11 @@ public class MailboxController {
     }
 
     /**
-     * Updates the {@linkplain Need need} with the provided {@linkplain Need need} object, if it exists
+     * Updates the {@linkplain HelpRequest request} with the provided {@linkplain HelpRequest request} object, if it exists
      * 
-     * @param need The {@link Need need} to update
+     * @param request The {@link HelpRequest request} to update
      * 
-     * @return ResponseEntity with updated {@link Need need} object and HTTP status of OK if updated<br>
+     * @return ResponseEntity with updated {@link HelpRequest request} object and HTTP status of OK if updated<br>
      * ResponseEntity with HTTP status of NOT_FOUND if not found<br>
      * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
      */
@@ -169,9 +173,9 @@ public class MailboxController {
     }
 
     /**
-     * Deletes a {@linkplain Need need} with the given id
+     * Deletes a {@linkplain HelpRequest request} with the given id
      * 
-     * @param id The id of the {@link Need need} to deleted
+     * @param id The id of the {@link HelpRequest request} to deleted
      * 
      * @return ResponseEntity HTTP status of OK if deleted<br>
      * ResponseEntity with HTTP status of NOT_FOUND if not found<br>

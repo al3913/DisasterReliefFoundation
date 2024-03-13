@@ -14,8 +14,8 @@ import org.springframework.stereotype.Component;
 import com.ufund.api.model.HelpRequest;
 
 /**
- * Implements the functionality for JSON file-based persistence for Need objects.
- * The class provides methods to interact with a local cache of Need objects stored in a JSON file.
+ * Implements the functionality for JSON file-based persistence for request objects.
+ * The class provides methods to interact with a local cache of Request objects stored in a JSON file.
  *
  * {@literal @}Component Spring annotation instantiates a single instance of this
  * class and injects the instance into other classes as needed.
@@ -47,11 +47,11 @@ public class MailboxFileDAO implements MailboxDAO {
     public MailboxFileDAO(@Value("${mailbox.file}") String filename, ObjectMapper objectMapper) throws IOException {
         this.filename = filename;
         this.objectMapper = objectMapper;
-        load();  // load the needs from the file
+        load();  // load the requests from the file
     }
 
     /**
-     * Generates the next id for a new {@linkplain Need need}.
+     * Generates the next id for a new {@linkplain HelpRequest request}.
      *
      * @return The next id.
      */
@@ -62,23 +62,23 @@ public class MailboxFileDAO implements MailboxDAO {
     }
 
     /**
-     * Generates an array of {@linkplain Need needs} from the tree map.
+     * Generates an array of {@linkplain HelpRequest requests} from the tree map.
      *
-     * @return The array of {@link Need needs}, may be empty.
+     * @return The array of {@link HelpRequest requests}, may be empty.
      */
     private HelpRequest[] getRequestsArray() {
         return getRequestsArray(null);
     }
 
     /**
-     * Generates an array of {@linkplain Need needs} from the tree map for any
-     * {@linkplain Need needs} that contain the text specified by containsText.
+     * Generates an array of {@linkplain HelpRequest requests} from the tree map for any
+     * {@linkplain HelpRequest requests} that contain the text specified by containsText.
      * <br>
-     * If containsText is null, the array contains all of the {@linkplain Need needs}
+     * If containsText is null, the array contains all of the {@linkplain HelpRequest requests}
      * in the tree map.
      *
-     * @param containsText The text to filter the needs by (if null, no filter).
-     * @return The array of {@link Need needs}, may be empty.
+     * @param containsText The text to filter the requests by (if null, no filter).
+     * @return The array of {@link HelpRequest requests}, may be empty.
      */
     private HelpRequest[] getRequestsArray(String containsText) {
         ArrayList<HelpRequest> requestArrayList = new ArrayList<>();
@@ -94,9 +94,9 @@ public class MailboxFileDAO implements MailboxDAO {
     }
 
     /**
-     * Saves the {@linkplain Need needs} from the map into the file as an array of JSON objects.
+     * Saves the {@linkplain HelpRequest requests} from the map into the file as an array of JSON objects.
      *
-     * @return true if the {@link Need needs} were written successfully.
+     * @return true if the {@link HelpRequest requests} were written successfully.
      *
      * @throws IOException when the file cannot be accessed or written to.
      */
@@ -110,7 +110,7 @@ public class MailboxFileDAO implements MailboxDAO {
     }
 
     /**
-     * Loads {@linkplain Need needs} from the JSON file into the map.
+     * Loads {@linkplain HelpRequest requests} from the JSON file into the map.
      * <br>
      * Also sets the next id to one more than the greatest id found in the file.
      *
@@ -121,11 +121,11 @@ public class MailboxFileDAO implements MailboxDAO {
     private boolean load() throws IOException {
         requests = new TreeMap<>();
         nextId = 0;
-        // Deserializes the JSON objects from the file into an array of needs
+        // Deserializes the JSON objects from the file into an array of requests
         // readValue will throw an IOException if there's an issue with the file
         // or reading from the file
         HelpRequest[] requestArray = objectMapper.readValue(new File(filename), HelpRequest[].class);
-        // Add each need to the tree map and keep track of the greatest id
+        // Add each request to the tree map and keep track of the greatest id
         for (HelpRequest request : requestArray) {
             requests.put(request.getId(), request);
             if (request.getId() > nextId)
@@ -175,8 +175,8 @@ public class MailboxFileDAO implements MailboxDAO {
     @Override
     public HelpRequest createRequest(HelpRequest request) throws IOException {
         synchronized (requests) {
-            // We create a new need object because the id field is immutable
-            // and we need to assign the next unique id
+            // We create a new request object because the id field is immutable
+            // and we request to assign the next unique id
             HelpRequest newRequest = new HelpRequest(request.getId(), request.getCreator(), request.getTitle(), request.getBody(), request.getResponse(), request.getCompleted());
             requests.put(newRequest.getId(), newRequest);
             save(); // may throw an IOException
@@ -191,7 +191,7 @@ public class MailboxFileDAO implements MailboxDAO {
     public HelpRequest updateRequest(HelpRequest request) throws IOException {
         synchronized (requests) {
             if (!requests.containsKey(request.getId()))
-                return null;  // need does not exist
+                return null;  // request does not exist
             requests.put(request.getId(), request);
             save(); // may throw an IOException
             return request;

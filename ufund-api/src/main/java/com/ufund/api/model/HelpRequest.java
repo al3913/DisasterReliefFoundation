@@ -5,10 +5,10 @@ import java.util.logging.Logger;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
- * Represents a "Request" entity that encapsulates information about a specific need.
+ * Represents a "Request" entity that encapsulates information about a specific request.
  * This class is part of the application's model.
  * 
- * @author SWEN Faculty
+ * @author Team
  */
 public class HelpRequest {
 
@@ -23,15 +23,16 @@ public class HelpRequest {
     @JsonProperty("body") private String body;
     @JsonProperty("response") private String response;
     @JsonProperty("completed") private boolean completed;
-// Have not edited anything past this line.
+
     /**
-     * Constructs a "Need" object with the given parameters.
+     * Constructs a "Request" object with the given parameters.
      * 
-     * @param id       The unique identifier for the need.
-     * @param name     The name or description of the need.
-     * @param cost     The cost associated with the need.
-     * @param quantity The quantity or amount required for the need.
-     * @param type     The type or category of the need.
+     * @param id         The unique identifier for the request.
+     * @param creator    The creator ID of the request.
+     * @param title      The title of the request.
+     * @param body       The body of the request.
+     * @param response   The response to the request.
+     * @param completed  The completion status of the request. 
      * 
      * @JsonProperty is used in serialization and deserialization of the JSON object 
      * to the Java object, facilitating the mapping of fields.
@@ -48,103 +49,115 @@ public class HelpRequest {
     }
 
     /**
-     * Retrieves the unique identifier of the need.
+     * Retrieves the unique identifier of the request.
      * 
-     * @return The unique identifier of the need.
+     * @return The unique identifier of the request.
      */
     public int getId() {
         return id;
     }
 
     /**
-     * Sets the unique identifier of the need.
+     * Sets the unique identifier of the request.
      * 
-     * @param id The unique identifier for the need.
+     * @param id The unique identifier for the request.
      */
     public void setId(int id) {
         this.id = id;
     }
 
     /**
-     * Sets the name or description of the need.
-     * Necessary for JSON object to Java object deserialization.
+     * Retrieves the unique identifier of the request's creator.
      * 
-     * @param name The name or description of the need.
+     * @return The unique identifier of the request's creator.
      */
 
     public int getCreator() {
         return creator;
     }
 
+    /**
+     * Sets the unique identifier of the request's creator.
+     * Necessary for JSON object to Java object deserialization.
+     * 
+     * @param creator The unique identifier of the request's creator.
+     */
+
     public void setCreator(int creator) {
         this.creator = creator;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
     /**
-     * Retrieves the name or description of the need.
+     * Retrieves the name or description of the request.
      * 
-     * @return The name or description of the need.
+     * @return The name or description of the request.
      */
     public String getTitle() {
         return title;
     }
 
     /**
-     * Retrieves the cost associated with the need.
+     * Sets the name or description of the request.
+     * Necessary for JSON object to Java object deserialization.
      * 
-     * @return The cost associated with the need.
+     * @param title The name or description of the request.
+     */
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    /**
+     * Retrieves the body of the request.
+     * 
+     * @return The body of the request.
      */
     public String getBody() {
         return body;
     }
 
     /**
-     * Sets the cost associated with the need.
+     * Sets the body of the request.
      * 
-     * @param cost The cost associated with the need.
+     * @param body The body of the request.
      */
     public void setBody(String body) {
         this.body = body;
     }
 
     /**
-     * Retrieves the quantity or amount required for the need.
+     * Retrieves the response to the request.
      * 
-     * @return The quantity or amount required for the need.
+     * @return The response to the request.
      */
     public String getResponse() {
         return response;
     }
 
     /**
-     * Sets the quantity or amount required for the need.
+     * Sets the response to the request.
      * 
-     * @param quantity The quantity or amount required for the need.
+     * @param response The response to the request.
      */
     public void setResponse(String response) {
         this.response = response;
     }
 
     /**
-     * Sets the type or category of the need.
+     * Retrieves the completed status of the request.
      * 
-     * @param type The type or category of the need.
-     */
-    public void setCompleted(boolean completed) {
-        this.completed = completed;
-    }
-
-    /**
-     * Retrieves the type or category of the need.
-     * 
-     * @return The type or category of the need.
+     * @return The completed status of the request.
      */
     public boolean getCompleted() {
         return completed;
+    }
+
+    /**
+     * Sets the completed status of the request.
+     * 
+     * @param type The completed status of the request.
+     */
+    public void setCompleted(boolean completed) {
+        this.completed = completed;
     }
 
     /**

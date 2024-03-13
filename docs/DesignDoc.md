@@ -12,9 +12,9 @@ geometry: margin=1in
 * Team name: Albatross
 * Team members
   * Joseph Pilon
-  * MEMBER2
-  * MEMBER3
-  * MEMBER4
+  * Matthew Peck
+  * ANdy Lin
+  * Naif Alanazi
 
 ## Executive Summary
 

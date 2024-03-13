@@ -3,52 +3,52 @@ import java.io.IOException;
 import com.ufund.api.model.HelpRequest;
 
 /**
- * Defines the interface for Need object persistence
+ * Defines the interface for request object persistence
  * 
  * @author SWEN Faculty
  */
 public interface MailboxDAO {
     /**
-     * Retrieves all {@linkplain Need needs}
+     * Retrieves all {@linkplain HelpRequest requests}
      * 
-     * @return An array of {@link Need need} objects, may be empty
+     * @return An array of {@link HelpRequest request} objects, may be empty
      * 
      * @throws IOException if an issue with underlying storage
      */
     HelpRequest[] getRequests() throws IOException;
 
     /**
-     * Finds all {@linkplain Need needs} whose name contains the given text
+     * Finds all {@linkplain HelpRequest requests} whose name contains the given text
      * 
      * @param containsText The text to match against
      * 
-     * @return An array of {@link Need needs} whose names contain the given text, may be empty
+     * @return An array of {@link HelpRequest requests} whose names contain the given text, may be empty
      * 
      * @throws IOException if an issue with underlying storage
      */
     HelpRequest[] findRequests(String containsText) throws IOException;
 
     /**
-     * Retrieves a {@linkplain Need need} with the given id
+     * Retrieves a {@linkplain HelpRequest request} with the given id
      * 
-     * @param id The id of the {@link Need need} to get
+     * @param id The id of the {@link HelpRequest request} to get
      * 
-     * @return a {@link Need need} object with the matching id
+     * @return a {@link HelpRequest request} object with the matching id
      * <br>
-     * null if no {@link Need need} with a matching id is found
+     * null if no {@link HelpRequest request} with a matching id is found
      * 
      * @throws IOException if an issue with underlying storage
      */
     HelpRequest[] findMyRequests(int userID) throws IOException;
 
     /**
-     * Retrieves a {@linkplain Need need} with the given id
+     * Retrieves a {@linkplain HelpRequest request} with the given id
      * 
-     * @param id The id of the {@link Need need} to get
+     * @param id The id of the {@link HelpRequest request} to get
      * 
-     * @return a {@link Need need} object with the matching id
+     * @return a {@link HelpRequest request} object with the matching id
      * <br>
-     * null if no {@link Need need} with a matching id is found
+     * null if no {@link HelpRequest request} with a matching id is found
      * 
      * @throws IOException if an issue with underlying storage
      */
@@ -56,51 +56,51 @@ public interface MailboxDAO {
     boolean findCompleted(boolean completedStatus) throws IOException;
 
     /**
-     * Retrieves a {@linkplain Need need} with the given id
+     * Retrieves a {@linkplain HelpRequest request} with the given id
      * 
-     * @param id The id of the {@link Need need} to get
+     * @param id The id of the {@link HelpRequest request} to get
      * 
-     * @return a {@link Need need} object with the matching id
+     * @return a {@link HelpRequest request} object with the matching id
      * <br>
-     * null if no {@link Need need} with a matching id is found
+     * null if no {@link HelpRequest request} with a matching id is found
      * 
      * @throws IOException if an issue with underlying storage
      */
     HelpRequest getRequest(int id) throws IOException;
 
     /**
-     * Creates and saves a {@linkplain Need need}
+     * Creates and saves a {@linkplain HelpRequest request}
      * 
-     * @param need {@linkplain Need need} object to be created and saved
+     * @param request {@linkplain HelpRequest request} object to be created and saved
      * <br>
-     * The id of the need object is ignored, and a new unique id is assigned
+     * The id of the request object is ignored, and a new unique id is assigned
      *
-     * @return new {@link Need need} if successful, false otherwise 
+     * @return new {@link HelpRequest request} if successful, false otherwise 
      * 
      * @throws IOException if an issue with underlying storage
      */
     HelpRequest createRequest(HelpRequest request) throws IOException;
 
     /**
-     * Updates and saves a {@linkplain Need need}
+     * Updates and saves a {@linkplain HelpRequest request}
      * 
-     * @param need {@link Need need} object to be updated and saved
+     * @param request {@link HelpRequest request} object to be updated and saved
      * 
-     * @return updated {@link Need need} if successful, null if
-     * {@link Need need} could not be found
+     * @return updated {@link HelpRequest request} if successful, null if
+     * {@link HelpRequest request} could not be found
      * 
      * @throws IOException if underlying storage cannot be accessed
      */
     HelpRequest updateRequest(HelpRequest request) throws IOException;
 
     /**
-     * Deletes a {@linkplain Need need} with the given id
+     * Deletes a {@linkplain HelpRequest request} with the given id
      * 
-     * @param id The id of the {@link Need need}
+     * @param id The id of the {@link HelpRequest request}
      * 
-     * @return true if the {@link Need need} was deleted
+     * @return true if the {@link HelpRequest request} was deleted
      * <br>
-     * false if the need with the given id does not exist
+     * false if the request with the given id does not exist
      * 
      * @throws IOException if underlying storage cannot be accessed
      */

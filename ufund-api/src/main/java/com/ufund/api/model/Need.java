@@ -8,7 +8,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * Represents a "Need" entity that encapsulates information about a specific need.
  * This class is part of the application's model.
  * 
- * @author SWEN Faculty
+ * @author Team
  */
 public class Need {
 
