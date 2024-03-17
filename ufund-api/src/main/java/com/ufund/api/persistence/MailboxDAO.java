@@ -5,7 +5,7 @@ import com.ufund.api.model.HelpRequest;
 /**
  * Defines the interface for request object persistence
  * 
- * @author SWEN Faculty
+ * @author Matthew Peck
  */
 public interface MailboxDAO {
     /**

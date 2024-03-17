@@ -19,7 +19,7 @@ import com.ufund.api.model.Need;
  * {@literal @}Component Spring annotation instantiates a single instance of this
  * class and injects the instance into other classes as needed.
  *
- * @author SWEN Faculty
+ * @author Team
  */
 @Component
 public class CupboardFileDAO implements CupboardDAO {

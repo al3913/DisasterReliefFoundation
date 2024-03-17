@@ -5,7 +5,7 @@ import com.ufund.api.model.Need;
 /**
  * Defines the interface for Need object persistence
  * 
- * @author SWEN Faculty
+ * @author Team
  */
 public interface CupboardDAO {
     /**

@@ -8,12 +8,16 @@ import static org.mockito.Mockito.when;
 import java.io.IOException;
 
 import com.ufund.api.persistence.CupboardDAO;
+import com.ufund.api.persistence.MailboxDAO;
 import com.ufund.api.controller.CupboardController;
+import com.ufund.api.controller.MailboxController;
 import com.ufund.api.model.Need;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
@@ -25,16 +29,18 @@ import org.springframework.http.ResponseEntity;
  */
 @Tag("Controller-tier")
 public class CupboardControllerTest {
-    private CupboardController cupboardController;
+    @Mock
     private CupboardDAO mockCupboardDAO;
 
+    @InjectMocks
+    private CupboardController cupboardController;
     /**
      * Before each test, create a new HeroController object and inject
      * a mock Hero DAO
      */
 
     @BeforeEach
-    public void setupCupboardController() {
+    public void setUp() {
         mockCupboardDAO = mock(CupboardDAO.class);
         cupboardController = new CupboardController(mockCupboardDAO);
     }
@@ -84,7 +90,7 @@ public class CupboardControllerTest {
     }
     
     @Test
-    public void testCreateNeed() throws IOException {  // createNeed may throw IOException
+    public void testCreateNeedSuccess() throws IOException {  // createNeed may throw IOException
         // Setup
         Need need = new Need(1, "Apples", 1, 50, "food");
         // when createNeed is called, return true simulating successful
