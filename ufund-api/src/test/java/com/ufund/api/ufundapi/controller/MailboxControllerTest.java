@@ -43,6 +43,7 @@ public class MailboxControllerTest {
     @Test
     public void testGetMyRequests() throws IOException { // findNeeds may throw IOException
         // Setup
+        setUp();
         HelpRequest[] requests = new HelpRequest[2];
         requests[0] = new HelpRequest(1,0,"a","a","a",true);
         requests[1] = new HelpRequest(2,1,"b","b","b",false);
@@ -61,6 +62,7 @@ public class MailboxControllerTest {
     @Test
     public void testCreateRequestSuccess() throws IOException {
         // Setup
+        setUp();
         HelpRequest request = new HelpRequest(0, 0, "test", "test", "test", false);
         // when createRequest is called, return true simulating success
         when(mockMailboxDAO.createRequest(request)).thenReturn(request);

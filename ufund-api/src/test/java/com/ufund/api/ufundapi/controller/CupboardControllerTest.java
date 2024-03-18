@@ -8,9 +8,7 @@ import static org.mockito.Mockito.when;
 import java.io.IOException;
 
 import com.ufund.api.persistence.CupboardDAO;
-import com.ufund.api.persistence.MailboxDAO;
 import com.ufund.api.controller.CupboardController;
-import com.ufund.api.controller.MailboxController;
 import com.ufund.api.model.Need;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -40,7 +38,7 @@ public class CupboardControllerTest {
      */
 
     @BeforeEach
-    public void setUp() {
+    public void setupCupboardController() {
         mockCupboardDAO = mock(CupboardDAO.class);
         cupboardController = new CupboardController(mockCupboardDAO);
     }
@@ -48,6 +46,7 @@ public class CupboardControllerTest {
     @Test
     public void testGetNeed() throws IOException {
         //Setup
+        setupCupboardController();
         Need need = new Need(1, "Apples", 1, 50, "food");
         // When the same id is passed in, our mock NeedDAO will return the Need object
         when(mockCupboardDAO.getNeed(need.getId())).thenReturn(need);
@@ -64,6 +63,7 @@ public class CupboardControllerTest {
     @Test
     public void testGetNeedNotFound() throws Exception {
         //Setup
+        setupCupboardController();
         int needId = 0;
         // When the same id is passed in, our mock NeedDAO will return null,
         // simulating no need found
@@ -79,6 +79,7 @@ public class CupboardControllerTest {
     @Test
     public void testGetNeedHandleException() throws Exception {
         //Setup
+        setupCupboardController();
         int needId = 0;
         // When getNeed is called on the mock CupboardDAO, throw an IOException
         doThrow(new IOException()).when(mockCupboardDAO).getNeed(needId);
@@ -123,6 +124,7 @@ public class CupboardControllerTest {
     @Test
     public void testCreateNeedHandleException() throws IOException {  // createNeed may throw IOException
         // Setup
+        setupCupboardController();
         Need need = new Need(1, "Apples", 1, 50, "food");
 
         // When createNeed is called on the Mock Hero DAO, throw an IOException
@@ -170,6 +172,7 @@ public class CupboardControllerTest {
     @Test
     public void testUpdateNeedHandleException() throws IOException { // updateNeed may throw IOException
         // Setup
+        setupCupboardController();
         Need need = new Need(1, "Apples", 1, 50, "food");
         // When updateHero is called on the Mock Hero DAO, throw an IOException
         doThrow(new IOException()).when(mockCupboardDAO).updateNeed(need);
@@ -201,6 +204,7 @@ public class CupboardControllerTest {
     @Test
     public void testGetCupboardHandleException() throws IOException { // getNeeds may throw IOException
         // Setup
+        setupCupboardController();
         // When getNeeds is called on the Mock CupboardDAO, throw an IOException
         doThrow(new IOException()).when(mockCupboardDAO).getNeeds();
 
@@ -233,6 +237,7 @@ public class CupboardControllerTest {
     @Test
     public void testSearchCupboardHandleException() throws IOException { // findNeeds may throw IOException
         // Setup
+        setupCupboardController();
         String searchString = "an";
         // When findNeeds is called on the Mock CupboardDAO, throw an IOException
         doThrow(new IOException()).when(mockCupboardDAO).findNeeds(searchString);
@@ -275,6 +280,7 @@ public class CupboardControllerTest {
     @Test
     public void testDeleteNeedHandleException() throws IOException { // deleteNeed may throw IOException
         // Setup
+        setupCupboardController();
         int needId = 99;
         // When deleteNeed is called on the Mock CupboardDAO, throw an IOException
         doThrow(new IOException()).when(mockCupboardDAO).deleteNeed(needId);
