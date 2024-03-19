@@ -19,7 +19,7 @@ public class User {
 
     @JsonProperty("id") private int id;
     @JsonProperty("name") private String username;
-    @JsonProperty("cost") private String password;
+    @JsonProperty("password") private String password;
 
     /**
      * Constructs a "Need" object with the given parameters.
