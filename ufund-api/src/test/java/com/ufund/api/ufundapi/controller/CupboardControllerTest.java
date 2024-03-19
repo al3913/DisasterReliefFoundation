@@ -238,6 +238,7 @@ public class CupboardControllerTest {
     public void testSearchCupboardHandleException() throws IOException { // findNeeds may throw IOException
         // Setup
         setupCupboardController();
+
         String searchString = "an";
         // When findNeeds is called on the Mock CupboardDAO, throw an IOException
         doThrow(new IOException()).when(mockCupboardDAO).findNeeds(searchString);
@@ -280,7 +281,6 @@ public class CupboardControllerTest {
     @Test
     public void testDeleteNeedHandleException() throws IOException { // deleteNeed may throw IOException
         // Setup
-        setupCupboardController();
         int needId = 99;
         // When deleteNeed is called on the Mock CupboardDAO, throw an IOException
         doThrow(new IOException()).when(mockCupboardDAO).deleteNeed(needId);
