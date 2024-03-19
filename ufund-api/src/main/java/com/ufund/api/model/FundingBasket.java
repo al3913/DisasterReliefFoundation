@@ -9,7 +9,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * 
  * This class represents a funding basket, which contains information about needs and bought items.
  * 
- * @author SWEN Faculty
+ * @author Andy Lin
  */
 public class FundingBasket {
     private static final Logger LOG = Logger.getLogger(FundingBasket.class.getName());
