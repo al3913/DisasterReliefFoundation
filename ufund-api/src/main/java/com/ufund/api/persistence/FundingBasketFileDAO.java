@@ -33,7 +33,7 @@ public class FundingBasketFileDAO implements FundingBasketDAO {
      *
      * @throws IOException when the file cannot be accessed or read from.
      */
-    public FundingBasketFileDAO(@Value("${funding-basket.file}") String filename, ObjectMapper objectMapper)
+    public FundingBasketFileDAO(@Value("${fundingbasket.file}") String filename, ObjectMapper objectMapper)
             throws IOException {
         this.filename = filename;
         this.objectMapper = objectMapper;

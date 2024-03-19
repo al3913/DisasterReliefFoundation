@@ -20,8 +20,8 @@ import com.ufund.api.model.FundingBasket;
  * @author Andy Lin
  */
 @RestController
-@RequestMapping("/funding-basket")
-@CrossOrigin(origins = "http://localhost:4200")
+@RequestMapping("fundingbasket")
+//@CrossOrigin(origins = "http://localhost:4200")
 public class FundingBasketController {
     private static final Logger LOG = Logger.getLogger(FundingBasketController.class.getName());
     private final FundingBasketDAO fundingBasketDAO;
