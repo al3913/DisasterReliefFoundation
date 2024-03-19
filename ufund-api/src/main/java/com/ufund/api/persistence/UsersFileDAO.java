@@ -11,7 +11,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
+
 import com.ufund.api.model.HelpRequest;
+import com.ufund.api.model.User;
 
 /**
  * Implements the functionality for JSON file-based persistence for request objects.
@@ -23,18 +25,20 @@ import com.ufund.api.model.HelpRequest;
  * @author Matthew Peck
  */
 @Component
-public class MailboxFileDAO implements MailboxDAO {
+public class UsersFileDAO implements UsersDAO {
 
     private static final Logger LOG = Logger.getLogger(MailboxFileDAO.class.getName());
     
-    Map<Integer, HelpRequest> requests;   // Provides a local cache of the Need objects
+    Map<Integer, User> users;   // Provides a local cache of the Need objects
                                 // so that we don't need to read from the file
                                 // each time
+    Map<Integer, User> loggedIn;
     private ObjectMapper objectMapper;  // Provides conversion between Need
                                         // objects and JSON text format written
                                         // to the file
     private static int nextId;  // The next Id to assign to a new Need
     private String filename;    // Filename to read from and write to
+    private String loggedInFile;
 
     /**
      * Creates a Need File Data Access Object.
@@ -44,8 +48,9 @@ public class MailboxFileDAO implements MailboxDAO {
      *
      * @throws IOException when the file cannot be accessed or read from.
      */
-    public MailboxFileDAO(@Value("${mailbox.file}") String filename, ObjectMapper objectMapper) throws IOException {
+    public UsersFileDAO(@Value("${users.file}") String filename, @Value("${loggedIn.file}") String loggedInFile, ObjectMapper objectMapper) throws IOException {
         this.filename = filename;
+        this.loggedInFile = loggedInFile;
         this.objectMapper = objectMapper;
         load();  // load the requests from the file
     }
@@ -66,8 +71,8 @@ public class MailboxFileDAO implements MailboxDAO {
      *
      * @return The array of {@link HelpRequest requests}, may be empty.
      */
-    private HelpRequest[] getRequestsArray() {
-        return getRequestsArray(null);
+    private User[] getUsersArray() {
+        return getUsersArray(null);
     }
 
     /**
@@ -80,16 +85,26 @@ public class MailboxFileDAO implements MailboxDAO {
      * @param containsText The text to filter the requests by (if null, no filter).
      * @return The array of {@link HelpRequest requests}, may be empty.
      */
-    private HelpRequest[] getRequestsArray(String containsText) {
-        ArrayList<HelpRequest> requestArrayList = new ArrayList<>();
-        for (HelpRequest request : requests.values()) {
-            if (containsText == null || request.getTitle().contains(containsText) || request.getBody().contains(containsText)) {
-                requestArrayList.add(request);
+    private User[] getUsersArray(String containsText) {
+        ArrayList<User> userArrayList = new ArrayList<>();
+        for (User user : users.values()) {
+            if (containsText == null || user.getUsername().contains(containsText)) {
+                userArrayList.add(user);
             }
         }
-        HelpRequest[] requestArray = new HelpRequest[requestArrayList.size()];
-        requestArrayList.toArray(requestArray);
-        return requestArray;
+        User[] userArray = new User[userArrayList.size()];
+        userArrayList.toArray(userArray);
+        return userArray;
+    }
+
+    private User[] getLoggedInArray() {
+        ArrayList<User> userArrayList = new ArrayList<>();
+        for (User user : loggedIn.values()) {
+            userArrayList.add(user);
+        }
+        User[] userArray = new User[userArrayList.size()];
+        userArrayList.toArray(userArray);
+        return userArray;
     }
 
     /**
@@ -100,11 +115,13 @@ public class MailboxFileDAO implements MailboxDAO {
      * @throws IOException when the file cannot be accessed or written to.
      */
     private boolean save() throws IOException {
-        HelpRequest[] requestArray = getRequestsArray();
+        User[] usersArray = getUsersArray();
+        User[] loggedArray = getLoggedInArray();
         // Serializes the Java Objects to JSON objects into the file
         // writeValue will throw an IOException if there is an issue
         // with the file or reading from the file
-        objectMapper.writeValue(new File(filename), requestArray);
+        objectMapper.writeValue(new File(filename), usersArray);
+        objectMapper.writeValue(new File(loggedInFile), loggedArray);
         return true;
     }
 
@@ -118,68 +135,36 @@ public class MailboxFileDAO implements MailboxDAO {
      * @throws IOException when the file cannot be accessed or read from.
      */
     private boolean load() throws IOException {
-        requests = new TreeMap<>();
+        users = new TreeMap<>();
         nextId = 0;
         // Deserializes the JSON objects from the file into an array of requests
         // readValue will throw an IOException if there's an issue with the file
         // or reading from the file
-        HelpRequest[] requestArray = objectMapper.readValue(new File(filename), HelpRequest[].class);
+        User[] userArray = objectMapper.readValue(new File(filename), User[].class);
+        User[] loggedArray = objectMapper.readValue(new File(loggedInFile), User[].class);
         // Add each request to the tree map and keep track of the greatest id
-        for (HelpRequest request : requestArray) {
-            requests.put(request.getId(), request);
-            if (request.getId() > nextId)
-                nextId = request.getId();
+        for (User user : userArray) {
+            users.put(user.getId(), user);
+            if (user.getId() > nextId)
+                nextId = user.getId();
         }
         // Make the next id one greater than the maximum from the file
         ++nextId;
         return true;
     }
 
-    /**
+        /**
      * {@inheritDoc}
      */
     @Override
-    public HelpRequest[] getRequests() {
-        synchronized (requests) {
-            return getRequestsArray();
-        }
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public HelpRequest[] findRequests(String containsText) {
-        synchronized (requests) {
-            return getRequestsArray(containsText);
-        }
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public HelpRequest getRequest(int id) { //May not be necessary
-        synchronized (requests) {
-            if (requests.containsKey(id))
-                return requests.get(id);
-            else
-                return null;
-        }
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public HelpRequest createRequest(HelpRequest request) throws IOException {
-        synchronized (requests) {
+    public User createUser(User user) throws IOException {
+        synchronized (users) {
             // We create a new request object because the id field is immutable
             // and we request to assign the next unique id
-            HelpRequest newRequest = new HelpRequest(request.getId(), request.getCreator(), request.getTitle(), request.getBody(), request.getResponse(), request.getCompleted());
-            requests.put(newRequest.getId(), newRequest);
+            User newUser = new User(user.getId(), user.getUsername(), user.getPassword());
+            users.put(newUser.getId(), newUser);
             save(); // may throw an IOException
-            return newRequest;
+            return newUser;
         }
     }
 
@@ -187,24 +172,10 @@ public class MailboxFileDAO implements MailboxDAO {
      * {@inheritDoc}
      */
     @Override
-    public HelpRequest updateRequest(HelpRequest request) throws IOException {
-        synchronized (requests) {
-            if (!requests.containsKey(request.getId()))
-                return null;  // request does not exist
-            requests.put(request.getId(), request);
-            save(); // may throw an IOException
-            return request;
-        }
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public boolean deleteRequest(int id) throws IOException {
-        synchronized (requests) {
-            if (requests.containsKey(id)) {
-                requests.remove(id);
+    public boolean deleteUser(int id) throws IOException {
+        synchronized (users) {
+            if (users.containsKey(id)) {
+                users.remove(id);
                 return save();
             } else
                 return false;
@@ -212,30 +183,26 @@ public class MailboxFileDAO implements MailboxDAO {
     }
 
     @Override
-    public HelpRequest[] findMyRequests(int userID) throws IOException {
-        synchronized (requests) {
-            ArrayList<HelpRequest> requestArrayList = new ArrayList<>();
-            for(HelpRequest request : requests.values()) {
-                if ((request.getCreator() == userID))
-                    requests.put(request.getId(), request);
-                    requestArrayList.add(request);
-            }
-            HelpRequest[] requestArray = new HelpRequest[requestArrayList.size()];
-            requestArrayList.toArray(requestArray);
-            save(); // may throw an IOException
-            return requestArray;
+    public boolean login(int id) throws IOException {
+        synchronized (users) {
+            if (users.containsKey(id)) {
+                loggedIn.put(id, users.get(id));
+                return save();
+            } else
+                return false;
         }
     }
 
     @Override
-    public boolean findCompleted(boolean completedStatus) throws IOException {
-        synchronized (requests) {
-            for(HelpRequest request : requests.values()) {
-                if ((request.getCompleted() == completedStatus))
-                    requests.put(request.getId(), request);
-            }
-            save(); // may throw an IOException
-            return completedStatus;
+    public boolean logout(int id) throws IOException {
+        synchronized (users) {
+            if (users.containsKey(id)) {
+                loggedIn.remove(id);
+                return save();
+            } else
+                return false;
         }
     }
+
+    
 }
