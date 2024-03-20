@@ -19,6 +19,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import com.ufund.api.persistence.UsersDAO;
+import com.ufund.api.model.Need;
 import com.ufund.api.model.User;
 
 /**
@@ -46,6 +47,34 @@ public class UsersController {
         this.usersDao = usersDAO;
     }
 
+    @GetMapping("")
+    public ResponseEntity<User[]> getUsers() {
+        LOG.info("GET /users");
+        try {
+            User[] users = usersDao.getUsers();
+            if (users != null)
+                return new ResponseEntity<User[]>(users, HttpStatus.OK);
+            else
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        } catch (IOException e) {
+            LOG.log(Level.SEVERE, e.getLocalizedMessage());
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+    @GetMapping("/{id}")
+    public ResponseEntity<User> getUser(@PathVariable int id) {
+        LOG.info("GET /user/" + id);
+        try {
+            User user = usersDao.getUser(id);
+            if (user != null)
+                return new ResponseEntity<User>(user, HttpStatus.OK);
+            else
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        } catch (IOException e) {
+            LOG.log(Level.SEVERE, e.getLocalizedMessage());
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
     /**
      * Creates a {@linkplain User user} with the provided user object
      * 

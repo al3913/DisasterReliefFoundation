@@ -12,6 +12,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { NeedSearchComponent } from './need-search/need-search.component';
 import { LoginComponent } from './login/login.component';
 import { AdminComponent } from './admin/admin.component';
+import { LoginService } from './login.service';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,7 @@ import { AdminComponent } from './admin/admin.component';
     AppRoutingModule,
     HttpClientModule,
   ],
-  providers: [],
+  providers: [LoginService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

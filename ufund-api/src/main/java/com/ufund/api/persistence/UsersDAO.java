@@ -1,6 +1,8 @@
 package com.ufund.api.persistence;
 import java.io.IOException;
 
+import com.ufund.api.model.HelpRequest;
+import com.ufund.api.model.Need;
 import com.ufund.api.model.User;
 
 /**
@@ -34,6 +36,12 @@ public interface UsersDAO {
      * @throws IOException if underlying storage cannot be accessed
      */
     boolean deleteUser(int id) throws IOException;
+
+
+
+    User getUser(int id) throws IOException;
+
+    User[] getUsers() throws IOException;
 
     /**
      * Deletes a {@linkplain HelpRequest request} with the given id

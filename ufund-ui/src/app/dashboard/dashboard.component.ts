@@ -20,4 +20,5 @@ export class DashboardComponent implements OnInit {
     this.needService.getNeeds()
       .subscribe(needs => this.needs = needs.slice(0, 4));
   }
+  
 }

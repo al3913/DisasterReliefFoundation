@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import com.ufund.api.model.HelpRequest;
+import com.ufund.api.model.Need;
 import com.ufund.api.model.User;
 
 /**
@@ -48,9 +49,9 @@ public class UsersFileDAO implements UsersDAO {
      *
      * @throws IOException when the file cannot be accessed or read from.
      */
-    public UsersFileDAO(@Value("${users.file}") String filename, @Value("${loggedIn.file}") String loggedInFile, ObjectMapper objectMapper) throws IOException {
+    public UsersFileDAO(@Value("${users.file}") String filename, ObjectMapper objectMapper) throws IOException {
         this.filename = filename;
-        this.loggedInFile = loggedInFile;
+        //this.loggedInFile = loggedInFile;
         this.objectMapper = objectMapper;
         load();  // load the requests from the file
     }
@@ -96,7 +97,7 @@ public class UsersFileDAO implements UsersDAO {
         userArrayList.toArray(userArray);
         return userArray;
     }
-
+    /*
     private User[] getLoggedInArray() {
         ArrayList<User> userArrayList = new ArrayList<>();
         for (User user : loggedIn.values()) {
@@ -106,7 +107,7 @@ public class UsersFileDAO implements UsersDAO {
         userArrayList.toArray(userArray);
         return userArray;
     }
-
+    */
     /**
      * Saves the {@linkplain HelpRequest requests} from the map into the file as an array of JSON objects.
      *
@@ -116,12 +117,12 @@ public class UsersFileDAO implements UsersDAO {
      */
     private boolean save() throws IOException {
         User[] usersArray = getUsersArray();
-        User[] loggedArray = getLoggedInArray();
+        //User[] loggedArray = getLoggedInArray();
         // Serializes the Java Objects to JSON objects into the file
         // writeValue will throw an IOException if there is an issue
         // with the file or reading from the file
         objectMapper.writeValue(new File(filename), usersArray);
-        objectMapper.writeValue(new File(loggedInFile), loggedArray);
+        //objectMapper.writeValue(new File(loggedInFile), loggedArray);
         return true;
     }
 
@@ -141,7 +142,7 @@ public class UsersFileDAO implements UsersDAO {
         // readValue will throw an IOException if there's an issue with the file
         // or reading from the file
         User[] userArray = objectMapper.readValue(new File(filename), User[].class);
-        User[] loggedArray = objectMapper.readValue(new File(loggedInFile), User[].class);
+        //User[] loggedArray = objectMapper.readValue(new File(loggedInFile), User[].class);
         // Add each request to the tree map and keep track of the greatest id
         for (User user : userArray) {
             users.put(user.getId(), user);
@@ -151,6 +152,13 @@ public class UsersFileDAO implements UsersDAO {
         // Make the next id one greater than the maximum from the file
         ++nextId;
         return true;
+    }
+
+    @Override
+    public User[] getUsers() throws IOException {
+        synchronized (users) {
+            return getUsersArray();
+        }
     }
 
         /**
@@ -201,6 +209,16 @@ public class UsersFileDAO implements UsersDAO {
                 return save();
             } else
                 return false;
+        }
+    }
+
+    @Override
+    public User getUser(int id) {
+        synchronized (users) {
+            if (users.containsKey(id))
+                return users.get(id);
+            else
+                return null;
         }
     }
 
