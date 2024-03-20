@@ -7,6 +7,7 @@ import { NeedDetailComponent } from './need-detail/need-detail.component';
 import { MessagesComponent } from './messages/messages.component';
 import { AppRoutingModule } from './app-routing.module';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { FundingBasketComponent } from './funding-basket/funding-basket.component';
 import { HttpClientModule } from '@angular/common/http';
 import { NeedSearchComponent } from './need-search/need-search.component';
 
@@ -17,6 +18,7 @@ import { NeedSearchComponent } from './need-search/need-search.component';
     NeedDetailComponent,
     MessagesComponent,
     DashboardComponent,
+    FundingBasketComponent,
     NeedSearchComponent
   ],
   imports: [

@@ -1,0 +1,17 @@
+/* DashboardComponent's private CSS styles */
+
+h2 {
+    text-align: center;
+  }
+  
+  
+  @media (min-width: 600px) {
+    a {
+      width: 18%;
+      box-sizing: content-box;
+    }
+  }
+  
+  a:hover {
+    background-color: #000;
+  }

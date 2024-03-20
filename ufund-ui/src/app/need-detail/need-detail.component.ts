@@ -39,4 +39,5 @@ export class NeedDetailComponent implements OnInit {
       .subscribe(() => this.goBack());
     }
   }
+  
 }
