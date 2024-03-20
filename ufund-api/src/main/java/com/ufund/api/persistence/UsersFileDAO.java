@@ -33,13 +33,11 @@ public class UsersFileDAO implements UsersDAO {
     Map<Integer, User> users;   // Provides a local cache of the Need objects
                                 // so that we don't need to read from the file
                                 // each time
-    Map<Integer, User> loggedIn;
     private ObjectMapper objectMapper;  // Provides conversion between Need
                                         // objects and JSON text format written
                                         // to the file
     private static int nextId;  // The next Id to assign to a new Need
     private String filename;    // Filename to read from and write to
-    private String loggedInFile;
 
     /**
      * Creates a Need File Data Access Object.
@@ -184,28 +182,6 @@ public class UsersFileDAO implements UsersDAO {
         synchronized (users) {
             if (users.containsKey(id)) {
                 users.remove(id);
-                return save();
-            } else
-                return false;
-        }
-    }
-
-    @Override
-    public boolean login(int id) throws IOException {
-        synchronized (users) {
-            if (users.containsKey(id)) {
-                loggedIn.put(id, users.get(id));
-                return save();
-            } else
-                return false;
-        }
-    }
-
-    @Override
-    public boolean logout(int id) throws IOException {
-        synchronized (users) {
-            if (users.containsKey(id)) {
-                loggedIn.remove(id);
                 return save();
             } else
                 return false;
