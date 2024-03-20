@@ -5,7 +5,6 @@ import static org.mockito.Mockito.*;
 
 import java.io.IOException;
 import com.ufund.api.model.HelpRequest;
-import com.ufund.api.model.Need;
 import com.ufund.api.persistence.MailboxDAO;
 import com.ufund.api.controller.MailboxController;
 import org.junit.jupiter.api.BeforeEach;
