@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { LoginService } from '../login.service';
 
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -10,7 +11,13 @@ export class LoginComponent {
   constructor(private loginService:LoginService) {}
 
   login(username: string, password: string):void {
-    window.location.href="http://localhost:4200/dashboard"
+
+    if(username && password == "admin"){
+      window.location.href="http://localhost:4200/admin"
+    }
+    else{
+      window.location.href="http://localhost:4200/dashboard"
+    }
   }
 
 }

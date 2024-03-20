@@ -5,6 +5,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { NeedDetailComponent } from './need-detail/need-detail.component';
 import { FundingBasketComponent } from './funding-basket/funding-basket.component';
 import { LoginComponent } from './login/login.component';
+import { AdminComponent } from './admin/admin.component';
 
 const routes: Routes = [
   { path: 'needs', component: NeedsComponent },
@@ -12,6 +13,7 @@ const routes: Routes = [
   { path: 'funding-basket', component: FundingBasketComponent},
   { path: 'detail/:id', component: NeedDetailComponent},
   { path: 'login', component: LoginComponent },
+  { path: 'admin', component: AdminComponent},
   { path: '', redirectTo: '/login', pathMatch: 'full' }
 ];
 
