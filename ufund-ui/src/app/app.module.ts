@@ -10,6 +10,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { FundingBasketComponent } from './funding-basket/funding-basket.component';
 import { HttpClientModule } from '@angular/common/http';
 import { NeedSearchComponent } from './need-search/need-search.component';
+import { LoginComponent } from './login/login.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { NeedSearchComponent } from './need-search/need-search.component';
     MessagesComponent,
     DashboardComponent,
     FundingBasketComponent,
-    NeedSearchComponent
+    NeedSearchComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,

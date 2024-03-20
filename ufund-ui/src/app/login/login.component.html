@@ -1,0 +1,13 @@
+<p>Login Page</p>
+<div id="user-component">
+    <label for="user-box">Username:</label>
+    <input #usernameBox id="user-box" />
+
+    <label for="password-box">Password: </label>
+    <input #passwordBox id="user-box" />
+
+    <button type="button" class="add-button" (click)="login(usernameBox.value, passwordBox.value); 
+                                                        usernameBox.value=''; passwordBox.value=''">
+        Login
+      </button>
+</div>
