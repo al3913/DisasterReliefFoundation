@@ -7,4 +7,9 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'Tour of Needs';
+
+  logout(){
+    window.location.href="http://localhost:4200/login";
+  }
+
 }
