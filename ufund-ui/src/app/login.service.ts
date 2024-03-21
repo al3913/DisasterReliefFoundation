@@ -11,6 +11,7 @@ import { MessageService } from './message.service';
 })
 export class LoginService {
   private usersURL = 'http://localhost:8080/users';
+  username :string = "";
   constructor(private http: HttpClient, private messageService: MessageService) {}
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -41,11 +42,12 @@ export class LoginService {
   private log(message: string) {
     this.messageService.add(`NeedService: ${message}`);
   }
-  
-  updateUser(user: User): Observable<any> {
-    return this.http.put(this.usersURL, user, this.httpOptions).pipe(
-      tap(_ => this.log(`updated need id=${user.id}`)),
-      catchError(this.handleError<any>('updateNeed'))
-    );
+
+  getUsername () : string { 
+    return this.username;
   }
+  setUsername (username : string) : void {
+    this.username = username;
+  }
+  
 }

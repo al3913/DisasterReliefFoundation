@@ -16,6 +16,7 @@ export class AdminComponent {
 
   ngOnInit(): void{
     this.getNeeds();
+    
   }
   add(name: string, cost: number, quantity : number, type : string) : void {
     name = name.trim();
