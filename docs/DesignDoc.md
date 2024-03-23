@@ -13,7 +13,7 @@ geometry: margin=1in
 * Team members
   * Joseph Pilon
   * Matthew Peck
-  * ANdy Lin
+  * Andy Lin
   * Naif Alanazi
 
 ## Executive Summary
@@ -56,12 +56,16 @@ This section describes the features of the application.
 
 This section describes the application domain.
 
-![Domain Model](domain-model-placeholder.png)
+![Domain Model](DomainModel.png)
 
-> _**[Sprint 2 & 4]** Provide a high-level overview of the domain for this application. You
-> can discuss the more important domain entities and their relationship
-> to each other._
 
+There are 2 types of Users: Admin and Helper. 
+
+Both types of users are able to view Needs and the "Dashboard", while the Admin is able to edit/modify the Needs in the Inventory/Cupboard.
+
+Both types of users has access to the Help Service.
+
+Each helper has a Funding Basket, where they can Add/Remove Needs (from the Cupboard). From the Funding Basket, a Helper can "Checkout", which empties the Funding Basket and decreases the quantity of those needs in the Cupboard.
 
 ## Architecture and Design
 
@@ -110,7 +114,6 @@ This section describes the web interface flow; this is how the user views and in
  >* _Include other details such as attributes and method signatures that you think are needed to support the level of detail in your discussion._
 
 ### ViewModel Tier
-> _**[Sprint 1]** List the classes supporting this tier and provide a description of there purpose._
     Need.java is used to keep the atributes of the needs that will be shown in the cupboard.
     CupboardController.java is used to read in the commands and calls the commands to make adjusments to the cupboard or specific instructions from the user.
     CupboardDAO.java defines different functions that the cupboard is able to use and perform while manipulating different needs.
@@ -126,7 +129,6 @@ This section describes the web interface flow; this is how the user views and in
 ![Replace with your ViewModel Tier class diagram 1, etc.](model-placeholder.png)
 
 ### Model Tier
-> _**[Sprint 1]** List the classes supporting this tier and provide a description of there purpose._
     Need.java is used to keep the atributes of the needs that will be shown in the cupboard.
     CupboardController.java is used to read in the commands and calls the commands to make adjusments to the cupboard or specific instructions from the user.
     CupboardDAO.java defines different functions that the cupboard is able to use and perform while manipulating different needs.
@@ -142,7 +144,6 @@ This section describes the web interface flow; this is how the user views and in
 
 ## OO Design Principles
 
-> _**[Sprint 1]** Name and describe the initial OO Principles that your team has considered in support of your design (and implementation) for this first Sprint._
     While getting started with this project and during the first sprint, we need to make sure that we are focusing on the idea of single responsibility in the hopes that it will disperse the 'weight' of the functionality across multiple classes and functions.
 `
 > _**[Sprint 2, 3 & 4]** Will eventually address upto **4 key OO Principles** in your final design. Follow guidance in augmenting those completed in previous Sprints as indicated to you by instructor. Be sure to include any diagrams (or clearly refer to ones elsewhere in your Tier sections above) to support your claims._
