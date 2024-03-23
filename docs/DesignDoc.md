@@ -23,8 +23,8 @@ It allows for a manager to sign in as well in order to update the cupboard of ne
 customers will be able to see.
 
 ### Purpose
->  _**[Sprint 2 & 4]** Provide a very brief statement about the project and the most
-> important user group and user goals._
+
+To create a Web-Based Ufund system, where users are able to select from a Cupboard of "Needs" to provide to a Specific Charity. Users are able to add/remove "Needs" from their unique Funding Basket, and choose to checkout their basket, locking in their "Purchase".
 
 ### Glossary and Acronyms
 > _**[Sprint 2 & 4]** Provide a table of terms and acronyms._
@@ -43,7 +43,8 @@ This section describes the features of the application.
 > maybe Epics and critical Stories._
 
 ### Definition of MVP
-> _**[Sprint 2 & 4]** Provide a simple description of the Minimum Viable Product._
+
+Charity donation website, where users are able to login and view their unique Funding Basket and the currently needed "Needs" from the Cupboard. Users are able to checkout the Needs in their basket and thus removes those Needs from the Cupboard.
 
 ### MVP Features
 >  _**[Sprint 4]** Provide a list of top-level Epics and/or Stories of the MVP._
@@ -133,6 +134,7 @@ This section describes the web interface flow; this is how the user views and in
     CupboardController.java is used to read in the commands and calls the commands to make adjusments to the cupboard or specific instructions from the user.
     CupboardDAO.java defines different functions that the cupboard is able to use and perform while manipulating different needs.
     CupboardFileDAO.java is used to define each of the functions that cupboardDAO uses and actually writes the functions actions that they will be performing.
+    
 > _**[Sprint 2, 3 & 4]** Provide a summary of this tier of your architecture. This
 > section will follow the same instructions that are given for the View
 > Tier above._
