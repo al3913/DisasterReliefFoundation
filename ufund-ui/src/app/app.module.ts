@@ -9,10 +9,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { FundingBasketComponent } from './funding-basket/funding-basket.component';
 import { HttpClientModule } from '@angular/common/http';
-import { NeedSearchComponent } from './need-search/need-search.component';
-import { LoginComponent } from './login/login.component';
 import { AdminComponent } from './admin/admin.component';
-import { LoginService } from './login.service';
+import { NeedSearchComponent } from './need-search/need-search.component';
 
 @NgModule({
   declarations: [
@@ -22,9 +20,8 @@ import { LoginService } from './login.service';
     MessagesComponent,
     DashboardComponent,
     FundingBasketComponent,
-    NeedSearchComponent,
-    LoginComponent,
-    AdminComponent
+    AdminComponent,
+    NeedSearchComponent
   ],
   imports: [
     BrowserModule,
@@ -32,7 +29,7 @@ import { LoginService } from './login.service';
     AppRoutingModule,
     HttpClientModule,
   ],
-  providers: [LoginService],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

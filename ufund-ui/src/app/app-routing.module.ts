@@ -6,6 +6,7 @@ import { NeedDetailComponent } from './need-detail/need-detail.component';
 import { FundingBasketComponent } from './funding-basket/funding-basket.component';
 import { LoginComponent } from './login/login.component';
 import { AdminComponent } from './admin/admin.component';
+import { AppComponent } from './app.component';
 
 const routes: Routes = [
   { path: 'needs', component: NeedsComponent },

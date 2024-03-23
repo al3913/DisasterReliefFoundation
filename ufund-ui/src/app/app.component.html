@@ -2,11 +2,12 @@
 <nav>
   <a routerLink="/dashboard">Dashboard</a><br>
   <a routerLink="/needs">Needs</a><br>
-  <a routerLink="/funding-basket">Funding Basket</a>
+  <a routerLink="/funding-basket">Funding Basket</a><br>
+
+  <button type="button" class="add-button" (click)="logout()">
+      Logout
+  </button>
+
 </nav>
-<div>
-  <button type="button" (click)="logout()">Logout</button>
-</div>
-<h2> {{username}} </h2>
 <router-outlet></router-outlet>
 <app-messages></app-messages>

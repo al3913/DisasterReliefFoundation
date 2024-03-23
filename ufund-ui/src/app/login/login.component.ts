@@ -33,14 +33,14 @@ export class LoginComponent implements OnInit{
   login(username: string, password: string):void {
     //this.getUser();
     //wait time?
-
     localStorage.setItem("username", username);
 
-
     //this.loginService.updateUser();
+    this.loginService.setUsername(username);
 
     if(username && password == "admin"){
       window.location.href="http://localhost:4200/admin"
+      
     }
     else{
       window.location.href="http://localhost:4200/dashboard"

@@ -54,6 +54,4 @@ public interface UsersDAO {
      * 
      * @throws IOException if underlying storage cannot be accessed
      */
-    boolean login(int id) throws IOException;
-    boolean logout(int id) throws IOException;
 }
