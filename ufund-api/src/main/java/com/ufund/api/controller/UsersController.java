@@ -1,5 +1,6 @@
 package com.ufund.api.controller;
 
+import org.apache.catalina.connector.Response;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -66,6 +67,22 @@ public class UsersController {
         LOG.info("GET /user/" + id);
         try {
             User user = usersDao.getUser(id);
+            if (user != null)
+                return new ResponseEntity<User>(user, HttpStatus.OK);
+            else
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        } catch (IOException e) {
+            LOG.log(Level.SEVERE, e.getLocalizedMessage());
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @GetMapping("/")
+    public ResponseEntity<User> getUser(@RequestParam String username)
+    {
+        LOG.info("GET /user/" + username);
+        try {
+            User user = usersDao.getUser(username);
             if (user != null)
                 return new ResponseEntity<User>(user, HttpStatus.OK);
             else

@@ -4,8 +4,10 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Map;
+import java.util.Optional;
 import java.util.TreeMap;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -193,6 +195,22 @@ public class UsersFileDAO implements UsersDAO {
         synchronized (users) {
             if (users.containsKey(id))
                 return users.get(id);
+            else
+                return null;
+        }
+    }
+
+    @Override
+    public User getUser(String username){
+        synchronized (users) {
+            Optional<Integer> keyForUsername = users.entrySet().stream()
+                .filter(entry -> entry.getValue().getUsername().equals(username))
+                .map(Map.Entry::getKey)
+                .findFirst();
+            if (keyForUsername.isPresent())
+            {
+                return users.get(keyForUsername.get());
+            }
             else
                 return null;
         }

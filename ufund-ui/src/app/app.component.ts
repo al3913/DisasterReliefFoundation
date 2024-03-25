@@ -12,6 +12,8 @@ export class AppComponent {
 
   }
 
+  
+
   logout(){
     window.location.href="http://localhost:4200/login";
   }
