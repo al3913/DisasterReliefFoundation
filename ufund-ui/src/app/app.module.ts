@@ -11,10 +11,11 @@ import { FundingBasketComponent } from './funding-basket/funding-basket.componen
 import { HttpClientModule } from '@angular/common/http';
 import { AdminComponent } from './admin/admin.component';
 import { NeedSearchComponent } from './need-search/need-search.component';
+import { CookieService } from 'ngx-cookie-service';
 
 @NgModule({
   declarations: [
-    AppComponent,
+    AppComponent, 
     NeedsComponent,
     NeedDetailComponent,
     MessagesComponent,
@@ -29,7 +30,7 @@ import { NeedSearchComponent } from './need-search/need-search.component';
     AppRoutingModule,
     HttpClientModule,
   ],
-  providers: [],
+  providers: [CookieService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -31,12 +31,16 @@ export class LoginComponent implements OnInit{
       .subscribe(user => this.user = user);
   }
   login(username: string, password: string):void {
-    //this.getUser();
-    //wait time?
-    localStorage.setItem("username", username);
+    const userObs = this.loginService.getUser(username);
+    userObs.subscribe((user) => {
+      console.log(user);
+      this.user = user;
+      if (this.user.password == password)
+      {
+         this.appComponent.setCookie()
+      }
+    })
 
-    //this.loginService.updateUser();
-    this.loginService.setUsername(username);
 
     if(username && password == "admin"){
       window.location.href="http://localhost:4200/admin"
