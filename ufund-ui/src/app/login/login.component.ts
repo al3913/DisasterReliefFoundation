@@ -2,6 +2,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
+import { AppComponent } from '../app.component';
 
 import { User } from '../user';
 import { LoginService } from '../login.service';
@@ -18,7 +19,8 @@ export class LoginComponent implements OnInit{
   constructor(
     private route: ActivatedRoute,
     private loginService: LoginService,
-    private location: Location
+    private location: Location,
+    private appComponent : AppComponent
   ) {}
   
   ngOnInit(): void {
