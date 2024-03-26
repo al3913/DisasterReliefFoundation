@@ -39,17 +39,15 @@ export class LoginComponent implements OnInit{
       this.user = user;
       if (this.user.password == password)
       {
-         this.appComponent.setCookie()
+         this.appComponent.setCookie(this.user.id.toString());
+         if(username && password == "admin"){
+          window.location.href="http://localhost:4200/admin"
+          
+        }
+        else{
+          window.location.href="http://localhost:4200/dashboard"
+        }
       }
     })
-
-
-    if(username && password == "admin"){
-      window.location.href="http://localhost:4200/admin"
-      
-    }
-    else{
-      window.location.href="http://localhost:4200/dashboard"
-    }
   }
 }
