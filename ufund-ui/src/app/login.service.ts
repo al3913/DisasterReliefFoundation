@@ -17,26 +17,13 @@ export class LoginService {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
   
-  getUser(id : number) : Observable<User>;
-  getUser(username : string) : Observable<User>;
-
-  getUser(input : any) : Observable<User> {
-    if (typeof input === "number")
-    {
-      const url = `${this.usersURL}/${input}`;
-      return this.http.get<User>(this.usersURL)
-      .pipe(
-        tap(_ => this.log('fetched user')),
-        catchError(this.handleError<User>('getUser'))
-        );
-    }
-    else{
-      return this.http.get<User>(`${this.usersURL}/?username=${input}`)
-      .pipe(
-        tap(_ => this.log('fetched user')),
-        catchError(this.handleError<User>('getUser'))
-        );
-    }
+  getUser(id : number) : Observable<User> {
+    const url = `${this.usersURL}/${id}`;
+    return this.http.get<User>(this.usersURL)
+    .pipe(
+      tap(_ => this.log('fetched user')),
+      catchError(this.handleError<User>('getUser'))
+      );
   }
   
   private handleError<T>(operation = 'operation', result?: T) {
