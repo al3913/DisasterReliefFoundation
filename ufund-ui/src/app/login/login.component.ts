@@ -27,19 +27,9 @@ export class LoginComponent implements OnInit{
     
 
   }
-  getUser(): void {
-    const id = Number(this.route.snapshot.paramMap.get('id'));
-    this.loginService.getUser(id)
-      .subscribe(user => this.user = user);
-  }
+
   login(username: string, password: string):void {
-    const userObs = this.loginService.getUser(username);
-    userObs.subscribe((user) => {
-      console.log(user);
-      this.user = user;
-      if (this.user.password == password)
-      {
-         this.appComponent.setCookie(this.user.id.toString());
+    
          if(username && password == "admin"){
           window.location.href="http://localhost:4200/admin"
           
@@ -48,6 +38,4 @@ export class LoginComponent implements OnInit{
           window.location.href="http://localhost:4200/dashboard"
         }
       }
-    })
-  }
 }

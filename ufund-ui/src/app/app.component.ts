@@ -12,10 +12,9 @@ export class AppComponent {
   userId: number = 0;
   constructor(){
   }
-  logout(){
+    logout(){
     this.userId = 0;
     window.location.href="http://localhost:4200/login";
   }
 
 }
-2
