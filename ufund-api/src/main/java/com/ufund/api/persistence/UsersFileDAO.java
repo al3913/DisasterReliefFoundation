@@ -77,8 +77,8 @@ public class UsersFileDAO implements UsersDAO {
         return getUsersArray(null);
     }
 
-    public User[] getCurrentUsers(){
-        return getCurrentUsers();
+    public User getCurrentUser(){
+        return getCurrentUser(null);
     }
 
     /**

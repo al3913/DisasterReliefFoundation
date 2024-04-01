@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { LoginComponent } from './login/login.component';
-import { Observable, of } from 'rxjs';
+import { Observable, of, pipe } from 'rxjs';
 import { User } from './user';
 import { HttpClient,HttpHeaders } from '@angular/common/http';
 import { catchError, map, tap } from 'rxjs/operators';
@@ -12,12 +12,26 @@ import { MessageService } from './message.service';
 export class LoginService {
   private usersURL = 'http://localhost:8080/users';
   username :string = "";
+  x : string | null = null;
   
   constructor(private http: HttpClient, private messageService: MessageService) {}
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
   
+
+  getWhoYouAre(){
+    this.x  = localStorage.getItem("user");
+    if(this.x == null){
+      return "";
+    }
+    return this.x;
+  }
+
+
+
+
+
   // Added getUser with Username
   getUser(id : number) : Observable<User>;
   getUser(username : string) : Observable<User>;
