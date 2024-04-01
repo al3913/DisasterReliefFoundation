@@ -15,7 +15,7 @@ public class User {
     private static final Logger LOG = Logger.getLogger(Need.class.getName());
 
     // Package private for tests
-    public static final String STRING_FORMAT = "Need [id=%s, username=%s, password=%s]";
+    public static final String STRING_FORMAT = "Need [id=%d, username=%s, password=%s]";
 
     @JsonProperty("id") private int id;
     @JsonProperty("name") private String username;
@@ -68,6 +68,8 @@ public class User {
         this.username = username;
     }
 
+    public void logout(){
+    }
     /**
      * Retrieves the name or description of the user.
      * 

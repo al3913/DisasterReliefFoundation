@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Need } from '../need';
 import { NeedService } from '../need.service';
+import { User } from '../user';
+import { UserService } from '../user.service';
+import { LoginService } from '../login.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -9,15 +12,21 @@ import { NeedService } from '../need.service';
 })
 export class DashboardComponent implements OnInit {
   needs: Need[] = [];
+  users : User[] = [];
 
-  constructor(private needService: NeedService) { }
+  constructor(private needService: NeedService, private loginService : LoginService) { }
 
   ngOnInit(): void {
     this.getNeeds();
+    
   }
 
   getNeeds(): void {
     this.needService.getNeeds()
       .subscribe(needs => this.needs = needs.slice(0, 4));
+  }
+  getUsers() : void{
+    this.loginService.getUsers()
+    .subscribe(users => this.users = users.slice(0, 4));
   }
 }

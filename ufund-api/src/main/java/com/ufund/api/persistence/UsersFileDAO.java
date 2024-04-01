@@ -38,6 +38,7 @@ public class UsersFileDAO implements UsersDAO {
                                         // to the file
     private static int nextId;  // The next Id to assign to a new Need
     private String filename;    // Filename to read from and write to
+    private String currentUserFilename;
 
     /**
      * Creates a Need File Data Access Object.
@@ -47,8 +48,9 @@ public class UsersFileDAO implements UsersDAO {
      *
      * @throws IOException when the file cannot be accessed or read from.
      */
-    public UsersFileDAO(@Value("${users.file}") String filename, ObjectMapper objectMapper) throws IOException {
+    public UsersFileDAO(@Value("${users.file}") String filename, @Value("${currentUser.file}") String currentUserFilename, ObjectMapper objectMapper) throws IOException {
         this.filename = filename;
+        this.currentUserFilename = currentUserFilename;
         //this.loggedInFile = loggedInFile;
         this.objectMapper = objectMapper;
         load();  // load the requests from the file
@@ -74,6 +76,10 @@ public class UsersFileDAO implements UsersDAO {
         return getUsersArray(null);
     }
 
+    public User[] getCurrentUsers(){
+        return getCurrentUsers();
+    }
+
     /**
      * Generates an array of {@linkplain HelpRequest requests} from the tree map for any
      * {@linkplain HelpRequest requests} that contain the text specified by containsText.
@@ -94,6 +100,15 @@ public class UsersFileDAO implements UsersDAO {
         User[] userArray = new User[userArrayList.size()];
         userArrayList.toArray(userArray);
         return userArray;
+    }
+    private User getCurrentUser(String containsText) {
+        User currentUser = null;
+        for (User user : users.values()) {
+            currentUser = user;
+            currentUser = new User(user.getId(),user.getUsername(),user.getPassword());
+        }
+        
+        return currentUser;
     }
     /*
     private User[] getLoggedInArray() {
@@ -119,7 +134,9 @@ public class UsersFileDAO implements UsersDAO {
         // Serializes the Java Objects to JSON objects into the file
         // writeValue will throw an IOException if there is an issue
         // with the file or reading from the file
+
         objectMapper.writeValue(new File(filename), usersArray);
+        objectMapper.writeValue(new File(currentUserFilename), getCurrentUser(filename) );
         //objectMapper.writeValue(new File(loggedInFile), loggedArray);
         return true;
     }
@@ -136,6 +153,7 @@ public class UsersFileDAO implements UsersDAO {
     private boolean load() throws IOException {
         users = new TreeMap<>();
         nextId = 0;
+        objectMapper.writeValue(new File(currentUserFilename), "[]" );
         // Deserializes the JSON objects from the file into an array of requests
         // readValue will throw an IOException if there's an issue with the file
         // or reading from the file
@@ -159,6 +177,12 @@ public class UsersFileDAO implements UsersDAO {
         }
     }
 
+    @Override
+    public void logout() throws IOException{
+        objectMapper.writeValue(new File(currentUserFilename), "[]" );
+        return;
+    }
+
         /**
      * {@inheritDoc}
      */
@@ -167,7 +191,7 @@ public class UsersFileDAO implements UsersDAO {
         synchronized (users) {
             // We create a new request object because the id field is immutable
             // and we request to assign the next unique id
-            User newUser = new User(user.getId(), user.getUsername(), user.getPassword());
+            User newUser = new User( nextId(), user.getUsername(), user.getPassword());
             users.put(newUser.getId(), newUser);
             save(); // may throw an IOException
             return newUser;
@@ -195,6 +219,16 @@ public class UsersFileDAO implements UsersDAO {
                 return users.get(id);
             else
                 return null;
+        }
+    }
+    @Override
+    public User updateUser(User user) throws IOException {
+        synchronized (users) {
+            if (!users.containsKey(user.getId()))
+                return null;  // need does not exist
+            users.put(user.getId(), user);
+            save(); // may throw an IOException
+            return user;
         }
     }
 

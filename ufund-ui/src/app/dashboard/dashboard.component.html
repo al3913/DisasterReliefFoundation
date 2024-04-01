@@ -5,5 +5,11 @@
     {{need.name}}
   </a>
 </div>
+<div>
+  <a *ngFor="let user of users"
+    routerLink="/detail/{{user.id}}">
+    {{user.username}}
+  </a>
+</div>
 
 <app-need-search></app-need-search>

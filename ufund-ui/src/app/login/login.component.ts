@@ -14,8 +14,8 @@ import { LoginService } from '../login.service';
 })
 export class LoginComponent implements OnInit{
 
-  user: User | undefined;
-
+  //user: User | undefined;
+  users: User[] = [];
   constructor(
     private route: ActivatedRoute,
     private loginService: LoginService,
@@ -25,12 +25,21 @@ export class LoginComponent implements OnInit{
   
   ngOnInit(): void {
     
-
   }
 
   login(username: string, password: string):void {
-    
-         if(username && password == "admin"){
+
+        //before it adds the user you have to check to make
+        //sure that the username and password already dont
+        //exist together
+
+        this.loginService.addUser({username,password} as User)
+        .subscribe(user => {
+          this.users.push(user);
+        })
+        
+
+        if(username && password == "admin"){
           window.location.href="http://localhost:4200/admin"
           
         }

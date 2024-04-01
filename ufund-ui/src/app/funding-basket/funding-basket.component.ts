@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Need } from '../need';
 import { NeedService } from '../need.service';
+import { LoginService } from '../login.service';
 
 @Component({
   selector: 'app-funding-basket',
@@ -10,10 +11,12 @@ import { NeedService } from '../need.service';
 export class FundingBasketComponent implements OnInit {
   needs: Need[] = [];
 
-  constructor(private needService: NeedService) { }
+  constructor(private needService: NeedService, private loginService : LoginService) { }
 
   ngOnInit(): void {
     this.getNeeds();
+    
+
   }
 
   getNeeds(): void {

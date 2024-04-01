@@ -12,6 +12,7 @@ import { MessageService } from './message.service';
 export class LoginService {
   private usersURL = 'http://localhost:8080/users';
   username :string = "";
+  
   constructor(private http: HttpClient, private messageService: MessageService) {}
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -23,6 +24,13 @@ export class LoginService {
     .pipe(
       tap(_ => this.log('fetched user')),
       catchError(this.handleError<User>('getUser'))
+      );
+  }
+  getUsers() : Observable<User[]> {
+    return this.http.get<User[]>(this.usersURL)
+    .pipe(
+      tap(_ => this.log('fetched users')),
+      catchError(this.handleError<User[]>('getUsers', []))
       );
   }
   
@@ -40,7 +48,7 @@ export class LoginService {
     };
   }
   private log(message: string) {
-    this.messageService.add(`NeedService: ${message}`);
+    this.messageService.add(`LoginService: ${message}`);
   }
 
   getUsername () : string { 
@@ -49,5 +57,13 @@ export class LoginService {
   setUsername (username : string) : void {
     this.username = username;
   }
-  
+  addUser(user: User): Observable<User> {
+    return this.http.post<User>(this.usersURL, user, this.httpOptions).pipe(
+      tap((newUser: User) => this.log(`added user w/ id=${newUser.id}`)),
+      catchError(this.handleError<User>('addUser'))
+    );
+  }
+  logout(){
+    this.logout;
+  }
 }

@@ -43,6 +43,10 @@ public interface UsersDAO {
 
     User[] getUsers() throws IOException;
 
+    User[] getCurrentUsers() throws IOException;
+
+
+
     /**
      * Deletes a {@linkplain HelpRequest request} with the given id
      * 
@@ -54,4 +58,7 @@ public interface UsersDAO {
      * 
      * @throws IOException if underlying storage cannot be accessed
      */
+    User updateUser(User user) throws IOException;
+
+    void logout() throws IOException;
 }

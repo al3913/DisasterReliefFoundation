@@ -61,6 +61,21 @@ public class UsersController {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+    @GetMapping("")
+    public ResponseEntity<User[]> getCurrentUsers() {
+        LOG.info("GET /currentUsers");
+        try {
+            User[] currentUsers = usersDao.getUsers();
+            if (currentUsers != null)
+                return new ResponseEntity<User[]>(currentUsers, HttpStatus.OK);
+            else
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        } catch (IOException e) {
+            LOG.log(Level.SEVERE, e.getLocalizedMessage());
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+    
     @GetMapping("/{id}")
     public ResponseEntity<User> getUser(@PathVariable int id) {
         LOG.info("GET /user/" + id);

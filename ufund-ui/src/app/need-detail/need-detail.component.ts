@@ -32,7 +32,6 @@ export class NeedDetailComponent implements OnInit {
   goBack(): void {
     this.location.back();
   }
-
   save(): void{
     if (this.need) { //Checks if hero exists
       this.needService.updateNeed(this.need)
