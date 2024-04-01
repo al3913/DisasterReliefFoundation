@@ -65,7 +65,7 @@ public class UsersController {
     public ResponseEntity<User[]> getCurrentUsers() {
         LOG.info("GET /currentUsers");
         try {
-            User[] currentUsers = usersDao.getUsers();
+            User[] currentUsers = usersDao.getCurrentUsers();
             if (currentUsers != null)
                 return new ResponseEntity<User[]>(currentUsers, HttpStatus.OK);
             else
