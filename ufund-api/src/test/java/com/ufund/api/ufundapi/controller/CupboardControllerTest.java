@@ -93,6 +93,7 @@ public class CupboardControllerTest {
     @Test
     public void testCreateNeedSuccess() throws IOException {  // createNeed may throw IOException
         // Setup
+        setupCupboardController();
         Need need = new Need(1, "Apples", 1, 50, "food");
         // when createNeed is called, return true simulating successful
         // creation and save
@@ -109,6 +110,7 @@ public class CupboardControllerTest {
     @Test
     public void testCreateNeedFailed() throws IOException {  // createNeed may throw IOException
         // Setup
+        setupCupboardController();
         Need need = new Need(1, "Apples", 1, 50, "food");
         // when createNeed is called, return false simulating failed
         // creation and save
@@ -158,6 +160,7 @@ public class CupboardControllerTest {
     @Test
     public void testUpdateNeedFailed() throws IOException { // updateNeed may throw IOException
         // Setup
+        setupCupboardController();
         Need need = new Need(1, "Apples", 1, 50, "food");
         // when updateHero is called, return null simulating failure
         when(mockCupboardDAO.updateNeed(need)).thenReturn(null);

@@ -215,6 +215,7 @@ public class UsersControllerTest {
     @Test
     public void testDeleteUser() throws IOException { // deleteNeed may throw IOException
         // Setup
+        setUp();
         int userId = 99;
         // when deleteHero is called return true, simulating successful deletion
         when(mockUsersDAO.deleteUser(userId)).thenReturn(true);
@@ -229,6 +230,7 @@ public class UsersControllerTest {
     @Test
     public void testDeleteUserNotFound() throws IOException { // deleteNeed may throw IOException
         // Setup
+        setUp();
         int userId = 99;
         // when deleteHero is called return true, simulating successful deletion
         when(mockUsersDAO.deleteUser(userId)).thenReturn(false);
@@ -243,6 +245,7 @@ public class UsersControllerTest {
     @Test
     public void testDeleteUserHandleException() throws IOException { // deleteNeed may throw IOException
         // Setup
+        setUp();
         int userId = 99;
         // When deleteNeed is called on the Mock CupboardDAO, throw an IOException
         doThrow(new IOException()).when(mockUsersDAO).deleteUser(userId);
