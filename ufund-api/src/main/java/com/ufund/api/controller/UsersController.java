@@ -90,6 +90,23 @@ public class UsersController {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
+    @GetMapping("/")
+    public ResponseEntity<User> getUser(@RequestParam String username)
+    {
+        LOG.info("GET /user/" + username);
+        try {
+            User user = usersDao.getUser(username);
+            if (user != null)
+                return new ResponseEntity<User>(user, HttpStatus.OK);
+            else
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        } catch (IOException e) {
+            LOG.log(Level.SEVERE, e.getLocalizedMessage());
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
     /**
      * Creates a {@linkplain User user} with the provided user object
      * 

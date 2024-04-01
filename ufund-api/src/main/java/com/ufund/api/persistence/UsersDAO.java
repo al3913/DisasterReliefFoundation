@@ -41,6 +41,8 @@ public interface UsersDAO {
 
     User getUser(int id) throws IOException;
 
+    User getUser(String username) throws IOException;
+
     User[] getUsers() throws IOException;
 
     User[] getCurrentUsers() throws IOException;

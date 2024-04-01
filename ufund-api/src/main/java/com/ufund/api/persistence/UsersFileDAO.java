@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Map;
+import java.util.Optional;
 import java.util.TreeMap;
 import java.util.logging.Logger;
 
@@ -221,6 +222,23 @@ public class UsersFileDAO implements UsersDAO {
                 return null;
         }
     }
+
+    @Override
+    public User getUser(String username){
+        synchronized (users) {
+            Optional<Integer> keyForUsername = users.entrySet().stream()
+                .filter(entry -> entry.getValue().getUsername().equals(username))
+                .map(Map.Entry::getKey)
+                .findFirst();
+            if (keyForUsername.isPresent())
+            {
+                return users.get(keyForUsername.get());
+            }
+            else
+                return null;
+        }
+    }
+
     @Override
     public User updateUser(User user) throws IOException {
         synchronized (users) {
