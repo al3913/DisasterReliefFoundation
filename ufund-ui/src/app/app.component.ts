@@ -13,11 +13,12 @@ export class AppComponent {
   title = 'Tour of Needs';
   userId: number = 0;
   
-  constructor(private loginService : LoginService){
-  }
-    logout(){
+  constructor(private loginService : LoginService){}
+  user = this.loginService.getWhoYouAre();
+  logout(){
     this.userId = 0;
     this.loginService.logout;
+    localStorage.clear();
     window.location.href="http://localhost:4200/login";
   }
 

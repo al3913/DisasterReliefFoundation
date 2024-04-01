@@ -33,6 +33,9 @@ export class LoginComponent implements OnInit{
         //sure that the username and password already dont
         //exist together
 
+        localStorage.setItem("user",username);
+        console.log(localStorage.getItem("user"));
+
         this.loginService.addUser({username,password} as User)
         .subscribe(user => {
           this.users.push(user);

@@ -19,14 +19,18 @@ export class DashboardComponent implements OnInit {
   ngOnInit(): void {
     this.getNeeds();
     
+    
   }
 
+  getUsername(user : User) : string{
+    return this.getUsername(user);
+  }
   getNeeds(): void {
     this.needService.getNeeds()
       .subscribe(needs => this.needs = needs.slice(0, 4));
   }
   getUsers() : void{
     this.loginService.getUsers()
-    .subscribe(users => this.users = users.slice(0, 4));
+    .subscribe(users => this.users = users);
   }
 }
