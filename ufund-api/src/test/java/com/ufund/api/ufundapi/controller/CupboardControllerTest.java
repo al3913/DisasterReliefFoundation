@@ -221,6 +221,7 @@ public class CupboardControllerTest {
     @Test
     public void testSearchCupboard() throws IOException { // findNeeds may throw IOException
         // Setup
+        setupCupboardController();
         String searchString = "ap";
         Need[] needs = new Need[2];
         needs[0] = new Need(1, "Apples", 1, 50, "food");
