@@ -5,6 +5,7 @@ import { User } from './user';
 import { HttpClient,HttpHeaders } from '@angular/common/http';
 import { catchError, map, tap } from 'rxjs/operators';
 import { MessageService } from './message.service';
+import { Need } from './need';
 
 @Injectable({
   providedIn: 'root',
@@ -27,10 +28,13 @@ export class LoginService {
     }
     return this.x;
   }
+  getFundingBasketNeeds() : Observable<Need[]>{
+    return this.http.get<Need[]>(this.usersURL + "/" + localStorage.getItem("user") + "/basket")
+  }
 
 
   login(username:string, password:string){
-    if(this.isNewUser(username)){
+    if(!(this.isNewUser(username))){
       return this.addUser({username,password} as User);
     }
     else{

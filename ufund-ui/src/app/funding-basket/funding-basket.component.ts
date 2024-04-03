@@ -20,7 +20,7 @@ export class FundingBasketComponent implements OnInit {
   }
 
   getNeeds(): void {
-    this.needService.getNeeds()
-      .subscribe(needs => this.needs = needs.slice(0, 4));
+    this.loginService.getFundingBasketNeeds()
+      .subscribe(needs => this.needs = needs);
   }
 }
