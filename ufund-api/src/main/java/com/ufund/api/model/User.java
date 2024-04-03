@@ -1,8 +1,11 @@
 package com.ufund.api.model;
 
+import java.util.ArrayList;
 import java.util.logging.Logger;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 /**
  * Represents a "Need" entity that encapsulates information about a specific user.
@@ -20,6 +23,7 @@ public class User {
     @JsonProperty("id") private int id;
     @JsonProperty("name") private String username;
     @JsonProperty("password") private String password;
+    @JsonProperty("basket") private ArrayList<Need> basket;
 
     /**
      * Constructs a "Need" object with the given parameters.
@@ -38,6 +42,7 @@ public class User {
         this.id = id;
         this.username = name;
         this.password = password;
+        this.basket = new ArrayList<Need>();
     }
 
     /**
@@ -78,6 +83,19 @@ public class User {
     public String getUsername() {
         return username;
     }
+
+    public Need[] getBasket(){
+        return this.basket.toArray(new Need[this.basket.size()]);
+    }
+
+    public void addToBasket(Need need){
+        this.basket.add(need);
+    }
+
+    public void removeFromBasket(Need need){
+        basket.remove(need);
+    }
+
 
     /**
      * Retrieves the password of the user.

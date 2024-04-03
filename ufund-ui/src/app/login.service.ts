@@ -29,6 +29,20 @@ export class LoginService {
   }
 
 
+  login(username:string, password:string){
+    if(this.isNewUser(username)){
+      return this.addUser({username,password} as User);
+    }
+    else{
+      return this.http.get<User>(this.usersURL + '/' + username);
+    }
+
+  }
+
+  isNewUser(username :string ){
+    return this.http.get<Boolean>(this.usersURL + '/isNewUser');
+  }
+
 
 
 

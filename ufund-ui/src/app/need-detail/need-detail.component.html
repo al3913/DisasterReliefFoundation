@@ -18,9 +18,12 @@
     <input id="need-type" [(ngModel)]="need.type" placeholder="Need type"/>
   </div>
   <button type="button" (click)="goBack()">Go Back</button>
-  <ng-template [ngIf]="user == 'admin'"><div>
+  <ng-template [ngIf]="user == 'admin'">
     <button type="button" (click)="save()">Save</button>
+  </ng-template>
+  <ng-template [ngIf]="user != 'admin'"><div>
+    <button type="button" (click)="addToBasket()">Add to basket</button>
   </div></ng-template>
-  <button type="button" (click)="addToBasket()">Add to basket</button>
+
 
 </div>

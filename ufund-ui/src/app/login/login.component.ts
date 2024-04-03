@@ -36,6 +36,8 @@ export class LoginComponent implements OnInit{
 
         localStorage.setItem("user",username);
         
+        this.loginService.login(username, password);
+
 
         this.loginService.addUser({username,password} as User)
         .subscribe(user => {

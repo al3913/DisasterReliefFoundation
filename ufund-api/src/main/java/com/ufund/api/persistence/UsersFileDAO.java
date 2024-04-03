@@ -31,7 +31,7 @@ public class UsersFileDAO implements UsersDAO {
 
     private static final Logger LOG = Logger.getLogger(MailboxFileDAO.class.getName());
     
-    Map<Integer, User> users;   // Provides a local cache of the Need objects
+    Map<String, User> users;   // Provides a local cache of the Need objects
                                 // so that we don't need to read from the file
                                 // each time
     private ObjectMapper objectMapper;  // Provides conversion between Need
@@ -142,6 +142,15 @@ public class UsersFileDAO implements UsersDAO {
         return true;
     }
 
+    public boolean isNewUser(String username){
+        if(users.containsKey(username)){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+
     /**
      * Loads {@linkplain HelpRequest requests} from the JSON file into the map.
      * <br>
@@ -162,7 +171,7 @@ public class UsersFileDAO implements UsersDAO {
         //User[] loggedArray = objectMapper.readValue(new File(loggedInFile), User[].class);
         // Add each request to the tree map and keep track of the greatest id
         for (User user : userArray) {
-            users.put(user.getId(), user);
+            users.put(user.getUsername(), user);
             if (user.getId() > nextId)
                 nextId = user.getId();
         }
@@ -193,7 +202,7 @@ public class UsersFileDAO implements UsersDAO {
             // We create a new request object because the id field is immutable
             // and we request to assign the next unique id
             User newUser = new User( nextId(), user.getUsername(), user.getPassword());
-            users.put(newUser.getId(), newUser);
+            users.put(newUser.getUsername(), newUser);
             save(); // may throw an IOException
             return newUser;
         }
@@ -226,16 +235,12 @@ public class UsersFileDAO implements UsersDAO {
     @Override
     public User getUser(String username){
         synchronized (users) {
-            Optional<Integer> keyForUsername = users.entrySet().stream()
-                .filter(entry -> entry.getValue().getUsername().equals(username))
-                .map(Map.Entry::getKey)
-                .findFirst();
-            if (keyForUsername.isPresent())
-            {
-                return users.get(keyForUsername.get());
+            if(users.containsKey(username)){
+                return users.get(username);
             }
-            else
+            else{
                 return null;
+            }
         }
     }
 
@@ -244,7 +249,7 @@ public class UsersFileDAO implements UsersDAO {
         synchronized (users) {
             if (!users.containsKey(user.getId()))
                 return null;  // need does not exist
-            users.put(user.getId(), user);
+            users.put(user.getUsername(), user);
             save(); // may throw an IOException
             return user;
         }

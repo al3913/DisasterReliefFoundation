@@ -76,11 +76,15 @@ public class UsersController {
         }
     }
     
-    @GetMapping("/{id}")
-    public ResponseEntity<User> getUser(@PathVariable int id) {
-        LOG.info("GET /user/" + id);
+    
+    
+
+    @GetMapping("/{username}")
+    public ResponseEntity<User> getUser(@PathVariable String username)
+    {
+        LOG.info("GET /user/" + username);
         try {
-            User user = usersDao.getUser(id);
+            User user = usersDao.getUser(username);
             if (user != null)
                 return new ResponseEntity<User>(user, HttpStatus.OK);
             else
@@ -90,16 +94,15 @@ public class UsersController {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-    
-
-    @GetMapping("/")
-    public ResponseEntity<User> getUser(@RequestParam String username)
+    @GetMapping("/{username}/basket")
+    public ResponseEntity<Need[]> getUserBasket(@PathVariable String username)
     {
-        LOG.info("GET /user/" + username);
+        LOG.info("GET /user/" + username + "/basket");
         try {
             User user = usersDao.getUser(username);
+            Need[] basket = user.getBasket();
             if (user != null)
-                return new ResponseEntity<User>(user, HttpStatus.OK);
+                return new ResponseEntity<Need[]>(basket, HttpStatus.OK);
             else
                 return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         } catch (IOException e) {
@@ -132,7 +135,44 @@ public class UsersController {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+    @PostMapping("/{username}/basket")
+    public ResponseEntity<User> addToBasket(@PathVariable String username, @RequestBody Need need) {
+        LOG.info("POST /users " + username);
+        try {
+            User user = usersDao.getUser(username);
+            user.addToBasket(need);
+            return new ResponseEntity<User>(user, HttpStatus.CREATED);
+        } catch (IOException e) {
+            LOG.log(Level.SEVERE, e.getLocalizedMessage());
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+    @DeleteMapping("/{username}/basket")
+    public ResponseEntity<User> removeFromBasket(@PathVariable String username, @RequestBody Need need) {
+        LOG.info("DELETE /users " + username);
+        try {
+            User user = usersDao.getUser(username);
+            if(user != null){
+                user.removeFromBasket(need);
+                return new ResponseEntity<User>(user, HttpStatus.OK);
+            }
+            else{
+                return new ResponseEntity<>(HttpStatus.CONFLICT);
+            }
+        } catch (IOException e) {
+            LOG.log(Level.SEVERE, e.getLocalizedMessage());
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 
+    @GetMapping("/isNewUser")
+    public ResponseEntity<Boolean> isNewUser(@RequestParam String username){
+        boolean isNewUser = usersDao.isNewUser(username);
+        if(isNewUser){
+            return new ResponseEntity<Boolean>(isNewUser, HttpStatus.OK);
+        }
+        return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+    } 
     /**
      * Deletes a {@linkplain User user} with the given id
      * 

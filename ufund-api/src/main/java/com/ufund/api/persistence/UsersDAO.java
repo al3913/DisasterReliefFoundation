@@ -47,6 +47,8 @@ public interface UsersDAO {
 
     User getCurrentUser() throws IOException;
 
+    boolean isNewUser(String username);
+
 
 
     /**

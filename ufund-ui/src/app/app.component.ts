@@ -10,7 +10,7 @@ import { LoginService } from './login.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'Tour of Needs';
+  title = 'United Way';
   userId: number = 0;
   x : boolean = false;
   
