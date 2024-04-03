@@ -90,6 +90,7 @@ public class UsersController {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+    
 
     @GetMapping("/")
     public ResponseEntity<User> getUser(@RequestParam String username)

@@ -24,6 +24,7 @@ export class LoginComponent implements OnInit{
   ) {}
   
   ngOnInit(): void {
+    localStorage.clear();
     
   }
 
@@ -34,7 +35,7 @@ export class LoginComponent implements OnInit{
         //exist together
 
         localStorage.setItem("user",username);
-        console.log(localStorage.getItem("user"));
+        
 
         this.loginService.addUser({username,password} as User)
         .subscribe(user => {

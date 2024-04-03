@@ -1,14 +1,21 @@
 <h1>{{title}}</h1>
-<h1>{{user}}</h1>
-<nav>
+<ng-template [ngIf]="user != ''"><h1>
+  Logged in as: {{user}}</h1></ng-template>
+<ng-template [ngIf]="user != '' "><div><nav>
+  <ng-template [ngIf]="user == 'admin'"><div>
+    <a routerLink="/admin">Admin Page</a><br></div></ng-template>
   <a routerLink="/dashboard">Dashboard</a><br>
   <a routerLink="/needs">Needs</a><br>
-  <a routerLink="/funding-basket">Funding Basket</a><br>
+  <ng-template [ngIf]="user != 'admin'"><div>
+    <a routerLink="funding-basket">Funding Basket</a><br>
+  </div></ng-template>
 
   <button type="button" class="add-button" (click)="logout()">
-      Logout
+    Logout
   </button>
 
-</nav>
+
+</nav></div></ng-template>
+
 <router-outlet></router-outlet>
 <app-messages></app-messages>

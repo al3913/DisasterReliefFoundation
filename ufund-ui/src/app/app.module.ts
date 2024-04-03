@@ -11,6 +11,7 @@ import { FundingBasketComponent } from './funding-basket/funding-basket.componen
 import { HttpClientModule } from '@angular/common/http';
 import { AdminComponent } from './admin/admin.component';
 import { NeedSearchComponent } from './need-search/need-search.component';
+import { UserComponent } from './user/user.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { NeedSearchComponent } from './need-search/need-search.component';
     DashboardComponent,
     FundingBasketComponent,
     AdminComponent,
-    NeedSearchComponent
+    NeedSearchComponent,
+    UserComponent
   ],
   imports: [
     BrowserModule,

@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NeedService } from '../need.service';
 import {Need} from '../need';
+import { LoginService } from '../login.service';
 @Component({
   selector: 'app-admin',
   templateUrl: './admin.component.html',
@@ -8,8 +9,9 @@ import {Need} from '../need';
 })
 export class AdminComponent {
   needs: Need[] = [];
-  //selectedHero?: Hero;
-  constructor(private needService:NeedService) {}
+  userId: number = 0;
+  
+  constructor(private needService:NeedService, private loginService:LoginService) {}
   getNeeds(): void{
     this.needService.getNeeds().subscribe(needs => this.needs = needs)
   }

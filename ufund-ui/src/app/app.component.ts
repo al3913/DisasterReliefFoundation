@@ -12,6 +12,7 @@ import { LoginService } from './login.service';
 export class AppComponent {
   title = 'Tour of Needs';
   userId: number = 0;
+  x : boolean = false;
   
   constructor(private loginService : LoginService){}
   user = this.loginService.getWhoYouAre();
@@ -21,5 +22,4 @@ export class AppComponent {
     localStorage.clear();
     window.location.href="http://localhost:4200/login";
   }
-
 }

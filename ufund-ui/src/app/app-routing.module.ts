@@ -7,6 +7,7 @@ import { FundingBasketComponent } from './funding-basket/funding-basket.componen
 import { LoginComponent } from './login/login.component';
 import { AdminComponent } from './admin/admin.component';
 import { AppComponent } from './app.component';
+import { UserComponent } from './user/user.component';
 
 const routes: Routes = [
   { path: 'needs', component: NeedsComponent },
@@ -15,6 +16,7 @@ const routes: Routes = [
   { path: 'detail/:id', component: NeedDetailComponent},
   { path: 'login', component: LoginComponent },
   { path: 'admin', component: AdminComponent},
+  { path: 'user',component:UserComponent},
   { path: '', redirectTo: '/login', pathMatch: 'full' }
 ];
 
