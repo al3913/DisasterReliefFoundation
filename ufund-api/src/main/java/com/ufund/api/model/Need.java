@@ -145,4 +145,13 @@ public class Need {
     public String toString() {
         return String.format(STRING_FORMAT, id, name, cost, quantity, type);
     }
+
+    @Override
+    public boolean equals(Object other){
+        Need otherNeed = (Need) other;
+        return this.id == otherNeed.getId() && this.name.equals(otherNeed.getName()) && this.cost == otherNeed.getCost()
+        && this.quantity == otherNeed.getQuantity() && this.type.equals(otherNeed.getType());
+    }
+
+
 }

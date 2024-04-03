@@ -135,7 +135,7 @@ public class UsersController {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-    @PostMapping("/{username}/basket")
+    @PostMapping("/{username}/basketadd")
     public ResponseEntity<User> addToBasket(@PathVariable String username, @RequestBody Need need) {
         LOG.info("POST /users " + username);
         try {
@@ -147,7 +147,7 @@ public class UsersController {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-    @DeleteMapping("/{username}/basket")
+    @DeleteMapping("/{username}/basketremove")
     public ResponseEntity<User> removeFromBasket(@PathVariable String username, @RequestBody Need need) {
         LOG.info("DELETE /users " + username);
         try {
