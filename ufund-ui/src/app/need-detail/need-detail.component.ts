@@ -40,9 +40,13 @@ export class NeedDetailComponent implements OnInit {
     this.location.back();
   }
   save(): void{
-    if (this.need) { //Checks if hero exists
+    if (this.need) {
       this.needService.updateNeed(this.need)
       .subscribe(() => this.goBack());
     }
+  }
+  
+  addToBasket() : void{
+    
   }
 }

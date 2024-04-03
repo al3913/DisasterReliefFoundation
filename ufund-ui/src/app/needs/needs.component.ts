@@ -9,6 +9,7 @@ import {FormsModule} from '@angular/forms';
 import {Need} from '../need';
 import { NeedService } from '../need.service';
 import { MessageService } from '../message.service';
+import { LoginService } from '../login.service';
 
 @Component({
   selector: 'app-needs',
@@ -18,13 +19,10 @@ import { MessageService } from '../message.service';
 
 export class NeedsComponent {
   needs: Need[] = [];
-  //selectedHero?: Hero;
-  constructor(private needService:NeedService, private messageService: MessageService) {}
-
-  // onSelect(hero: Hero): void {
-  //   this.selectedHero = hero;
-  //   this.messageService.add('HeroesComponent: Selected hero id=${hero.id}');
-  // }
+  user: string | null = null;
+  constructor(private needService:NeedService, private messageService: MessageService, private loginService: LoginService) {
+    this.user = this.loginService.getWhoYouAre();
+  }
 
   getNeeds(): void{
     this.needService.getNeeds().subscribe(needs => this.needs = needs)

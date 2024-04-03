@@ -1,16 +1,21 @@
 <h2>Needs</h2>
-<div>
-
-  <!-- (click) passes input value to add() and then clears the input -->
-  
+<div *ngIf="needs.length; else noNeeds">
+  <ul class="needs">
+    <li *ngFor="let need of needs">
+      <a routerLink="/detail/{{need.id}}">
+        <span class="badge">{{need.id}}</span> {{need.name}}
+      </a>
+      <ng-template [ngIf]="user == 'admin'">
+        <div>
+          <button type="button" class="delete" title="delete need"
+        (click)="delete(need)">x</button>
+        </div>
+      </ng-template>
+    </li>
+  </ul>
 </div>
 
-<ul class="needs">
-  <li *ngFor="let need of needs">
-    <a routerLink="/detail/{{need.id}}">
-      <span class="badge">{{need.id}}</span> {{need.name}}
-    </a>
-    <button type="button" class="delete" title="delete need"
-      (click)="delete(need)">x</button>
-  </li>
-</ul>
+
+<ng-template #noNeeds>
+  <h1> No Needs available right now!</h1>
+</ng-template>
