@@ -11,6 +11,7 @@ import { catchError, map, tap } from 'rxjs/operators';
 })
 export class NeedService {
   private needsUrl = 'http://localhost:8080/cupboard';  // URL to web api
+  private userURL = 'http://localhost:8080/users'
   constructor(private http: HttpClient, private messageService: MessageService) {}
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -74,6 +75,7 @@ export class NeedService {
     );
   }
 
+  
     /** DELETE: delete the hero from the server */
   deleteNeed(id: number): Observable<Need> {
     const url = `${this.needsUrl}/${id}`;

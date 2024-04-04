@@ -46,7 +46,14 @@ export class NeedDetailComponent implements OnInit {
     }
   }
   
-  addToBasket() : void{
-    
+  addToBasket(){
+    if(this.need){
+      this.loginService.addNeedToBasket(this.need)
+      .subscribe(() => this.goBack());
+    }
+  }
+
+  convertToString( str:string){
+    return parseInt(str);
   }
 }

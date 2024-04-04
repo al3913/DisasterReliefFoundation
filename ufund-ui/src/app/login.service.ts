@@ -47,6 +47,13 @@ export class LoginService {
     return this.http.get<Boolean>(this.usersURL + '/isNewUser');
   }
 
+  addNeedToBasket(need: Need): Observable<Need> {
+    return this.http.post<Need>(this.usersURL + "/" + localStorage.getItem("user") + "/basketadd", need, this.httpOptions).pipe(
+      tap((newNeed: Need) => this.log(`added need w/ id=${newNeed.id}`)),
+      catchError(this.handleError<Need>('addNeed'))
+    );
+  }
+
 
 
 
