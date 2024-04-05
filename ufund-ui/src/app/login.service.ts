@@ -54,12 +54,12 @@ export class LoginService {
     );
   }
 
-  removeFromBasket(id : number):Observable<Need[]>{
-    const url = `${this.usersURL + "/" + localStorage.getItem("user") + "/basket"}/${id}`;
+  removeFromBasket(need : Need):Observable<Need>{
+    const url = `${this.usersURL + "/" + localStorage.getItem("user") + "/basket"}/${need.id}`;
 
-    return this.http.delete<Need[]>(url, this.httpOptions).pipe(
-      tap(_ => this.log(`deleted need id=${id}`)),
-      catchError(this.handleError<Need[]>('deleteNeed'))
+    return this.http.delete<Need>(url,this.httpOptions).pipe(
+      tap(_ => this.log(`deleted need id=${need.id}`)),
+      catchError(this.handleError<Need>('deleteNeed'))
     );
   }
 

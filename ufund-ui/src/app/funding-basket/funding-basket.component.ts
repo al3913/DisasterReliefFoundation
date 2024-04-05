@@ -26,6 +26,6 @@ export class FundingBasketComponent implements OnInit {
 
   delete(need: Need): void {
     this.needs = this.needs.filter(h => h !== need);
-    this.loginService.removeFromBasket(need.id).subscribe(needs => this.needs = needs);
+    this.loginService.removeFromBasket(need).subscribe(needs => this.needs);
   }
 }
