@@ -24,6 +24,7 @@ public class User {
     @JsonProperty("name") private String username;
     @JsonProperty("password") private String password;
     @JsonProperty("basket") private ArrayList<Need> basket;
+    @JsonProperty("total") private int total;
 
     /**
      * Constructs a "Need" object with the given parameters.
@@ -43,6 +44,7 @@ public class User {
         this.username = name;
         this.password = password;
         this.basket = new ArrayList<Need>();
+        this.total = 0;
     }
 
     /**
@@ -95,6 +97,21 @@ public class User {
     public void removeFromBasket(Need need){
         basket.remove(need);
     }
+    public int basketCheckout(){
+        int size = this.basket.size();
+        int total = 0;
+        while(size > 0){
+            Need need = this.basket.get(0);
+            total = total + need.getCost();
+
+            this.basket.remove(0);
+            size = size - 1;
+        }
+        return total;
+        
+        
+        //this.basket.clear();
+    }
 
 
     /**
@@ -104,6 +121,10 @@ public class User {
      */
     public String getPassword() {
         return password;
+    }
+
+    public int getTotal(){
+        return this.total;
     }
 
     /**

@@ -15,14 +15,11 @@ public class HelpRequest {
     private static final Logger LOG = Logger.getLogger(HelpRequest.class.getName());
 
     // Package private for tests
-    public static final String STRING_FORMAT = "Request [id=%d, creator=%d, title=%s, body=%s, response=%s, completed=%b]"; 
+    public static final String STRING_FORMAT = "Request [id=%d, creator=%s, body=%s]"; 
 
     @JsonProperty("id") private int id;
-    @JsonProperty("creator") private int creator;
-    @JsonProperty("title") private String title;
+    @JsonProperty("creator") private String creator;
     @JsonProperty("body") private String body;
-    @JsonProperty("response") private String response;
-    @JsonProperty("completed") private boolean completed;
 
     /**
      * Constructs a "Request" object with the given parameters.
@@ -39,13 +36,11 @@ public class HelpRequest {
      * If a field is not provided in the JSON object, the Java field gets the default Java value,
      * i.e., 0 for int.
      */
-    public HelpRequest(@JsonProperty("id") int id, @JsonProperty("creator") int creator, @JsonProperty("title") String title, @JsonProperty("body") String body, @JsonProperty("response") String response, @JsonProperty("completed") boolean completed) {
+    public HelpRequest(@JsonProperty("id") int id, @JsonProperty("creator") String creator, @JsonProperty("body") String body) {
         this.id = id;
         this.creator = creator;
-        this.title = title;
         this.body = body;
-        this.response = response;
-        this.completed = completed;
+
     }
 
     /**
@@ -72,7 +67,7 @@ public class HelpRequest {
      * @return The unique identifier of the request's creator.
      */
 
-    public int getCreator() {
+    public String getCreator() {
         return creator;
     }
 
@@ -83,7 +78,7 @@ public class HelpRequest {
      * @param creator The unique identifier of the request's creator.
      */
 
-    public void setCreator(int creator) {
+    public void setCreator(String creator) {
         this.creator = creator;
     }
 
@@ -92,9 +87,7 @@ public class HelpRequest {
      * 
      * @return The name or description of the request.
      */
-    public String getTitle() {
-        return title;
-    }
+
 
     /**
      * Sets the name or description of the request.
@@ -102,9 +95,7 @@ public class HelpRequest {
      * 
      * @param title The name or description of the request.
      */
-    public void setTitle(String title) {
-        this.title = title;
-    }
+
 
     /**
      * Retrieves the body of the request.
@@ -124,47 +115,14 @@ public class HelpRequest {
         this.body = body;
     }
 
-    /**
-     * Retrieves the response to the request.
-     * 
-     * @return The response to the request.
-     */
-    public String getResponse() {
-        return response;
-    }
 
-    /**
-     * Sets the response to the request.
-     * 
-     * @param response The response to the request.
-     */
-    public void setResponse(String response) {
-        this.response = response;
-    }
 
-    /**
-     * Retrieves the completed status of the request.
-     * 
-     * @return The completed status of the request.
-     */
-    public boolean getCompleted() {
-        return completed;
-    }
-
-    /**
-     * Sets the completed status of the request.
-     * 
-     * @param type The completed status of the request.
-     */
-    public void setCompleted(boolean completed) {
-        this.completed = completed;
-    }
 
     /**
      * {@inheritDoc}
      */
     @Override
     public String toString() {
-        return String.format(STRING_FORMAT, id, creator, title, body, response, completed);
+        return String.format(STRING_FORMAT, id, creator, body);
     }
 }

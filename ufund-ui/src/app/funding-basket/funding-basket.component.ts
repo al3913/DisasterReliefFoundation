@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Need } from '../need';
 import { NeedService } from '../need.service';
+import { User } from '../user';
 import { LoginService } from '../login.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-funding-basket',
@@ -10,7 +12,8 @@ import { LoginService } from '../login.service';
 })
 export class FundingBasketComponent implements OnInit {
   needs: Need[] = [];
-
+  total : number = 0;
+  user : Observable<User> | undefined;
   constructor(private needService: NeedService, private loginService : LoginService) { }
 
   ngOnInit(): void {
@@ -27,5 +30,16 @@ export class FundingBasketComponent implements OnInit {
   delete(need: Need): void {
     this.needs = this.needs.filter(h => h !== need);
     this.loginService.removeFromBasket(need).subscribe(needs => this.needs);
+  }
+
+
+  checkout(){
+    this.loginService.basketCheckout().subscribe(needs=>this.needs);
+    this.needs = this.needs.filter(h => h !== h);
+  }
+
+  getTotal(){
+    this.user = this.loginService.getUser(this.loginService.getWhoYouAre());
+    //want to be able to access the user's total here somehow
   }
 }

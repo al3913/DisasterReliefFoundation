@@ -1,0 +1,10 @@
+<div *ngIf="request" class="center-align">
+  <h2 class="underline">{{request.creator}}'s Request</h2>
+  <div>
+    <p id="request-creator">{{request.body}}</p>
+  </div>
+  <div>
+    <button type="button" class="delete" title="delete request"
+  (click)="clearRequest()">Request Fulfilled</button>
+  </div>
+</div>

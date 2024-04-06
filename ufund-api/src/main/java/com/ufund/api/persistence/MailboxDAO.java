@@ -41,19 +41,6 @@ public interface MailboxDAO {
      */
     HelpRequest[] findMyRequests(int userID) throws IOException;
 
-    /**
-     * Retrieves a {@linkplain HelpRequest request} with the given id
-     * 
-     * @param id The id of the {@link HelpRequest request} to get
-     * 
-     * @return a {@link HelpRequest request} object with the matching id
-     * <br>
-     * null if no {@link HelpRequest request} with a matching id is found
-     * 
-     * @throws IOException if an issue with underlying storage
-     */
-
-    boolean findCompleted(boolean completedStatus) throws IOException;
 
     /**
      * Retrieves a {@linkplain HelpRequest request} with the given id

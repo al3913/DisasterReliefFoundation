@@ -1,0 +1,10 @@
+<h2 style="text-align: center;">Incoming Requests</h2>
+<div>
+    <ul class="needs">
+        <li *ngFor="let request of requests">
+          <a routerLink="/mailbox/{{request.id}}">
+            <span class="badge">{{request.id}}</span> {{request.creator}}
+          </a>
+        </li>
+      </ul>
+</div>

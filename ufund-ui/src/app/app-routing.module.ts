@@ -8,6 +8,9 @@ import { LoginComponent } from './login/login.component';
 import { AdminComponent } from './admin/admin.component';
 import { AppComponent } from './app.component';
 import { UserComponent } from './user/user.component';
+import { RequestsComponent } from './requests/requests.component';
+import { RequestsAdminComponent } from './requests-admin/requests-admin.component';
+import { RequestDetailComponent } from './request-detail/request-detail.component';
 
 const routes: Routes = [
   { path: 'needs', component: NeedsComponent },
@@ -17,6 +20,9 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'admin', component: AdminComponent},
   { path: 'user',component:UserComponent},
+  { path: 'requests', component:RequestsComponent},
+  { path: 'requests-admin',component:RequestsAdminComponent},
+  { path: 'mailbox/:id', component: RequestDetailComponent},
   { path: '', redirectTo: '/login', pathMatch: 'full' }
 ];
 

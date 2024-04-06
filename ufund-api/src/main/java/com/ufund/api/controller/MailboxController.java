@@ -54,13 +54,12 @@ public class MailboxController {
 
     //We need to edit this so that it lines up with JavaDoc above, or update JavaDoc
     @GetMapping("/{id}")
-    public ResponseEntity<HelpRequest[]> getMyRequests() {
-        LOG.info("GET /mailbox/myRequests");
-        int userID = 0; //THIS WILL NEED TO BE REPLACED WITH ACTUAL USER ID LATER!!
+    public ResponseEntity<HelpRequest> getRequest(@PathVariable int id) {
+        LOG.info("GET /mailbox/request");
         try {
-            HelpRequest[] myRequests = mailboxDao.findMyRequests(userID);
-            if (myRequests != null)
-                return new ResponseEntity<HelpRequest[]>(myRequests, HttpStatus.OK);
+            HelpRequest myRequest = mailboxDao.getRequest(id);
+            if (myRequest != null)
+                return new ResponseEntity<HelpRequest>(myRequest, HttpStatus.OK);
             else
                 return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         } catch (IOException e) {

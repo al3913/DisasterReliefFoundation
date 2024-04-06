@@ -83,7 +83,7 @@ public class MailboxFileDAO implements MailboxDAO {
     private HelpRequest[] getRequestsArray(String containsText) {
         ArrayList<HelpRequest> requestArrayList = new ArrayList<>();
         for (HelpRequest request : requests.values()) {
-            if (containsText == null || request.getTitle().contains(containsText) || request.getBody().contains(containsText)) {
+            if (containsText == null || request.getBody().contains(containsText)) {
                 requestArrayList.add(request);
             }
         }
@@ -176,7 +176,7 @@ public class MailboxFileDAO implements MailboxDAO {
         synchronized (requests) {
             // We create a new request object because the id field is immutable
             // and we request to assign the next unique id
-            HelpRequest newRequest = new HelpRequest(request.getId(), request.getCreator(), request.getTitle(), request.getBody(), request.getResponse(), request.getCompleted());
+            HelpRequest newRequest = new HelpRequest(request.getId(), request.getCreator(), request.getBody());
             requests.put(newRequest.getId(), newRequest);
             save(); // may throw an IOException
             return newRequest;
@@ -216,9 +216,9 @@ public class MailboxFileDAO implements MailboxDAO {
         synchronized (requests) {
             ArrayList<HelpRequest> requestArrayList = new ArrayList<>();
             for(HelpRequest request : requests.values()) {
-                if ((request.getCreator() == userID))
-                    requests.put(request.getId(), request);
-                    requestArrayList.add(request);
+                //if ((request.getCreator() == userID))
+                requests.put(request.getId(), request);
+                requestArrayList.add(request);
             }
             HelpRequest[] requestArray = new HelpRequest[requestArrayList.size()];
             requestArrayList.toArray(requestArray);
@@ -227,15 +227,4 @@ public class MailboxFileDAO implements MailboxDAO {
         }
     }
 
-    @Override
-    public boolean findCompleted(boolean completedStatus) throws IOException {
-        synchronized (requests) {
-            for(HelpRequest request : requests.values()) {
-                if ((request.getCompleted() == completedStatus))
-                    requests.put(request.getId(), request);
-            }
-            save(); // may throw an IOException
-            return completedStatus;
-        }
-    }
 }

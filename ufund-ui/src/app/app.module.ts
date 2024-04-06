@@ -12,6 +12,9 @@ import { HttpClientModule } from '@angular/common/http';
 import { AdminComponent } from './admin/admin.component';
 import { NeedSearchComponent } from './need-search/need-search.component';
 import { UserComponent } from './user/user.component';
+import { RequestsComponent } from './requests/requests.component';
+import { RequestsAdminComponent } from './requests-admin/requests-admin.component';
+import { RequestDetailComponent } from './request-detail/request-detail.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +26,10 @@ import { UserComponent } from './user/user.component';
     FundingBasketComponent,
     AdminComponent,
     NeedSearchComponent,
-    UserComponent
+    UserComponent,
+    RequestsComponent,
+    RequestsAdminComponent,
+    RequestDetailComponent
   ],
   imports: [
     BrowserModule,

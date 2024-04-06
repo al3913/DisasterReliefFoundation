@@ -164,6 +164,23 @@ public class UsersController {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+    @DeleteMapping("/{username}/basketcheckout")
+    public ResponseEntity<User> checkout(@PathVariable String username) {
+        LOG.info("DELETE /users " + username);
+        try {
+            User user = usersDao.getUser(username);
+            if(user != null){
+                user.basketCheckout();
+                return new ResponseEntity<User>(user, HttpStatus.OK);
+            }
+            else{
+                return new ResponseEntity<>(HttpStatus.CONFLICT);
+            }
+        } catch (IOException e) {
+            LOG.log(Level.SEVERE, e.getLocalizedMessage());
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 
     @GetMapping("/isNewUser")
     public ResponseEntity<Boolean> isNewUser(@RequestParam String username){

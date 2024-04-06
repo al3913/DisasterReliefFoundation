@@ -8,6 +8,10 @@
   <a routerLink="/needs">Needs</a><br>
   <ng-template [ngIf]="user != 'admin'"><div>
     <a routerLink="funding-basket">Funding Basket</a><br>
+    <a routerLink="requests">Requests</a>
+  </div></ng-template>
+  <ng-template [ngIf]="user == 'admin'"><div>
+    <a routerLink="requests-admin">Requests</a>
   </div></ng-template>
 
   <button type="button" class="add-button" (click)="logout()">

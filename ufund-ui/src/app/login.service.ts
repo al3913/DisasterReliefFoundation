@@ -63,6 +63,13 @@ export class LoginService {
     );
   }
 
+  basketCheckout() {
+
+    return this.http.delete(this.usersURL + "/" + localStorage.getItem("user") + "/basketcheckout",this.httpOptions).pipe(
+      tap(_ => this.log(`deleted basket user=${this.username}`)),
+      catchError(this.handleError('deleteBasket'))
+    );
+  }
 
 
 

@@ -1,1 +1,1 @@
-[{"id":6,"name":"water","cost":5,"quantity":20,"type":"liquid"}]
+[{"id":6,"name":"water","cost":5,"quantity":20,"type":"liquid"},{"id":7,"name":"cookies","cost":10,"quantity":20,"type":"food"},{"id":8,"name":"toilet paper","cost":25,"quantity":10,"type":"paper"}]
