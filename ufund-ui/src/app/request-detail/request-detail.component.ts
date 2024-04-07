@@ -32,6 +32,12 @@ export class RequestDetailComponent  implements OnInit{
   }
   //needs to be completed
   clearRequest() : void {
-
+    //clear the request from the screen
+    const id = Number(this.route.snapshot.paramMap.get('id'))
+    console.log(id);
+    if(this.request){
+      this.requestService.deleteRequest(id).subscribe();
+    }
+    this.goBack();
   }
 }

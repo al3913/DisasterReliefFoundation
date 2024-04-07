@@ -57,4 +57,13 @@ export class RequestService{
       );
     }
 
+    deleteRequest(id: number): Observable<HelpRequest> {
+      const url = `${this.requestUrl}/${id}`;
+  
+      return this.http.delete<HelpRequest>(url, this.httpOptions).pipe(
+        tap(_ => this.log(`deleted request id=${id}`)),
+        catchError(this.handleError<HelpRequest>('deleteNeed'))
+      );
+    }
+
 }
