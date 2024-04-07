@@ -97,6 +97,15 @@ public class User {
     public void removeFromBasket(Need need){
         basket.remove(need);
     }
+    public void removeFromBasket(int id){
+        int x = 0;
+        for(Need need : this.basket){
+            if(need.getId() == id){
+                this.basket.remove(x);
+            }
+            x = x + 1;
+        }
+    }
     public int basketCheckout(){
         int size = this.basket.size();
         int total = 0;

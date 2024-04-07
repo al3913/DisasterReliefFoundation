@@ -147,13 +147,13 @@ public class UsersController {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-    @DeleteMapping("/{username}/basketremove")
-    public ResponseEntity<User> removeFromBasket(@PathVariable String username, @RequestBody Need need) {
+    @DeleteMapping("/{username}/basketremove/{id}")
+    public ResponseEntity<User> removeFromBasket(@PathVariable String username, @PathVariable int id) {
         LOG.info("DELETE /users " + username);
         try {
             User user = usersDao.getUser(username);
             if(user != null){
-                user.removeFromBasket(need);
+                user.removeFromBasket(id);
                 return new ResponseEntity<User>(user, HttpStatus.OK);
             }
             else{
