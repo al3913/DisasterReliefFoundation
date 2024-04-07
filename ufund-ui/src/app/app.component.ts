@@ -9,7 +9,7 @@ import { LoginService } from './login.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'United Way';
+  title = 'Disaster Relief Foundation';
   userId: number = 0;
   x : boolean = false;
   
