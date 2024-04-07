@@ -6,3 +6,7 @@
     <label for="new-request">New Request: </label>
     <input id="new-request" #request /><br>
 </div>
+<div>
+    <button type="button" class="send" title="send request"
+  (click)="sendRequest(request.value)">Send Request</button>
+</div>

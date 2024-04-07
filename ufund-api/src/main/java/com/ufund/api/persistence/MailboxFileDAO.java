@@ -176,7 +176,7 @@ public class MailboxFileDAO implements MailboxDAO {
         synchronized (requests) {
             // We create a new request object because the id field is immutable
             // and we request to assign the next unique id
-            HelpRequest newRequest = new HelpRequest(request.getId(), request.getCreator(), request.getBody());
+            HelpRequest newRequest = new HelpRequest(nextId(), request.getCreator(), request.getBody());
             requests.put(newRequest.getId(), newRequest);
             save(); // may throw an IOException
             return newRequest;

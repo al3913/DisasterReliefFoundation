@@ -3,6 +3,7 @@ import { HelpRequest } from './request';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { MessageService } from './message.service';
 import { Observable, catchError, of, tap } from 'rxjs';
+import { LoginService } from './login.service';
 
 @Injectable({
     providedIn: 'root'
@@ -11,7 +12,7 @@ export class RequestService{
 
     private requestUrl = 'http://localhost:8080/mailbox';
 
-    constructor(private http: HttpClient, private messageService: MessageService){}
+    constructor(private http: HttpClient, private messageService: MessageService, private loginService : LoginService){}
     httpOptions = {
         headers: new HttpHeaders({ 'Content-Type': 'application/json' })
       };
@@ -35,6 +36,7 @@ export class RequestService{
     }
 
     addRequest(request : HelpRequest): Observable<HelpRequest> {
+      request.creator = this.loginService.getWhoYouAre();
         return this.http.post<HelpRequest>(this.requestUrl, request, this.httpOptions).pipe(
           tap((newRequest: HelpRequest) => this.log(`added request w/ id=${newRequest.id}`)),
           catchError(this.handleError<HelpRequest>('addHelpRequest'))

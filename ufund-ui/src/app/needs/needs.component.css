@@ -17,6 +17,7 @@ input {
 .needs li {
   position: relative;
   cursor: pointer;
+  
 }
 
 .needs li:hover {
@@ -33,6 +34,7 @@ input {
   border-radius: 4px;
   display: block;
   width: 100%;
+  
 }
 
 .needs a:hover {
@@ -43,6 +45,7 @@ input {
 .needs a:active {
   background-color: #525252;
   color: #fafafa;
+  
 }
 
 .needs .badge {
@@ -60,6 +63,7 @@ input {
   text-align: right;
   margin-right: .8em;
   border-radius: 4px 0 0 4px;
+  
 }
 
 .add-button {
