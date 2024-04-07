@@ -1,15 +1,8 @@
-<h2>Top Needs</h2>
-<div class="cupboard-menu">
-  <a *ngFor="let need of needs"
-    routerLink="/detail/{{need.id}}">
-    {{need.name}}
-  </a>
-</div>
+<app-need-search></app-need-search>
+<app-needs></app-needs>
 <div>
   <a *ngFor="let user of users"
     routerLink="/detail/{{getUsername(user)}}">
     {{getUsername(user)}}
   </a>
 </div>
-
-<app-need-search></app-need-search>

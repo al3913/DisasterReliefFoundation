@@ -92,3 +92,7 @@ li a,h1 {
 li a:hover {
     background-color: #111111;
 }
+
+.container {
+    display: grid;
+}

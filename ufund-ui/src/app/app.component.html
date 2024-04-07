@@ -11,15 +11,16 @@
 <ng-template [ngIf]="user != '' ">
   <div>
     <nav>
-      <ng-template [ngIf]="user == 'admin'">
-        <div>
-          <a routerLink="/admin">Admin Page</a><br>
-        </div>
-      </ng-template>
       <div class="navbar">
         <ul>
+          <li>
+            <ng-template [ngIf]="user == 'admin'">
+              <div>
+                <a routerLink="/admin">Admin Page</a><br>
+              </div>
+            </ng-template>
+          </li>
           <li><a routerLink="/dashboard">Dashboard</a><br></li>
-          <li><a routerLink="/needs">Needs</a><br></li>
             <ng-template [ngIf]="user != 'admin'">
               <div>
                 <li><a routerLink="funding-basket">Funding Basket</a></li>
