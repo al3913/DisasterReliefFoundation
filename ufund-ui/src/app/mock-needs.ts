@@ -1,13 +1,8 @@
 import { Need } from './need';
 
 export const NEEDS: Need[] = [
-  { id: 12, name: 'Dr. Nice' },
-  { id: 13, name: 'Bombasto' },
-  { id: 14, name: 'Celeritas' },
-  { id: 15, name: 'Magneta' },
-  { id: 16, name: 'RubberMan' },
-  { id: 17, name: 'Dynama' },
-  { id: 18, name: 'Dr. IQ' },
-  { id: 19, name: 'Magma' },
-  { id: 20, name: 'Tornado' }
+  {"id":7,"name":"water","cost":1,"quantity":1,"type":"water"},
+  {"id":8,"name":"fire","cost":1,"quantity":1,"type":"fire"},
+  {"id":9,"name":"earth","cost":1,"quantity":1,"type":"earth"},
+  {"id":10,"name":"air","cost":1,"quantity":1,"type":"air"}
 ];

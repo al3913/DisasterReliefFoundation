@@ -1,25 +1,44 @@
-<h1>{{title}}</h1>
-<ng-template [ngIf]="user != ''"><h1>
-  Logged in as: {{user}}</h1></ng-template>
-<ng-template [ngIf]="user != '' "><div><nav>
-  <ng-template [ngIf]="user == 'admin'"><div>
-    <a routerLink="/admin">Admin Page</a><br></div></ng-template>
-  <a routerLink="/dashboard">Dashboard</a><br>
-  <a routerLink="/needs">Needs</a><br>
-  <ng-template [ngIf]="user != 'admin'"><div>
-    <a routerLink="funding-basket">Funding Basket</a><br>
-    <a routerLink="requests">Requests</a>
-  </div></ng-template>
-  <ng-template [ngIf]="user == 'admin'"><div>
-    <a routerLink="requests-admin">Requests</a>
-  </div></ng-template>
 
-  <button type="button" class="add-button" (click)="logout()">
-    Logout
-  </button>
+<div class="header">
+  <ul>
+    <li><h1>{{title}}</h1></li>
+    <ng-template [ngIf]="user != ''">
+      <li style="float: right;"><h1>Welcome, {{user}}!</h1></li>
+    </ng-template>
+  </ul> 
+</div>
 
-
-</nav></div></ng-template>
+<ng-template [ngIf]="user != '' ">
+  <div>
+    <nav>
+      <ng-template [ngIf]="user == 'admin'">
+        <div>
+          <a routerLink="/admin">Admin Page</a><br>
+        </div>
+      </ng-template>
+      <div class="navbar">
+        <ul>
+          <li><a routerLink="/dashboard">Dashboard</a><br></li>
+          <li><a routerLink="/needs">Needs</a><br></li>
+            <ng-template [ngIf]="user != 'admin'">
+              <div>
+                <li><a routerLink="funding-basket">Funding Basket</a></li>
+                <li><a routerLink="requests">Requests</a></li>
+              </div>
+            </ng-template>
+            <ng-template [ngIf]="user == 'admin'">
+              <div>
+                <li><a routerLink="requests-admin">Requests</a></li>
+              </div>
+            </ng-template>
+            <li style="float: right; " class="navbtn"><button type="button" class="navbtn" (click)="logout()">
+              Logout
+            </button></li>
+        </ul>
+      </div>
+    </nav>
+  </div>
+</ng-template>
 
 <router-outlet></router-outlet>
 <app-messages></app-messages>
