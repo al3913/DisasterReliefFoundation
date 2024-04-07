@@ -22,3 +22,7 @@ label {
     color: #ccc;
     cursor: auto;
   }
+  .underline {
+    text-decoration: underline;
+  }
+  
