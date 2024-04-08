@@ -1,0 +1,12 @@
+<p>leaderboard works!</p>
+
+<ul class="users">
+    <li *ngFor="let user of users">
+      <a routerLink="/mailbox/{{getUsername()}}">
+        <div class="grid-container">
+            <div>Creator:<br>{{getUsername()}}</div>
+            <div>{{getUsername()}}</div>
+        </div>
+      </a>
+    </li>
+  </ul>

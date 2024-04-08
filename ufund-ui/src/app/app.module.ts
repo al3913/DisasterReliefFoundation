@@ -15,6 +15,7 @@ import { UserComponent } from './user/user.component';
 import { RequestsComponent } from './requests/requests.component';
 import { RequestsAdminComponent } from './requests-admin/requests-admin.component';
 import { RequestDetailComponent } from './request-detail/request-detail.component';
+import { LeaderboardComponent } from './leaderboard/leaderboard.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { RequestDetailComponent } from './request-detail/request-detail.componen
     UserComponent,
     RequestsComponent,
     RequestsAdminComponent,
-    RequestDetailComponent
+    RequestDetailComponent,
+    LeaderboardComponent
   ],
   imports: [
     BrowserModule,

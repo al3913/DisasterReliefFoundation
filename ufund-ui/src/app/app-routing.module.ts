@@ -11,6 +11,7 @@ import { UserComponent } from './user/user.component';
 import { RequestsComponent } from './requests/requests.component';
 import { RequestsAdminComponent } from './requests-admin/requests-admin.component';
 import { RequestDetailComponent } from './request-detail/request-detail.component';
+import { LeaderboardComponent } from './leaderboard/leaderboard.component';
 
 const routes: Routes = [
   { path: 'needs', component: NeedsComponent },
@@ -23,6 +24,7 @@ const routes: Routes = [
   { path: 'requests', component:RequestsComponent},
   { path: 'requests-admin',component:RequestsAdminComponent},
   { path: 'mailbox/:id', component: RequestDetailComponent},
+  { path: 'leaderboard',component:LeaderboardComponent},
   { path: '', redirectTo: '/login', pathMatch: 'full' }
 ];
 
