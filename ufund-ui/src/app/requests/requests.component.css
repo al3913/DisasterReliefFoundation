@@ -6,3 +6,53 @@ input {
     margin: 1rem 0;
     box-sizing: border-box;
   }
+
+  .grid-container {
+    display: grid;
+    grid-template-columns: 15% 85%;
+    gap: 1px;
+    padding: 10px;
+    width: 95%
+  }
+  
+  .grid-container > div {
+    background-color: rgba(255, 255, 255, 0.8);
+    height: 50px;
+    width: 95%;
+    border-radius: 10px;
+    text-align: center;
+    padding: 10px;
+    margin-bottom: 5px;
+    font-size: 15px;
+    line-height: 17px;
+  }
+
+  .requests li {
+    position:sticky;
+    cursor: pointer;
+    width: 99%;
+  }
+  
+  .requests li:hover {
+    left: .1em;
+  }
+  
+  .requests a {
+    color: rgb(181, 37, 37);
+    text-decoration: none;
+    background-color:darkgray;
+    margin: .5em;
+    padding: .3em .1em .1em;
+    border-radius: 4px;
+    width: 100%;
+  }
+  
+  .requests a:hover {
+    color: #2c3a41;
+    background-color: #e6e6e6;
+  }
+  
+  .requests a:active {
+    background-color: #525252;
+    color: #fafafa;
+  }

@@ -2,16 +2,22 @@
 <button type="button" class="needs" title="delete need"
             (click)="checkout()">Checkout!</button>
 <div class="funding-basket">
-    <ul class="needs">
-        <li *ngFor="let need of needs">
-          <a routerLink="/detail/{{need.id}}">
-            <span class="badge">{{need.id}}</span> {{need.name}}
-          </a>
-          <button type="button" class="delete" title="delete need"
-            (click)="delete(need)">x</button>
-        </li>
-      </ul>
-      
+  <ul class="needs">
+    <li *ngFor="let need of needs">
+      <a routerLink="/detail/{{need.id}}">
+        <div class="grid-container">
+            <div>Name:<br>{{need.name}}</div>
+            <div>Cost:<br>{{need.cost}}</div>
+            <div>Quantity:<br>{{need.quantity}}</div>
+            <div>Type:<br>{{need.type}}</div>
+        </div>
+      </a>
+      <div>
+        <button type="button" class="delete" title="delete need"
+      (click)="delete(need)">x</button>
+      </div>
+    </li>
+  </ul>
 </div>
 
 

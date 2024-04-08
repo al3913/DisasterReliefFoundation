@@ -1,7 +1,18 @@
 <h2 style="text-align: center;">Requests</h2>
-<h3 style="text-align: center;">Don't see the need you want to donate? Write a request and the admin's will be able
+<h3 style="text-align: center;">Don't see the need you want to donate? Write a request and the admins will be able
     to add that to the cupboard of needs!
 </h3>
+    <ul class="requests">
+      <li *ngFor="let request of requests">
+        <a routerLink="/mailbox/{{request.id}}">
+          <div class="grid-container">
+              <div>Creator:<br>{{request.creator}}</div>
+              <div>{{request.body}}</div>
+          </div>
+        </a>
+      </li>
+    </ul>
+
 <div>
     <label for="new-request">New Request: </label>
     <input id="new-request" #request /><br>

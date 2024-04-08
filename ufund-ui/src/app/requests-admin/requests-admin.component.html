@@ -1,10 +1,15 @@
 <h2 style="text-align: center;">Incoming Requests</h2>
 <div>
-    <ul class="needs">
-        <li *ngFor="let request of requests">
-          <a routerLink="/mailbox/{{request.id}}">
-            <span class="badge">{{request.id}}</span> {{request.creator}}
-          </a>
-        </li>
-      </ul>
+  <div *ngIf="requests.length">
+    <ul class="requests">
+      <li *ngFor="let request of requests">
+        <a routerLink="/mailbox/{{request.id}}">
+          <div class="grid-container">
+              <div>Creator:<br>{{request.creator}}</div>
+              <div>{{request.body}}</div>
+          </div>
+        </a>
+      </li>
+    </ul>
+  </div>
 </div>

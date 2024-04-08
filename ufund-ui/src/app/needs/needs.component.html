@@ -1,5 +1,5 @@
 <h2 style="text-align: center;">Needs</h2>
-<div *ngIf="needs.length">
+<div *ngIf="needs.length; else noNeeds">
   <ul class="needs">
     <li *ngFor="let need of needs">
       <a routerLink="/detail/{{need.id}}">
