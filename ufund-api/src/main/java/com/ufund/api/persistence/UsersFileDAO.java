@@ -144,9 +144,9 @@ public class UsersFileDAO implements UsersDAO {
 
     public boolean isNewUser(String username){
         if(users.containsKey(username)){
-            return true;
-        }else{
             return false;
+        }else{
+            return true;
         }
     }
 
