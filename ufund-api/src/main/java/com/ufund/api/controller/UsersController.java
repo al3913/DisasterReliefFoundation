@@ -185,11 +185,8 @@ public class UsersController {
     @GetMapping("/isNewUser")
     public ResponseEntity<Boolean> isNewUser(@RequestParam String username){
         boolean isNewUser = usersDao.isNewUser(username);
-        if(isNewUser){
-            return new ResponseEntity<Boolean>(isNewUser, HttpStatus.OK);
-        }
-        return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-    } 
+            return new ResponseEntity<Boolean>(isNewUser, HttpStatus.OK);    
+        } 
     /**
      * Deletes a {@linkplain User user} with the given id
      * 

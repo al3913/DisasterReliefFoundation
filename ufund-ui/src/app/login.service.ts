@@ -34,7 +34,7 @@ export class LoginService {
 
 
   login(username:string, password:string){
-    if(!(this.isNewUser(username))){
+    if((this.isNewUser(username))){
       console.log("New user");
       return this.addUser({username,password} as User);
     }

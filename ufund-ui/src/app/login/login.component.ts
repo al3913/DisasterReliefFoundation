@@ -39,10 +39,10 @@ export class LoginComponent implements OnInit{
         this.loginService.login(username, password);
 
         
-        this.loginService.addUser({username,password} as User)
-        .subscribe(user => {
-          this.users.push(user);
-        })
+        //this.loginService.addUser({username,password} as User)
+        //.subscribe(user => {
+        //  this.users.push(user);
+        //})
         
         
         if(username && password == "admin"){
