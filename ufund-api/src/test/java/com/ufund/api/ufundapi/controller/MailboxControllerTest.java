@@ -38,31 +38,11 @@ public class MailboxControllerTest {
         mockMailboxDAO = mock(MailboxDAO.class);
         mailboxController = new MailboxController(mockMailboxDAO);
     }
-
-    @Test
-    public void testGetMyRequests() throws IOException { // findNeeds may throw IOException
-        // Setup
-        setUp();
-        HelpRequest[] requests = new HelpRequest[2];
-        requests[0] = new HelpRequest(1,0,"a","a","a",true);
-        requests[1] = new HelpRequest(2,1,"b","b","b",false);
-        // When findMyRequests is called, return the two
-        /// heroes above
-        when(mockMailboxDAO.findMyRequests(0)).thenReturn(requests);
-
-        // Invoke
-        ResponseEntity<HelpRequest[]> response = mailboxController.getMyRequests();
-
-        // Analyze
-        assertEquals(HttpStatus.OK,response.getStatusCode());
-        assertEquals(requests,response.getBody());
-    }
-
     @Test
     public void testCreateRequestSuccess() throws IOException {
         // Setup
         setUp();
-        HelpRequest request = new HelpRequest(0, 0, "test", "test", "test", false);
+        HelpRequest request = new HelpRequest(0, "admin", "test");
         // when createRequest is called, return true simulating success
         when(mockMailboxDAO.createRequest(request)).thenReturn(request);
 
