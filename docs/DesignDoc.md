@@ -31,7 +31,8 @@ To create a Web-Based Ufund system, where users are able to select from a Cupboa
 
 | Term | Definition |
 |------|------------|
-| SPA | Single Page |
+| SPA  | Single Page|
+| MVP  | Minimum Viable Product|
 
 
 ## Requirements
@@ -93,7 +94,15 @@ Both the ViewModel and Model are built using Java and Spring Framework. Details 
 
 This section describes the web interface flow; this is how the user views and interacts with the web application.
 
-> _Provide a summary of the application's user interface.  Describe, from the user's perspective, the flow of the pages in the web application._
+Users start at the Login Page, where they are presented two textboxes to take an entered username + password, as well as a Login button. Once Login is pressed, depending on if the user is an Admin or regular User, they are presented with either the Admin page or the Cupboard page.
+
+ From the Admin page, the user can add, delete, or update needs to/from the Cupboard. From the Cupboard page, a regular user is able to view details of each Need and have the ability to click into a specific Need's details, and there they are able to add the Need to their funding basket. An Admin is also able to edit/delete needs from the Cupboard page.
+
+ As a regular User, they are able to view their funding basket by clicking the Funding Basket button from the navbar on top of the page, where they are moved to the Funding Basket page. From the Funding Basket page the User is able to checkout the needs in their basket, adding the total amount of money spent to their total donations, which is also shown on the page.
+
+ As either a regular User or Admin, the Requests button in the navbar will take the user to their respective Requests page, where if the user is an Admin, they are able to see incoming requests made by regular users, and if the user is a regular user, they able to create requests for Admins to view.
+
+
 
 
 ### View Tier
