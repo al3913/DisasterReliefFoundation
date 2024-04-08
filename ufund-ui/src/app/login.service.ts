@@ -35,9 +35,11 @@ export class LoginService {
 
   login(username:string, password:string){
     if(!(this.isNewUser(username))){
+      console.log("New user");
       return this.addUser({username,password} as User);
     }
     else{
+      console.log("Old user");
       return this.http.get<User>(this.usersURL + '/' + username);
     }
 
