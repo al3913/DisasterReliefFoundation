@@ -2,6 +2,12 @@
 <div *ngIf="needs.length; else noNeeds">
   <ul class="needs">
     <li *ngFor="let need of needs">
+      <ng-template [ngIf]="user == 'admin'">
+        <div>
+          <button type="button" class="delete" title="delete need"
+        (click)="delete(need)">x</button>
+        </div>
+      </ng-template>
       <a routerLink="/detail/{{need.id}}">
         <div class="grid-container">
             <div>Name:<br>{{need.name}}</div>
@@ -10,12 +16,6 @@
             <div>Type:<br>{{need.type}}</div>
         </div>
       </a>
-      <ng-template [ngIf]="user == 'admin'">
-        <div>
-          <button type="button" class="delete" title="delete need"
-        (click)="delete(need)">x</button>
-        </div>
-      </ng-template>
     </li>
   </ul>
 </div>
