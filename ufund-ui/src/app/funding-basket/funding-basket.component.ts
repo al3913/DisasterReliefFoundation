@@ -44,8 +44,7 @@ export class FundingBasketComponent implements OnInit {
   getTotal(){
     this.loginService.getTotal(this.loginService.getWhoYouAre())
     .subscribe(total => this.total = total);
-    console.log("total" + this.total);
-    //want to be able to access the user's total here somehow
+    //console.log("total" + this.total);
   
   }
 }

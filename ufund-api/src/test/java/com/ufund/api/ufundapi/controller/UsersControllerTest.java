@@ -5,6 +5,7 @@ import static org.mockito.Mockito.*;
 
 import java.io.IOException;
 
+import com.ufund.api.model.Need;
 import com.ufund.api.model.User;
 import com.ufund.api.persistence.UsersDAO;
 import com.ufund.api.controller.UsersController;
@@ -73,54 +74,192 @@ public class UsersControllerTest {
     }
 
     @Test
-    public void testGetUserWithId() throws IOException {
-        //Setup
+    public void testGetCurrentUsers() throws IOException { // findNeeds may throw IOException
+        // Setup
         setUp();
-        User user = new User(1,"admin","admin");
-        // When the same id is passed in, our mock NeedDAO will return the Need object
-        when(mockUsersDAO.getUser(user.getId())).thenReturn(user);
+        User currentUser = new User(1,"admin","admin");
+        // When findMyRequests is called, return the two
+        /// heroes above
+        when(mockUsersDAO.getCurrentUser()).thenReturn(currentUser);
 
         // Invoke
-        ResponseEntity<User> response = usersController.getUser(user.getId());
+        ResponseEntity<User> response = usersController.getCurrentUsers();
 
         // Analyze
         assertEquals(HttpStatus.OK,response.getStatusCode());
-        assertEquals(user,response.getBody());
-
-    }  
-
-    @Test
-    public void testGetUserWithIdNotFound() throws Exception {
-        //Setup
-        setUp();
-        int userId = 0;
-        // When the same id is passed in, our mock NeedDAO will return null,
-        // simulating no need found
-        when(mockUsersDAO.getUser((userId))).thenReturn(null);
-
-        // Invoke
-        ResponseEntity<User> response = usersController.getUser(userId);
-
-        // Analyze
-        assertEquals(HttpStatus.NOT_FOUND,response.getStatusCode());
+        assertEquals(currentUser,response.getBody());
     }
 
     @Test
-    public void testGetUserWithIdHandleException() throws Exception {
+    public void testGetCurrentUsersHandleException() throws Exception {
         //Setup
         setUp();
-        int userId = 0;
         // When getNeed is called on the mock CupboardDAO, throw an IOException
-        doThrow(new IOException()).when(mockUsersDAO).getUser(userId);
+        doThrow(new IOException()).when(mockUsersDAO).getCurrentUser();
         // Invoke
-        ResponseEntity<User> response = usersController.getUser(userId);
+        ResponseEntity<User> response = usersController.getCurrentUsers();
 
         // Analyze
         assertEquals(HttpStatus.INTERNAL_SERVER_ERROR,response.getStatusCode());
     }
 
     @Test
-    public void testGetUserWithName() throws IOException {
+    public void testGetUserBasket() throws IOException { // findNeeds may throw IOException
+        // Setup
+        setUp();
+        User user = new User(1,"admin","admin");
+        user.addToBasket(new Need(0, "null", 0, 0, "null"));
+        Need[] basket = user.getBasket();
+
+        when(mockUsersDAO.getUser(user.getUsername())).thenReturn(user);
+
+        // Invoke
+        ResponseEntity<User> response = usersController.getUser(user.getUsername());
+
+        // Analyze
+        assertEquals(HttpStatus.OK,response.getStatusCode());
+        assertEquals(user,response.getBody());
+    }
+
+    @Test
+    public void testGetUserBasketHandleException() throws Exception {
+        //Setup
+        setUp();
+        User user = new User(1,"admin","admin");
+        // When getNeed is called on the mock CupboardDAO, throw an IOException
+        doThrow(new IOException()).when(mockUsersDAO).getUser(user.getUsername());
+        // Invoke
+        ResponseEntity<User> response = usersController.getUser(user.getUsername());
+
+        // Analyze
+        assertEquals(HttpStatus.INTERNAL_SERVER_ERROR,response.getStatusCode());
+    }
+
+    @Test
+    public void testGetUserTotal() throws IOException { // findNeeds may throw IOException
+        // Setup
+        setUp();
+        User user = new User(1,"admin","admin");
+
+        when(mockUsersDAO.getUser(user.getUsername())).thenReturn(user);
+
+        // Invoke
+        ResponseEntity<User> response = usersController.getUser(user.getUsername());
+
+        // Analyze
+        assertEquals(HttpStatus.OK,response.getStatusCode());
+        assertEquals(user,response.getBody());
+    }
+
+    @Test
+    public void testGetUserTotalHandleException() throws Exception {
+        //Setup
+        setUp();
+        User user = new User(1,"admin","admin");
+        // When getNeed is called on the mock CupboardDAO, throw an IOException
+        doThrow(new IOException()).when(mockUsersDAO).getUser(user.getUsername());
+        // Invoke
+        ResponseEntity<User> response = usersController.getUser(user.getUsername());
+
+        // Analyze
+        assertEquals(HttpStatus.INTERNAL_SERVER_ERROR,response.getStatusCode());
+    }
+
+    
+    @Test
+    public void testAddToBasket() throws IOException { // findNeeds may throw IOException
+        // Setup
+        setUp();
+        User user = new User(1,"admin","admin");
+
+        when(mockUsersDAO.getUser(user.getUsername())).thenReturn(user);
+
+        // Invoke
+        ResponseEntity<User> response = usersController.getUser(user.getUsername());
+
+        // Analyze
+        assertEquals(HttpStatus.OK,response.getStatusCode());
+        assertEquals(user,response.getBody());
+    }
+
+    @Test
+    public void testAddToBasketHandleException() throws Exception {
+        //Setup
+        setUp();
+        User user = new User(1,"admin","admin");
+        // When getNeed is called on the mock CupboardDAO, throw an IOException
+        doThrow(new IOException()).when(mockUsersDAO).getUser(user.getUsername());
+        // Invoke
+        ResponseEntity<User> response = usersController.getUser(user.getUsername());
+
+        // Analyze
+        assertEquals(HttpStatus.INTERNAL_SERVER_ERROR,response.getStatusCode());
+    }
+
+    
+    @Test
+    public void testRemoveFromBasket() throws IOException { // findNeeds may throw IOException
+        // Setup
+        setUp();
+        User user = new User(1,"admin","admin");
+
+        when(mockUsersDAO.getUser(user.getUsername())).thenReturn(user);
+
+        // Invoke
+        ResponseEntity<User> response = usersController.getUser(user.getUsername());
+
+        // Analyze
+        assertEquals(HttpStatus.OK,response.getStatusCode());
+        assertEquals(user,response.getBody());
+    }
+
+    @Test
+    public void testRemoveFromBasketHandleException() throws Exception {
+        //Setup
+        setUp();
+        User user = new User(1,"admin","admin");
+        // When getNeed is called on the mock CupboardDAO, throw an IOException
+        doThrow(new IOException()).when(mockUsersDAO).getUser(user.getUsername());
+        // Invoke
+        ResponseEntity<User> response = usersController.getUser(user.getUsername());
+
+        // Analyze
+        assertEquals(HttpStatus.INTERNAL_SERVER_ERROR,response.getStatusCode());
+    }
+
+    
+    @Test
+    public void testCheckout() throws IOException { // findNeeds may throw IOException
+        // Setup
+        setUp();
+        User user = new User(1,"admin","admin");
+
+        when(mockUsersDAO.getUser(user.getUsername())).thenReturn(user);
+
+        // Invoke
+        ResponseEntity<User> response = usersController.getUser(user.getUsername());
+
+        // Analyze
+        assertEquals(HttpStatus.OK,response.getStatusCode());
+        assertEquals(user,response.getBody());
+    }
+
+    @Test
+    public void testCheckoutHandleException() throws Exception {
+        //Setup
+        setUp();
+        User user = new User(1,"admin","admin");
+        // When getNeed is called on the mock CupboardDAO, throw an IOException
+        doThrow(new IOException()).when(mockUsersDAO).getUser(user.getUsername());
+        // Invoke
+        ResponseEntity<User> response = usersController.getUser(user.getUsername());
+
+        // Analyze
+        assertEquals(HttpStatus.INTERNAL_SERVER_ERROR,response.getStatusCode());
+    }
+
+    @Test
+    public void testGetUser() throws IOException {
         //Setup
         setUp();
         User user = new User(1,"admin","admin");
@@ -136,8 +275,9 @@ public class UsersControllerTest {
 
     }  
 
+    
     @Test
-    public void testGetUserWithNameNotFound() throws Exception {
+    public void testGetUserNotFound() throws Exception {
         //Setup
         setUp();
         String username = "";
@@ -153,7 +293,7 @@ public class UsersControllerTest {
     }
 
     @Test
-    public void testGetUserWithNameHandleException() throws Exception {
+    public void testGetUserHandleException() throws Exception {
         //Setup
         setUp();
         String username = "";
@@ -257,4 +397,18 @@ public class UsersControllerTest {
         assertEquals(HttpStatus.INTERNAL_SERVER_ERROR,response.getStatusCode());
     }
     
+    @Test
+    public void testIsNewUser() throws IOException { // deleteNeed may throw IOException
+        // Setup
+        setUp();
+        String username = "name";
+        // when deleteHero is called return true, simulating successful deletion
+        when(mockUsersDAO.isNewUser(username)).thenReturn(true);
+
+        // Invoke
+        ResponseEntity<Boolean> response = usersController.isNewUser(username);
+
+        // Analyze
+        assertEquals(HttpStatus.OK,response.getStatusCode());
+    }
 }
