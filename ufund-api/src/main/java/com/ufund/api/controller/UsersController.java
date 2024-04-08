@@ -182,7 +182,7 @@ public class UsersController {
         }
     }
 
-    @GetMapping("/isNewUser")
+    @GetMapping("/{username}/isNewUser")
     public ResponseEntity<Boolean> isNewUser(@RequestParam String username){
         boolean isNewUser = usersDao.isNewUser(username);
             return new ResponseEntity<Boolean>(isNewUser, HttpStatus.OK);    

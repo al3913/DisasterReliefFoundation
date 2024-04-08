@@ -6,6 +6,7 @@ import { HttpClient,HttpHeaders } from '@angular/common/http';
 import { catchError, map, tap } from 'rxjs/operators';
 import { MessageService } from './message.service';
 import { Need } from './need';
+import { UrlSegment } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
@@ -34,7 +35,7 @@ export class LoginService {
 
 
   login(username:string, password:string){
-    if((this.isNewUser(username))){
+    if(this.isNewUser(username)){
       console.log("New user");
       return this.addUser({username,password} as User);
     }
@@ -46,7 +47,7 @@ export class LoginService {
   }
 
   isNewUser(username :string ){
-    return this.http.get<Boolean>(this.usersURL + '/isNewUser');
+    return this.http.get<Boolean>(this.usersURL + "/" + username + "/isNewUser");
   }
 
   addNeedToBasket(need: Need): Observable<Need> {
