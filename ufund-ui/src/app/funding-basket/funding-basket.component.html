@@ -1,4 +1,5 @@
 <h2>Funding Basket</h2>
+<h2>Total lifetime donations: {{total|currency}}</h2>
 <button type="button" class="needs" title="delete need"
             (click)="checkout()">Checkout!</button>
 <div class="funding-basket">
@@ -7,7 +8,7 @@
       <a routerLink="/detail/{{need.id}}">
         <div class="grid-container">
             <div>Name:<br>{{need.name}}</div>
-            <div>Cost:<br>{{need.cost}}</div>
+            <div>Cost:<br>{{need.cost  | currency}}</div>
             <div>Quantity:<br>{{need.quantity}}</div>
             <div>Type:<br>{{need.type}}</div>
         </div>

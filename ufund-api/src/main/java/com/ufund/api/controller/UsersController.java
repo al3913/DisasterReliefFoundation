@@ -110,6 +110,22 @@ public class UsersController {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+    @GetMapping("/{username}/total")
+    public ResponseEntity<Integer> getUserTotal(@PathVariable String username)
+    {
+        LOG.info("GET /user/" + username + "/total");
+        try {
+            User user = usersDao.getUser(username);
+            Integer total = user.getTotal();
+            if (user != null)
+                return new ResponseEntity<Integer>(total, HttpStatus.OK);
+            else
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        } catch (IOException e) {
+            LOG.log(Level.SEVERE, e.getLocalizedMessage());
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 
     /**
      * Creates a {@linkplain User user} with the provided user object
@@ -170,7 +186,8 @@ public class UsersController {
         try {
             User user = usersDao.getUser(username);
             if(user != null){
-                user.basketCheckout();
+                int total = user.basketCheckout();
+                user.setTotal(total);
                 return new ResponseEntity<User>(user, HttpStatus.OK);
             }
             else{

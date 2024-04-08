@@ -112,6 +112,7 @@ public class User {
         while(size > 0){
             Need need = this.basket.get(0);
             total = total + need.getCost();
+            need.setQuantity(need.getQuantity() - 1);
 
             this.basket.remove(0);
             size = size - 1;
@@ -132,6 +133,9 @@ public class User {
         return password;
     }
 
+    public void setTotal(int total){
+        this.total = this.total + total;
+    }
     public int getTotal(){
         return this.total;
     }

@@ -15,7 +15,7 @@
   <div>
     <label for="need-cost " class="underline">Need cost: </label>
     <ng-template [ngIf]="user != 'admin'">
-      <p>{{need.cost}}</p>
+      <p>{{need.cost | currency}}</p>
     </ng-template>
     <ng-template [ngIf]="user == 'admin'"><div>
       <input id="need-cost" [(ngModel)]="need.cost" placeholder="Need cost"/>

@@ -13,12 +13,14 @@ import { Observable } from 'rxjs';
 export class FundingBasketComponent implements OnInit {
   needs: Need[] = [];
   total : number = 0;
+
   user : Observable<User> | undefined;
+  userObject : User | undefined;
   constructor(private needService: NeedService, private loginService : LoginService) { }
 
   ngOnInit(): void {
     this.getNeeds();
-    
+    this.getTotal();
 
   }
 
@@ -36,10 +38,14 @@ export class FundingBasketComponent implements OnInit {
   checkout(){
     this.loginService.basketCheckout().subscribe(needs=>this.needs);
     this.needs = this.needs.filter(h => h !== h);
+    this.getTotal();
   }
 
   getTotal(){
-    this.user = this.loginService.getUser(this.loginService.getWhoYouAre());
+    this.loginService.getTotal(this.loginService.getWhoYouAre())
+    .subscribe(total => this.total = total);
+    console.log("total" + this.total);
     //want to be able to access the user's total here somehow
+  
   }
 }

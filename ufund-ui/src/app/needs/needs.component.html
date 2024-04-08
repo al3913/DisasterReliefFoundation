@@ -5,7 +5,7 @@
       <a routerLink="/detail/{{need.id}}">
         <div class="grid-container">
             <div>Name:<br>{{need.name}}</div>
-            <div>Cost:<br>{{need.cost}}</div>
+            <div>Cost:<br>{{need.cost | currency}}</div>
             <div>Quantity:<br>{{need.quantity}}</div>
             <div>Type:<br>{{need.type}}</div>
         </div>

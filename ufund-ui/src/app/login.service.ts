@@ -67,17 +67,25 @@ export class LoginService {
   }
 
   basketCheckout() {
-
     return this.http.delete(this.usersURL + "/" + localStorage.getItem("user") + "/basketcheckout",this.httpOptions).pipe(
       tap(_ => this.log(`deleted basket user=${this.username}`)),
       catchError(this.handleError('deleteBasket'))
     );
   }
 
+  getTotal(username : string) : Observable<number>{
+    const url = `${this.usersURL}/${username}/total`;
+    return this.http.get<number>(url).pipe(
+      tap(_ => this.log(`fetched user id=${username}`)),
+      catchError(this.handleError<number>(`getNeed id=${username}`))
+    );
+  } 
+
+
 
 
   // Added getUser with Username
-  getUser(id : number) : Observable<User>;
+  //getUser(id : number) : Observable<User>;
   getUser(username : string) : Observable<User>;
 
   getUser(input : any) : Observable<User> {
@@ -131,6 +139,7 @@ export class LoginService {
   setUsername (username : string) : void {
     this.username = username;
   }
+  
   addUser(user: User): Observable<User> {
     return this.http.post<User>(this.usersURL, user, this.httpOptions).pipe(
       tap((newUser: User) => this.log(`added user w/ id=${newUser.id}`)),
