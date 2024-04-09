@@ -1,4 +1,8 @@
 /* HeroesComponent's private CSS styles */
+h2 {
+  margin-left: 10px;
+  margin-top: 10px;
+}
 .heroes {
     margin: 0 0 2em 0;
     list-style-type: none;
@@ -10,7 +14,7 @@
   }
   input {
     display: block;
-    width: 100%;
+    width: 90%;
     padding: .5rem;
     margin: 1rem 0;
     box-sizing: border-box;

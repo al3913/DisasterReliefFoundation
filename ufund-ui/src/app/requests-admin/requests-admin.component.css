@@ -37,7 +37,7 @@
   .requests li {
     position:sticky;
     cursor: pointer;
-    width: 99%;
+    width: 95vw;
   }
   
   .requests li:hover {
@@ -45,7 +45,7 @@
   }
   
   .requests a {
-    color: rgb(181, 37, 37);
+    color: rgb(0, 0, 0);
     text-decoration: none;
     background-color:darkgray;
     margin: .5em;
@@ -53,10 +53,16 @@
     border-radius: 4px;
     width: 100%;
   }
+  @keyframes fade {
+    0%   {background-color: #525252;}
+    100% {background-color: #00aaff;}
+  }
   
   .requests a:hover {
-    color: #2c3a41;
-    background-color: #e6e6e6;
+    color: #02547d;
+    background: #056697;
+    background-size: 400% 400%;
+    animation: fade 1s forwards;
   }
   
   .requests a:active {

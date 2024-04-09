@@ -1,3 +1,6 @@
+.needs {
+  margin-left: 20px;
+}
 
 .needs li {
   position: relative;
@@ -17,16 +20,19 @@
   padding: .3em .1em;
   border-radius: 4px;
   width: 100%;
+    
+}
+
+@keyframes fade {
+  0%   {background-color: #525252;}
+  100% {background-color: #00aaff;}
 }
 
 .needs a:hover {
-  color: #2c3a41;
-  background-color: #e6e6e6;
-}
-
-.needs a:active {
-  background-color: #525252;
-  color: #fafafa;
+  color: #02547d;
+  background: #056697;
+  background-size: 400% 400%;
+  animation: fade 1s forwards;
 }
 
 .add-button {
@@ -64,7 +70,7 @@ button.delete:hover {
 }
 
 .grid-container > div {
-  background-color: rgba(255, 255, 255, 0.8);
+  background-color: rgba(214, 214, 214, 0.8);
   height: inherit;
   width: inherit;
   border-radius: 10px;

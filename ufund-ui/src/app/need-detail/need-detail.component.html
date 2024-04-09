@@ -1,4 +1,4 @@
-<div *ngIf="need">
+<div *ngIf="need" style="margin: 10px;">
   <h2>{{need.name | uppercase}} Details</h2>
   <ng-template [ngIf]="user == 'admin'">
     <div><span>id: </span>{{need.id}}</div>

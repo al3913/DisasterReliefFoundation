@@ -1,13 +1,12 @@
-<p>Sign In!</p>
-<div id="user-component">
-    <label for="user-box">Username:</label>
+<div id="user-component" align="center" class="login">
+  <p>Sign In!</p>
+    <label for="user-box">Username: </label>
     <input #usernameBox id="user-box" />
 
     <label for="password-box">Password: </label>
     <input #passwordBox id="user-box" />
 
-    <button type="button" class="add-button" (click)="login(usernameBox.value, passwordBox.value); 
-                                                        usernameBox.value=''; passwordBox.value=''">
+    <button type="button" class="add-button" (click)="login(usernameBox.value, passwordBox.value);                                                    usernameBox.value=''; passwordBox.value=''">
         Login
-      </button>
+    </button>
 </div>

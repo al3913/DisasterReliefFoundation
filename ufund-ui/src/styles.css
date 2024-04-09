@@ -1,6 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
 * {
     box-sizing: border-box;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
 }
 
 body {
@@ -8,10 +9,11 @@ body {
 }
 
 .header {
-    background-color: #f1f1f1;
+    background: linear-gradient(to bottom right, #0f63e09d 0%,#31db9490 100%);
     padding: 0px;
     text-align: center;
     font-size: 10px;
+
 }
 
 .column {
@@ -47,14 +49,14 @@ body {
 
 .navbar {
   overflow: hidden;
-  background-color: #333;
+  background: linear-gradient(to bottom right, #0f63e090 0%,#31db9497 100%);
   font-family: Arial;
 }
 
 .navbar a {
   float: left;
   font-size: 16px;
-  color: white;
+  color:azure;
   text-align: center;
   padding: 14px 16px;
   text-decoration: none;
@@ -63,12 +65,13 @@ body {
     font-size: 16px;
     border: none;
     outline: none;
-    color: white;
+    color: azure;
     padding: .45em 16px;
     background-color: inherit;
     font-family: inherit; /* Important for vertical align on mobile phones */
     margin: 0;
 }
+
 
 ul {
     list-style-type: none;
@@ -83,7 +86,7 @@ li {
   
 li a,h1 {
     display: block;
-    color: white;
+    color: rgb(0, 0, 0);
     text-align: center;
     padding: 16px;
     text-decoration: none;
@@ -96,3 +99,24 @@ li a:hover {
 .container {
     display: grid;
 }
+
+@import url(https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300);
+
+
+*{
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+	
+	font-weight: 300;
+}
+
+body{
+    background: linear-gradient(to bottom right, #3b8ad481 0%, #1ecd528b 100%);
+	font-family: 'Source Sans Pro', sans-serif;
+	color: rgb(255, 255, 255);
+    text-shadow: 1px 1px 2px #11111102;
+	font-weight: 300;
+    min-height: 100vh;
+}
+

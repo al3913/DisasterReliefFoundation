@@ -1,5 +1,5 @@
 <h2 style="text-align: center;">Needs</h2>
-<div *ngIf="needs.length; else noNeeds">
+<div *ngIf="needs.length; else noNeeds" class="centered">
   <ul class="needs">
     <li *ngFor="let need of needs">
       <ng-template [ngIf]="user == 'admin'">
