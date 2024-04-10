@@ -74,6 +74,52 @@ public class HelpRequestTest {
     }
 
     @Test
+    public void testSetId() {
+        // Setup
+        int expected_id = 1;
+        String expected_creator = "admin";
+        String expected_body = "Request Body";
+
+        // Invoke
+        HelpRequest req = new HelpRequest(0, expected_creator, expected_body);
+        req.setId(expected_id);
+
+        // Analyze
+        assertEquals(expected_id,req.getId());
+    }
+
+    @Test
+    public void testSetCreator() {
+        // Setup
+        int expected_id = 1;
+        String expected_creator = "admin";
+        String expected_body = "Request Body";
+
+        // Invoke
+        HelpRequest req = new HelpRequest(expected_id, "expected_creator", expected_body);
+        req.setCreator(expected_creator);
+
+        // Analyze
+        assertEquals(expected_creator, req.getCreator());
+    }
+
+
+    @Test
+    public void testSetBody() {
+        // Setup
+        int expected_id = 1;
+        String expected_creator = "admin";
+        String expected_body = "Request Body";
+
+        // Invoke
+        HelpRequest req = new HelpRequest(expected_id, expected_creator, "expected_body");
+        req.setBody(expected_body);
+
+        // Analyze
+        assertEquals(expected_body,req.getBody());
+    }
+
+    @Test
     public void testToString(){
         // Setup
         int expected_id = 1;
