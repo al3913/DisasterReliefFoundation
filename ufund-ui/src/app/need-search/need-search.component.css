@@ -39,8 +39,14 @@ label {
   }
   
   .search-result li a:hover {
-    background-color: #435A60;
     color: white;
+    background: #05669722;
+    background-size: 400% 400%;
+    animation: fade 0.5s forwards;
+  }
+  @keyframes fade {
+    0%   {background-color: #525252;}
+    100% {background-color: #00aaff63;}
   }
   
   ul.search-result {
