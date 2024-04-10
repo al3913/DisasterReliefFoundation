@@ -55,16 +55,6 @@ public class User {
     public int getId() {
         return id;
     }
-
-    /**
-     * Sets the unique identifier of the user.
-     * 
-     * @param id The unique identifier for the user.
-     */
-    public void setId(int id) {
-        this.id = id;
-    }
-
     /**
      * Sets the name or description of the user.
      * Necessary for JSON object to Java object deserialization.
@@ -101,7 +91,8 @@ public class User {
         int x = 0;
         for(Need need : this.basket){
             if(need.getId() == id){
-                this.basket.remove(x);
+                this.basket.remove(need);
+                break;
             }
             x = x + 1;
         }
