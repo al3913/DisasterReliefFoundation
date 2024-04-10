@@ -10,6 +10,9 @@ input {
   box-sizing: border-box;
 }
 
+.needs {
+  margin-left: 20px;
+}
 
 .needs li {
   position: relative;
@@ -26,19 +29,22 @@ input {
   text-decoration: none;
   background-color:darkgray;
   margin: .5em;
-  padding: .3em .1em;
-  border-radius: 4px;
+  padding: .2em .05em;
+  border-radius: 10px;
   width: 100%;
+    
+}
+
+@keyframes fade {
+  0%   {background-color: #525252;}
+  100% {background-color: #00aaff;}
 }
 
 .needs a:hover {
-  color: #2c3a41;
-  background-color: #e6e6e6;
-}
-
-.needs a:active {
-  background-color: #525252;
-  color: #fafafa;
+  color: #02547d;
+  background: #056697;
+  background-size: 400% 400%;
+  animation: fade 0.5s forwards;
 }
 
 .add-button {
@@ -54,8 +60,8 @@ input {
 
 button.delete {
   position: relative;
-  right: inherit;
-  top: 30px;
+  right:15px;
+  top: 45px;
   background-color: white;
   color:  #525252;
   font-size: 1.1rem;

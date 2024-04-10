@@ -5,6 +5,10 @@
 <div class="funding-basket">
   <ul class="needs">
     <li *ngFor="let need of needs">
+      <div>
+        <button type="button" class="delete" title="delete need"
+      (click)="delete(need)">x</button>
+      </div>
       <a routerLink="/detail/{{need.id}}">
         <div class="grid-container">
             <div>Name:<br>{{need.name}}</div>
@@ -13,10 +17,6 @@
             <div>Type:<br>{{need.type}}</div>
         </div>
       </a>
-      <div>
-        <button type="button" class="delete" title="delete need"
-      (click)="delete(need)">x</button>
-      </div>
     </li>
   </ul>
 </div>

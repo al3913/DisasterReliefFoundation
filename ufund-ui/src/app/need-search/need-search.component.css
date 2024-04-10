@@ -24,15 +24,18 @@ label {
   li {
     list-style-type: none;
   }
+
   .search-result li a {
     border: 1px solid gray;
+    margin-left: 10px;
     display: inline-block;
     width: 700px;
     padding: .5rem;
     box-sizing: border-box;
     text-decoration: none;
     text-align: left;
-    color: black;
+    color: white;
+    background-color: darkgray;
   }
   
   .search-result li a:hover {

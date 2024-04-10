@@ -32,7 +32,7 @@
   color: #02547d;
   background: #056697;
   background-size: 400% 400%;
-  animation: fade 1s forwards;
+  animation: fade 0.5s forwards;
 }
 
 .add-button {
