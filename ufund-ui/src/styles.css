@@ -130,7 +130,7 @@ li a:hover {
 }
 
 body{
-    background: radial-gradient(#3b8ad481, #5bb2758b );
+    background: radial-gradient(#09b7f0aa, #5bb2758b );
     background-size: 400% 400%;
 	animation: gradient 15s ease infinite;
 	font-family: 'Source Sans Pro', sans-serif;
