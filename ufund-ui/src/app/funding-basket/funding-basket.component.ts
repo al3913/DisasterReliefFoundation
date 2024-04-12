@@ -13,7 +13,7 @@ import { Observable } from 'rxjs';
 export class FundingBasketComponent implements OnInit {
   needs: Need[] = [];
   total : number = 0;
-
+  cost : number  = 0;
   user : Observable<User> | undefined;
   userObject : User | undefined;
   constructor(private needService: NeedService, private loginService : LoginService) { }
@@ -21,12 +21,20 @@ export class FundingBasketComponent implements OnInit {
   ngOnInit(): void {
     this.getNeeds();
     this.getTotal();
-
+    this.getBasketCost();
   }
 
   getNeeds(): void {
     this.loginService.getFundingBasketNeeds()
       .subscribe(needs => this.needs = needs);
+  }
+
+  getBasketCost() : number{
+    var cartTotal = 0;
+    for(var need of this.needs){
+        cartTotal += need.cost;
+    }
+    return cartTotal;
   }
 
   delete(need: Need): void {
