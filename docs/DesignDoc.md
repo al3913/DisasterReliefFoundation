@@ -133,15 +133,10 @@ Users start at the Login Page, where they are presented two textboxes to take an
  >* _Correct labeling of relationships with proper notation for the relationship type, multiplicities, and navigation information will be important._
  >* _Include other details such as attributes and method signatures that you think are needed to support the level of detail in your discussion._
 
-![Add to Funding Basket](AddToFBSeqDiagram.drawio.png)
-![Remove from Funding Basket](RemFBSeqDiagram.drawio.png)
-
-
-### ViewModel Tier
-    Need.java is used to keep the atributes of the needs that will be shown in the cupboard.
+### ViewModel Tier (controllers and service ) (work in progress)
+    
     CupboardController.java is used to read in the commands and calls the commands to make adjusments to the cupboard or specific instructions from the user.
-    CupboardDAO.java defines different functions that the cupboard is able to use and perform while manipulating different needs.
-    CupboardFileDAO.java is used to define each of the functions that cupboardDAO uses and actually writes the functions actions that they will be performing.
+    
 
 > _**[Sprint 4]** Provide a summary of this tier of your architecture. This
 > section will follow the same instructions that are given for the View
@@ -152,9 +147,13 @@ Users start at the Login Page, where they are presented two textboxes to take an
 > 
 ![Replace with your ViewModel Tier class diagram 1, etc.](model-placeholder.png)
 
-### Model Tier
+### Model Tier (work in progress)
     Need.java is used to keep the atributes of the needs that will be shown in the cupboard.
-    CupboardController.java is used to read in the commands and calls the commands to make adjusments to the cupboard or specific instructions from the user.
+    
+    User.java is used to keep the atributes of the users that 
+
+    HelpRequests.java
+
     CupboardDAO.java defines different functions that the cupboard is able to use and perform while manipulating different needs.
     CupboardFileDAO.java is used to define each of the functions that cupboardDAO uses and actually writes the functions actions that they will be performing.
     
