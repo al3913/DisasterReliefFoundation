@@ -411,4 +411,6 @@ public class UsersControllerTest {
         // Analyze
         assertEquals(HttpStatus.OK,response.getStatusCode());
     }
+
+    
 }

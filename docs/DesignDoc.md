@@ -75,7 +75,7 @@ There are 2 types of Users: Admin and Helper.
 
 Both types of users are able to view Needs and the "Dashboard", while the Admin is able to edit/modify the Needs in the Inventory/Cupboard.
 
-Both types of users has access to the Help Service.
+Both types of users has access to the Request Service, where Helpers are able to send out requests to the Admins and the Admins are able to view all requests and mark them as fulfilled.
 
 Each helper has a Funding Basket, where they can Add/Remove Needs (from the Cupboard). From the Funding Basket, a Helper can "Checkout", which empties the Funding Basket and decreases the quantity of those needs in the Cupboard.
 
@@ -179,6 +179,19 @@ Users start at the Login Page, where they are presented two textboxes to take an
 
 > _**[Sprint 4]** Discuss **future** refactoring and other design improvements your team would explore if the team had additional time._
 
+![Static Code Analysis](Static-Code-Analysis.png)
+
+Areas Flagged by SonarQube
+- Reliability
+- Maintainability
+- Coverage
+
+For Reliability and Code Coverage, apart of the reason why Reliability was flagged was because of old implementations of methods in UsersFileDAO, that have not been removed / edited due to lack of time. Tests for these methods were also not implemented as they currently give a compile-time error.
+
+For Maintainability, we are given an A rating, however various issues are marked under Intentionality and Maintainability, for example more efficient formatting methods through the use of constants that are used repeatedly throughout the files.
+
+For future refactoring and design improvements, we would make use of the Static Code Analysis Tool to find the weak points / inefficient parts of the application and makes changes for optimization, like better formatting practices. With additional time, we would also be able to revise redundant/useless code that may have been missed during other times of refactoring during a Sprint.
+
 
 
 ## Testing
@@ -198,6 +211,8 @@ Sprint 4 -
 11 Failed Tests -> (Mostly features that had to be cut to meet the Sprint 3 Deadline)
 0 User Stories not
 
+Initially there was an issue with persistency on the front-end where a User's basket would be cleared everytime they re-login, however this was resolved by the deadline of Sprint 3.
+
 
 ### Unit Testing and Code Coverage
 > _**[Sprint 4]** Discuss your unit testing strategy. Report on the code coverage
@@ -208,7 +223,13 @@ Sprint 4 -
 >_**[Sprint 2 & 4]** **Include images of your code coverage report.** If there are any anomalies, discuss
 > those._
 
-![Replace with your Model Tier class diagram 1, etc.](Code-Coverage.png)
+![Upper Tier](Code-Coverage.png)
+![Model Tier](Code-Coverage-Model.png)
+![Persistence Tier](Code-Coverage-Persistence.png)
+![Controller Tier](Code-Coverage-Controller.png)
+
+Our Unit testing strategy involved testing both successful cases and unsuccessful cases of each method, for example NullExceptions and IOExceptions. As shown above, each tier has generally pretty high code coverage, where Unit Tests of the UserController class is the only class with less than 50% coverage.
+
 
 
 ## Ongoing Rationale

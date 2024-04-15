@@ -99,16 +99,16 @@ public class User {
     }
     public int basketCheckout(){
         int size = this.basket.size();
-        int total = 0;
+        int result = 0;
         while(size > 0){
             Need need = this.basket.get(0);
-            total = total + need.getCost();
+            result = result + need.getCost();
             need.setQuantity(need.getQuantity() - 1);
 
             this.basket.remove(0);
             size = size - 1;
         }
-        return total;
+        return result;
         
         
         //this.basket.clear();
