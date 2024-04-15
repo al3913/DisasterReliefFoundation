@@ -202,8 +202,14 @@ Users start at the Login Page, where they are presented two textboxes to take an
 
     While getting started with this project and during the first sprint, we need to make sure that we are focusing on the idea of single responsibility in the hopes that it will disperse the 'weight' of the functionality across multiple classes and functions.
 
+    Controller: We use 3 controllers that handle curl requests sent from the front end that pass to DAO's to handle the method calls. Our MailboxController handles these curl commands that the request.service.ts passes to it in order to access the data from the back end.
+
+    Open/Closed principle: The way our code exists now, it is very easy to be able to add methods to controllers and add generate componenets without altering the code that is working perfectly fine at the moment. This allows for the possibility of extending on without breaking the current working code. 
+
     Throughout the project we had to keep in mind the idea of encapsulation as we have to combine many methods and data to 
     single classes in order to manipulate data and hide the internal state of the object from the outside. This helps in maintaining the integrity of data and prevents unintended interference
+
+
 `
 > _**[Sprint 2, 3 & 4]** Will eventually address upto **4 key OO Principles** in your final design. Follow guidance in augmenting those completed in previous Sprints as indicated to you by instructor. Be sure to include any diagrams (or clearly refer to ones elsewhere in your Tier sections above) to support your claims._
 
