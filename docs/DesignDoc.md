@@ -179,6 +179,8 @@ Users start at the Login Page, where they are presented two textboxes to take an
 
 > _**[Sprint 4]** Discuss **future** refactoring and other design improvements your team would explore if the team had additional time._
 
+
+
 ## Testing
 > _This section will provide information about the testing performed
 > and the results of the testing._
@@ -205,6 +207,9 @@ Sprint 4 -
 
 >_**[Sprint 2 & 4]** **Include images of your code coverage report.** If there are any anomalies, discuss
 > those._
+
+![Replace with your Model Tier class diagram 1, etc.](Code-Coverage.png)
+
 
 ## Ongoing Rationale
 >_**[Sprint 1, 2, 3 & 4]** Throughout the project, provide a time stamp **(yyyy/mm/dd): Sprint # and description** of any _**mayor**_ team decisions or design milestones/changes and corresponding justification._
