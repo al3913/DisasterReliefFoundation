@@ -133,9 +133,25 @@ Users start at the Login Page, where they are presented two textboxes to take an
  >* _Correct labeling of relationships with proper notation for the relationship type, multiplicities, and navigation information will be important._
  >* _Include other details such as attributes and method signatures that you think are needed to support the level of detail in your discussion._
 
-### ViewModel Tier (controllers and service ) (work in progress)
+### ViewModel Tier 
     
     CupboardController.java is used to read in the commands and calls the commands to make adjusments to the cupboard or specific instructions from the user.
+
+    need.service.ts is calling the cupboardController commands in order to access the backend side of the data and view it in order to display/access the needs in the cupboard on the front side.
+
+    MailboxController.java is used to read in commands and 
+    calls commands to make certain adjusments to handling 
+    the requests that the users have sent to the admin.
+
+    request.service.ts is calling the methods contained in the mailboxController which is able to post/delete help requests sent from users in the backend from the front end. 
+
+    UsersController.java is used to read in commands
+    and calls that handle all the users as well as accessing
+    each user's specific basket. 
+
+    login.service.ts is calling the methods contained in the usersController class that handles not adding/deleting/manipulating users, but also handles the total of the specific user's basket as well as adding/removing items from the user basket. 
+
+
     
 
 > _**[Sprint 4]** Provide a summary of this tier of your architecture. This
@@ -147,12 +163,28 @@ Users start at the Login Page, where they are presented two textboxes to take an
 > 
 ![Replace with your ViewModel Tier class diagram 1, etc.](model-placeholder.png)
 
-### Model Tier (work in progress)
+### Model Tier
+
+    HelpRequests.java is used to keep track of the request sent from a specific user; with an id, body, and creator. 
+
+    MailboxDAO.java is used to define specific functions such as getting a specific request, posting a new request, or deleting a request. 
+
+    MailboxFileDAO.java's methods are called by MailboxDAO with the functions that have been defined and this is where each function defined in the MailboxDAO is actually affecting the data/backend.
+
+
     Need.java is used to keep the atributes of the needs that will be shown in the cupboard.
+
+    CupboardDAO.java is used to define specific functions such as getting the needs, creating needs, or deleting needs.
+
+    CupboardFileDAO.java's methods are called by CupboardDAO.java and contains all the functions that were previously defined but this is where the data is manipulated and stored in the backend. 
     
     User.java is used to keep the atributes of the users that 
 
-    HelpRequests.java
+    UsersDAO.java is used to define specific functions such as getting users, posting new users, and deleting users.
+
+    UsersFileDAO.java's methods are called from UsersDAO.java and this is where all of the previously defined functions reside which are able to manipulate the data in the backend. 
+
+
 
     CupboardDAO.java defines different functions that the cupboard is able to use and perform while manipulating different needs.
     CupboardFileDAO.java is used to define each of the functions that cupboardDAO uses and actually writes the functions actions that they will be performing.
