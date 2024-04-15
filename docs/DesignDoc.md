@@ -50,8 +50,18 @@ Charity donation website, where users are able to login and view their unique Fu
 ### MVP Features
 >  _**[Sprint 4]** Provide a list of top-level Epics and/or Stories of the MVP._
 
+"As a Helper, I want to store the needs that I want to contribute to in one place so that I can keep track of what needs I plan to contribute to."
+
+"As a User, I want to be able to "login" as an Admin, so that I can manage the website."
+
+"As a User, I want to be able to "login" as a Helper, so that I can donate to the charity"
+
 ### Enhancements
 > _**[Sprint 4]** Describe what enhancements you have implemented for the project._
+
+"As a Helper, I want to be able to contact Managers so that I can receive help on any issues I have."
+
+Our enhancements involve a Request System, which allows users to make requests to the Admins about certain things they may want, and Admins are able to view and resolve those requests made by users.
 
 
 ## Application Domain
@@ -180,6 +190,13 @@ Users start at the Login Page, where they are presented two textboxes to take an
 > have not had any testing yet. Highlight the issues found during
 > acceptance testing and if there are any concerns._
 
+Sprint 4 - 
+
+16 Passed Tests
+11 Failed Tests -> (Mostly features that had to be cut to meet the Sprint 3 Deadline)
+0 User Stories not
+
+
 ### Unit Testing and Code Coverage
 > _**[Sprint 4]** Discuss your unit testing strategy. Report on the code coverage
 > achieved from unit testing of the code base. Discuss the team's
@@ -191,3 +208,8 @@ Users start at the Login Page, where they are presented two textboxes to take an
 
 ## Ongoing Rationale
 >_**[Sprint 1, 2, 3 & 4]** Throughout the project, provide a time stamp **(yyyy/mm/dd): Sprint # and description** of any _**mayor**_ team decisions or design milestones/changes and corresponding justification._
+
+Sprint 3 2024/04/01 - Simplify Request functionality, by not having requests go back and forth from User to Admins, but just have Requests go to Admins and Admins can just mark them as resolved.
+Includes not having the ability to modify a request after it's sent, or a search area for requests, since only Admins are able to view requests once its sent. (Saves time of implementation by deadline of Sprint 3)
+
+Sprint 3 2024/04/05 - In order to achieve the MVP, doing only one enhancement instead of two to save time (Requests Enhancement > Statistics Enhancement)
