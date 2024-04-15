@@ -166,6 +166,9 @@ Users start at the Login Page, where they are presented two textboxes to take an
 ## OO Design Principles
 
     While getting started with this project and during the first sprint, we need to make sure that we are focusing on the idea of single responsibility in the hopes that it will disperse the 'weight' of the functionality across multiple classes and functions.
+
+    Throughout the project we had to keep in mind the idea of encapsulation as we have to combine many methods and data to 
+    single classes in order to manipulate data and hide the internal state of the object from the outside. This helps in maintaining the integrity of data and prevents unintended interference
 `
 > _**[Sprint 2, 3 & 4]** Will eventually address upto **4 key OO Principles** in your final design. Follow guidance in augmenting those completed in previous Sprints as indicated to you by instructor. Be sure to include any diagrams (or clearly refer to ones elsewhere in your Tier sections above) to support your claims._
 
@@ -178,6 +181,9 @@ Users start at the Login Page, where they are presented two textboxes to take an
 > Include any relevant screenshot(s) with each area._
 
 > _**[Sprint 4]** Discuss **future** refactoring and other design improvements your team would explore if the team had additional time._
+
+    We would be able to delete a lot of code that is not used anymore. A decent amount of code got left behind when trying
+    to meet deadlines for some sprints, as we went down a teammate, and this could be pruned through to get out unneeded code. 
 
 ![Static Code Analysis](Static-Code-Analysis.png)
 
