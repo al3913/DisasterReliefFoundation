@@ -133,6 +133,9 @@ Users start at the Login Page, where they are presented two textboxes to take an
  >* _Correct labeling of relationships with proper notation for the relationship type, multiplicities, and navigation information will be important._
  >* _Include other details such as attributes and method signatures that you think are needed to support the level of detail in your discussion._
 
+![](AddToFBSeqDiagram.drawio.png)
+![](RemFBSeqDiagram.drawio.png)
+
 ### ViewModel Tier 
     
     CupboardController.java is used to read in the commands and calls the commands to make adjusments to the cupboard or specific instructions from the user.
