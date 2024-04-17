@@ -26,10 +26,7 @@ public class HelpRequest {
      * 
      * @param id         The unique identifier for the request.
      * @param creator    The creator ID of the request.
-     * @param title      The title of the request.
      * @param body       The body of the request.
-     * @param response   The response to the request.
-     * @param completed  The completion status of the request. 
      * 
      * @JsonProperty is used in serialization and deserialization of the JSON object 
      * to the Java object, facilitating the mapping of fields.
