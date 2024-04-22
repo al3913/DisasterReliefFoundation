@@ -33,6 +33,11 @@ To create a Web-Based Ufund system, where users are able to select from a Cupboa
 |------|------------|
 | SPA  | Single Page|
 | MVP  | Minimum Viable Product|
+| REST | Representational State Transfer|
+| MVVM | Model-View-ViewModel|
+| UI   | User Interface|
+| API  | Application Programming Interface|
+| DAO  | Data Access Object|
 
 
 ## Requirements
@@ -50,16 +55,29 @@ Charity donation website, where users are able to login and view their unique Fu
 ### MVP Features
 >  _**[Sprint 4]** Provide a list of top-level Epics and/or Stories of the MVP._
 
+"As a Helper I want to see a list of needs so that I choose what to contribute to."
+
 "As a Helper, I want to store the needs that I want to contribute to in one place so that I can keep track of what needs I plan to contribute to."
+
+"As a Helper, I want to be able to come back to the needs that I plan to contribute to, at another time, so that I'm not rushed with my decision." 
+
+"As a Helper, I want to be able to “checkout” the needs that I plan to contribute to, so that I can fund them."
 
 "As a User, I want to be able to "login" as an Admin, so that I can manage the website."
 
 "As a User, I want to be able to "login" as a Helper, so that I can donate to the charity"
 
+"As a U-fund Manager, I don't want to see the funding baskets of users so that their privacy is respected."
+
+
 ### Enhancements
 > _**[Sprint 4]** Describe what enhancements you have implemented for the project._
 
 "As a Helper, I want to be able to contact Managers so that I can receive help on any issues I have."
+
+"As a U-fund Manager I want to be able to respond to help requests sent by users so that I can answer/help user inquires."
+
+"As a User, I WANT to be able to view donation statistics so that I know how much I've donated so far."
 
 Our enhancements involve a Request System, which allows users to make requests to the Admins about certain things they may want, and Admins are able to view and resolve those requests made by users.
 
@@ -89,7 +107,10 @@ The following Tiers/Layers model shows a high-level view of the webapp's archite
 **NOTE**: detailed diagrams are required in later sections of this document.
 > _**[Sprint 1]** (Augment this diagram with your **own** rendition and representations of sample system classes, placing them into the appropriate M/V/VM (orange rectangle) tier section. Focus on what is currently required to support **Sprint 1 - Demo requirements**. Make sure to describe your design choices in the corresponding _**Tier Section**_ and also in the _**OO Design Principles**_ section below.)_
 
-![The Tiers & Layers of the Architecture](architecture-tiers-and-layers.png)
+![The Tiers & Layers of the Architecture (Need)](Arch_Need.png)
+![The Tiers & Layers of the Architecture (Users)](Arch_User.png)
+![The Tiers & Layers of the Architecture (Requests)](Arch_Request.png)
+
 
 The web application, is built using the Model–View–ViewModel (MVVM) architecture pattern. 
 
@@ -103,17 +124,6 @@ Both the ViewModel and Model are built using Java and Spring Framework. Details 
 ### Overview of User Interface
 
 This section describes the web interface flow; this is how the user views and interacts with the web application.
-
-Users start at the Login Page, where they are presented two textboxes to take an entered username + password, as well as a Login button. Once Login is pressed, depending on if the user is an Admin or regular User, they are presented with either the Admin page or the Cupboard page.
-
- From the Admin page, the user can add, delete, or update needs to/from the Cupboard. From the Cupboard page, a regular user is able to view details of each Need and have the ability to click into a specific Need's details, and there they are able to add the Need to their funding basket. An Admin is also able to edit/delete needs from the Cupboard page.
-
- As a regular User, they are able to view their funding basket by clicking the Funding Basket button from the navbar on top of the page, where they are moved to the Funding Basket page. From the Funding Basket page the User is able to checkout the needs in their basket, adding the total amount of money spent to their total donations, which is also shown on the page.
-
- As either a regular User or Admin, the Requests button in the navbar will take the user to their respective Requests page, where if the user is an Admin, they are able to see incoming requests made by regular users, and if the user is a regular user, they able to create requests for Admins to view.
-
-
-
 
 ### View Tier
 > _**[Sprint 4]** Provide a summary of the View Tier UI of your architecture.
@@ -133,8 +143,18 @@ Users start at the Login Page, where they are presented two textboxes to take an
  >* _Correct labeling of relationships with proper notation for the relationship type, multiplicities, and navigation information will be important._
  >* _Include other details such as attributes and method signatures that you think are needed to support the level of detail in your discussion._
 
-![](AddToFBSeqDiagram.drawio.png)
-![](RemFBSeqDiagram.drawio.png)
+Users start at the Login Page, where they are presented two textboxes to take an entered username + password, as well as a Login button. Once Login is pressed, depending on if the user is an Admin or regular User, they are presented with either the Admin page or the Cupboard page.
+
+From the Admin page, the user can add, delete, or update needs to/from the Cupboard. From the Cupboard page, a regular user is able to view details of each Need and have the ability to click into a specific Need's details, and there they are able to add the Need to their funding basket. An Admin is also able to edit/delete needs from the Cupboard page.
+
+From the Cupboard page, the user is able to view all the needs currently in the Cupboard as well as their details. As a Helper, they are also able to add those needs into their respective funding basket, once clicking the Need. As an Admin, they are able to remove needs from the Cupboard, as well as edit their details once clicking on the Need.
+
+As a Helper, they are able to view their funding basket by clicking the Funding Basket button from the navbar on top of the page, where they are moved to the Funding Basket page. From the Funding Basket page the User is able to remove needs and checkout the needs in their basket, adding the total amount of money spent to their total donations, which is also shown on the page.
+
+As either a Helper or Admin, the Requests button in the navbar will take the user to their respective Requests page, where if the user is an Admin, they are able to see incoming requests made by regular users, and if the user is a regular user, they able to create requests for Admins to view.
+
+![Add to Funding Basket](AddToFBSeqDiagram.drawio.png)
+![Remove from Funding Basket](RemFBSeqDiagram.drawio.png)
 
 ### ViewModel Tier 
     
@@ -164,30 +184,26 @@ Users start at the Login Page, where they are presented two textboxes to take an
 > _At appropriate places as part of this narrative provide **one** or more updated and **properly labeled**
 > static models (UML class diagrams) with some details such as critical attributes and methods._
 > 
-![Replace with your ViewModel Tier class diagram 1, etc.](model-placeholder.png)
 
 ### Model Tier
 
-    HelpRequests.java is used to keep track of the request sent from a specific user; with an id, body, and creator. 
+    HelpRequests.java is used to model the object that is a HelpRequest and its attributes, keeping track of it's sender/creator as well as its message.
 
     MailboxDAO.java is used to define specific functions such as getting a specific request, posting a new request, or deleting a request. 
 
     MailboxFileDAO.java's methods are called by MailboxDAO with the functions that have been defined and this is where each function defined in the MailboxDAO is actually affecting the data/backend.
 
-
-    Need.java is used to keep the atributes of the needs that will be shown in the cupboard.
+    Need.java is used to model the object that is a Need and its attributes that will be shown in the cupboard.
 
     CupboardDAO.java is used to define specific functions such as getting the needs, creating needs, or deleting needs.
 
     CupboardFileDAO.java's methods are called by CupboardDAO.java and contains all the functions that were previously defined but this is where the data is manipulated and stored in the backend. 
     
-    User.java is used to keep the atributes of the users that 
+    User.java is used to model the object that is a User and its attributes.
 
     UsersDAO.java is used to define specific functions such as getting users, posting new users, and deleting users.
 
     UsersFileDAO.java's methods are called from UsersDAO.java and this is where all of the previously defined functions reside which are able to manipulate the data in the backend. 
-
-
 
     CupboardDAO.java defines different functions that the cupboard is able to use and perform while manipulating different needs.
     CupboardFileDAO.java is used to define each of the functions that cupboardDAO uses and actually writes the functions actions that they will be performing.
@@ -199,7 +215,10 @@ Users start at the Login Page, where they are presented two textboxes to take an
 > _At appropriate places as part of this narrative provide **one** or more updated and **properly labeled**
 > static models (UML class diagrams) with some details such as critical attributes and methods._
 > 
-![Replace with your Model Tier class diagram 1, etc.](model-placeholder.png)
+![Need Class](needClassDiagram.drawio.png)
+![User Class](userClassDiagram.drawio.png)
+![Request Class](requestClassDiagram.drawio.png)
+
 
 ## OO Design Principles
 
@@ -226,8 +245,7 @@ Users start at the Login Page, where they are presented two textboxes to take an
 
 > _**[Sprint 4]** Discuss **future** refactoring and other design improvements your team would explore if the team had additional time._
 
-    We would be able to delete a lot of code that is not used anymore. A decent amount of code got left behind when trying
-    to meet deadlines for some sprints, as we went down a teammate, and this could be pruned through to get out unneeded code. 
+    We would be able to delete a lot of code that is not used anymore. A decent amount of code got left behind when trying to meet deadlines for some sprints, as we went down a teammate, and this could be pruned through to get out unneeded code. 
 
 ![Static Code Analysis](Static-Code-Analysis.png)
 
@@ -259,7 +277,7 @@ Sprint 4 -
 
 16 Passed Tests
 11 Failed Tests -> (Mostly features that had to be cut to meet the Sprint 3 Deadline)
-0 User Stories not
+0 User Stories Not
 
 Initially there was an issue with persistency on the front-end where a User's basket would be cleared everytime they re-login, however this was resolved by the deadline of Sprint 3.
 
