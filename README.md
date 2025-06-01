@@ -1,8 +1,5 @@
-# U-Fund:  _____ _replace with your particular fundraising type_ _____
-# Modify this document to expand any and all sections that are applicable for a better understanding from your users/testers/collaborators (remove this comment and other instructions areas for your FINAL release)
+A web-based UFund platform designed to empower users to donate products directly to disaster relief charities. The platform operates like an online store, where users can browse, select, and contribute items to support various causes. Developed through Agile and Scrum methodologies, the system features a robust REST API that ensures smooth communication between the front-end and back-end, providing a user-friendly experience for charitable giving.
 
-An online U-Fund system built in Java 17=> and ___ _replace with other platform requirements_ ___
-  
 ## Team
 
 - Andy Lin
@@ -15,15 +12,12 @@ An online U-Fund system built in Java 17=> and ___ _replace with other platform 
 
 - Java 11=>17 (Make sure to have correct JAVA_HOME setup in your environment)
 - Maven
--  _add any other tech stack requirements_
-
 
 ## How to run it
 
 1. Clone the repository and go to the root directory.
 2. Execute `mvn compile exec:java`
 3. Open in your browser `http://localhost:8080/`
-4.  _add any other steps required or examples of how to use/run_
 
 ## Known bugs and disclaimers
 (It may be the case that your implementation is not perfect.)
